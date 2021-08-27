@@ -122,7 +122,7 @@ CreateThread(function()
     while true do
         DisableControlAction(1, 199) 
         if IsDisabledControlJustPressed(1--[[input group]],  199--[[control index]]) then
-            if not PhoneData.isOpen then
+        if not PhoneData.isOpen then
                 --local IsHandcuffed = exports['police']:IsHandcuffed()
                 local IsHandcuffed = false
                 if not IsHandcuffed then
