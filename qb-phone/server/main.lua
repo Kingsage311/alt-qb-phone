@@ -1,4 +1,3 @@
-
 local QBPhone = {}
 local Tweets = {}
 local AppAlerts = {}
@@ -60,7 +59,7 @@ QBCore.Functions.CreateCallback('qb-phone:server:GetPhoneData', function(source,
         }
         PhoneData.Adverts = Adverts
 
-        local result = exports.oxmysql:fetchSync('SELECT * FROM player_contacts WHERE citizenid = ? ORDER BY name ASC', 
+        local result = exports.oxmysql:fetchSync('SELECT * FROM player_contacts WHERE citizenid = ? ORDER BY name ASC',
             {Player.PlayerData.citizenid})
         local Contacts = {}
         if result[1] ~= nil then
@@ -218,13 +217,12 @@ AddEventHandler('qb-phone:server:sendNewMail', function(mailData)
 
     if mailData.button == nil then
         exports.oxmysql:insert(
-            'INSERT INTO player_mails (`citizenid`, `sender`, `subject`, `message`, `mailid`, `read`) VALUES (?)',
+            'INSERT INTO player_mails (`citizenid`, `sender`, `subject`, `message`, `mailid`, `read`) VALUES (?, ?, ?, ?, ?, ?)',
             {Player.PlayerData.citizenid, mailData.sender, mailData.subject, mailData.message, GenerateMailId(), 0})
     else
         exports.oxmysql:insert(
-            'INSERT INTO player_mails (`citizenid`, `sender`, `subject`, `message`, `mailid`, `read`, `button`) VALUES (?)',
-            {Player.PlayerData.citizenid, mailData.sender, mailData.subject, mailData.message, GenerateMailId(), 0,
-             json.encode(mailData.button)})
+            'INSERT INTO player_mails (`citizenid`, `sender`, `subject`, `message`, `mailid`, `read`, `button`) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            {Player.PlayerData.citizenid, mailData.sender, mailData.subject, mailData.message, GenerateMailId(), 0, json.encode(mailData.button)})
     end
     TriggerClientEvent('qb-phone:client:NewMailNotify', src, mailData)
     SetTimeout(200, function()
@@ -251,12 +249,12 @@ AddEventHandler('qb-phone:server:sendNewMailToOffline', function(citizenid, mail
 
         if mailData.button == nil then
             exports.oxmysql:insert(
-                'INSERT INTO player_mails (`citizenid`, `sender`, `subject`, `message`, `mailid`, `read`) VALUES (?)',
+                'INSERT INTO player_mails (`citizenid`, `sender`, `subject`, `message`, `mailid`, `read`) VALUES (?, ?, ?, ?, ?, ?)',
                 {Player.PlayerData.citizenid, mailData.sender, mailData.subject, mailData.message, GenerateMailId(), 0})
             TriggerClientEvent('qb-phone:client:NewMailNotify', src, mailData)
         else
             exports.oxmysql:insert(
-                'INSERT INTO player_mails (`citizenid`, `sender`, `subject`, `message`, `mailid`, `read`, `button`) VALUES (?)',
+                'INSERT INTO player_mails (`citizenid`, `sender`, `subject`, `message`, `mailid`, `read`, `button`) VALUES (?, ?, ?, ?, ?, ?, ?)',
                 {Player.PlayerData.citizenid, mailData.sender, mailData.subject, mailData.message, GenerateMailId(), 0,
                  json.encode(mailData.button)})
             TriggerClientEvent('qb-phone:client:NewMailNotify', src, mailData)
@@ -278,11 +276,11 @@ AddEventHandler('qb-phone:server:sendNewMailToOffline', function(citizenid, mail
     else
         if mailData.button == nil then
             exports.oxmysql:insert(
-                'INSERT INTO player_mails (`citizenid`, `sender`, `subject`, `message`, `mailid`, `read`) VALUES (?)',
+                'INSERT INTO player_mails (`citizenid`, `sender`, `subject`, `message`, `mailid`, `read`) VALUES (?, ?, ?, ?, ?, ?)',
                 {Player.PlayerData.citizenid, mailData.sender, mailData.subject, mailData.message, GenerateMailId(), 0})
         else
             exports.oxmysql:insert(
-                'INSERT INTO player_mails (`citizenid`, `sender`, `subject`, `message`, `mailid`, `read`, `button`) VALUES (?)',
+                'INSERT INTO player_mails (`citizenid`, `sender`, `subject`, `message`, `mailid`, `read`, `button`) VALUES (?, ?, ?, ?, ?, ?, ?)',
                 {Player.PlayerData.citizenid, mailData.sender, mailData.subject, mailData.message, GenerateMailId(), 0,
                  json.encode(mailData.button)})
         end
@@ -294,11 +292,11 @@ AddEventHandler('qb-phone:server:sendNewEventMail', function(citizenid, mailData
     local Player = QBCore.Functions.GetPlayerByCitizenId(citizenid)
     if mailData.button == nil then
         exports.oxmysql:insert(
-            'INSERT INTO player_mails (`citizenid`, `sender`, `subject`, `message`, `mailid`, `read`) VALUES (?)',
+            'INSERT INTO player_mails (`citizenid`, `sender`, `subject`, `message`, `mailid`, `read`) VALUES (?, ?, ?, ?, ?, ?)',
             {citizenid, mailData.sender, mailData.subject, mailData.message, GenerateMailId(), 0})
     else
         exports.oxmysql:insert(
-            'INSERT INTO player_mails (`citizenid`, `sender`, `subject`, `message`, `mailid`, `read`, `button`) VALUES (?)',
+            'INSERT INTO player_mails (`citizenid`, `sender`, `subject`, `message`, `mailid`, `read`, `button`) VALUES (?, ?, ?, ?, ?, ?, ?)',
             {citizenid, mailData.sender, mailData.subject, mailData.message, GenerateMailId(), 0,
              json.encode(mailData.button)})
     end
@@ -454,7 +452,7 @@ QBCore.Commands.Add('bill', 'Bill A Player', {{
             if biller.PlayerData.citizenid ~= billed.PlayerData.citizenid then
                 if amount and amount > 0 then
                     exports.oxmysql:insert(
-                        'INSERT INTO phone_invoices (citizenid, amount, society, sender, sendercitizenid) VALUES (?)',
+                        'INSERT INTO phone_invoices (citizenid, amount, society, sender, sendercitizenid) VALUES (?, ?, ?, ?, ?)',
                         {billed.PlayerData.citizenid, amount, biller.PlayerData.job.name,
                          biller.PlayerData.charinfo.firstname, biller.PlayerData.citizenid})
                     TriggerClientEvent('qb-phone:RefreshPhone', billed.PlayerData.source)
@@ -649,7 +647,7 @@ RegisterServerEvent('qb-phone:server:AddNewContact')
 AddEventHandler('qb-phone:server:AddNewContact', function(name, number, iban)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
-    exports.oxmysql:insert('INSERT INTO player_contacts (citizenid, name, number, iban) VALUES (?)',
+    exports.oxmysql:insert('INSERT INTO player_contacts (citizenid, name, number, iban) VALUES (?, ?, ?, ?)',
         {Player.PlayerData.citizenid, tostring(name), tostring(number), tostring(iban)})
 end)
 
@@ -680,11 +678,11 @@ AddEventHandler('qb-phone:server:UpdateMessages', function(ChatMessages, ChatNum
                     SenderData.PlayerData.charinfo.phone, false)
             else
                 -- Insert for target
-                exports.oxmysql:insert('INSERT INTO phone_messages (citizenid, number, messages) VALUES (?)',
+                exports.oxmysql:insert('INSERT INTO phone_messages (citizenid, number, messages) VALUES (?, ?, ?)',
                     {TargetData.PlayerData.citizenid, SenderData.PlayerData.charinfo.phone, json.encode(ChatMessages)})
 
                 -- Insert for sender
-                exports.oxmysql:insert('INSERT INTO phone_messages (citizenid, number, messages) VALUES (?)',
+                exports.oxmysql:insert('INSERT INTO phone_messages (citizenid, number, messages) VALUES (?, ?, ?)',
                     {SenderData.PlayerData.citizenid, TargetData.PlayerData.charinfo.phone, json.encode(ChatMessages)})
 
                 -- Send notification & Update messages for target
@@ -704,12 +702,12 @@ AddEventHandler('qb-phone:server:UpdateMessages', function(ChatMessages, ChatNum
                     {json.encode(ChatMessages), SenderData.PlayerData.citizenid, Player[1].charinfo.phone})
             else
                 -- Insert for target
-                exports.oxmysql:insert('INSERT INTO phone_messages (citizenid, number, messages) VALUES (?)', {Player[1]
+                exports.oxmysql:insert('INSERT INTO phone_messages (citizenid, number, messages) VALUES (?, ?, ?)', {Player[1]
                     .citizenid, SenderData.PlayerData.charinfo.phone, json.encode(ChatMessages)})
 
                 -- Insert for sender
                 Player[1].charinfo = json.decode(Player[1].charinfo)
-                exports.oxmysql:insert('INSERT INTO phone_messages (citizenid, number, messages) VALUES (?)',
+                exports.oxmysql:insert('INSERT INTO phone_messages (citizenid, number, messages) VALUES (?, ?, ?)',
                     {SenderData.PlayerData.citizenid, Player[1].charinfo.phone, json.encode(ChatMessages)})
             end
         end
@@ -1184,7 +1182,7 @@ RegisterServerEvent('qb-phone:server:AddTransaction')
 AddEventHandler('qb-phone:server:AddTransaction', function(data)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
-    exports.oxmysql:insert('INSERT INTO crypto_transactions (citizenid, title, message) VALUES (?)', {Player.PlayerData
+    exports.oxmysql:insert('INSERT INTO crypto_transactions (citizenid, title, message) VALUES (?, ?, ?)', {Player.PlayerData
         .citizenid, escape_sqli(data.TransactionTitle), escape_sqli(data.TransactionMessage)})
 end)
 
