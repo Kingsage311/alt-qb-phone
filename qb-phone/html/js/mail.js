@@ -72,7 +72,7 @@ RL.Phone.Functions.SetupMails = function(Mails) {
     }
     var MessageTime = Hourssssss + ":" + Minutessss;
 
-    $("#mail-header-mail").html(RL.Phone.Data.PlayerData.charinfo.firstname+"."+RL.Phone.Data.PlayerData.charinfo.lastname+"@inlook.com");
+    $("#mail-header-mail").html(RL.Phone.Data.PlayerData.charinfo.firstname+"."+RL.Phone.Data.PlayerData.charinfo.lastname+"@eyefind.info");
     $("#mail-header-lastsync").html("Latest synchronization "+MessageTime);
     if (Mails !== null && Mails !== undefined) {
         if (Mails.length > 0) {
@@ -161,11 +161,11 @@ $(document).on('click', '#new-advert-submit', function(e){
 });
 
 RL.Phone.Functions.RefreshAdverts = function(Adverts) {
-    $("#advert-header-name").html("@"+RL.Phone.Data.PlayerData.charinfo.firstname+""+RL.Phone.Data.PlayerData.charinfo.lastname+" | "+RL.Phone.Data.PlayerData.charinfo.phone);
+    $("#advert-header-name").html("👤"+RL.Phone.Data.PlayerData.charinfo.firstname+""+RL.Phone.Data.PlayerData.charinfo.lastname+" 📱"+RL.Phone.Data.PlayerData.charinfo.phone);
     if (Adverts.length > 0 || Adverts.length == undefined) {
         $(".advert-list").html("");
         $.each(Adverts, function(i, advert){
-            var element = '<div class="advert"><span class="advert-sender">'+advert.name+' | '+advert.number+'</span><p>'+advert.message+'</p></div>';
+            var element = '<div class="advert"><span class="advert-sender">'+advert.name+' 📱'+advert.number+'</span><p>'+advert.message+'</p></div>';
             $(".advert-list").append(element);
         });
     } else {

@@ -162,7 +162,7 @@ RL.Phone.Notifications.LoadTweets = function (Tweets) {
 
         });
     } else {
-        let html = `<div class="twitter-no-tweets"><p>No Tweets :(</p></div>`
+        let html = `<div class="twitter-no-tweets"><p>No Invasions!</p></div>`
         $(".twitter-home-tab").html(html);
 
     }
@@ -229,7 +229,7 @@ RL.Phone.Notifications.LoadSelfTweets = function (Tweets) {
 
         });
     } else {
-        let html = `<div class="twitter-no-tweets"><p>Attıgın bir tweet yok</p></div>`
+        let html = `<div class="twitter-no-tweets"><p>No Invasions!</p></div>`
         $(".twitter-self-tab").html(html);
 
     }

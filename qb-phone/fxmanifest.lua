@@ -6,19 +6,20 @@ version '1.0.0'
 
 ui_page 'html/index.html'
 
+shared_scripts {
+    'config.lua',
+	'@qb-core/import.lua',
+    '@qb-apartments/config.lua',
+    '@qb-garages/config.lua',
+}
+
+
 client_scripts {
     'client/main.lua',
     'client/animation.lua',
     'client/photo.lua',
     'client/gui.lua',
     'client/rentel.lua',
-}
-
-shared_scripts {
-    'config.lua',
-	'@qb-core/import.lua',
-    '@qb-apartments/config.lua',
-    '@qb-garages/SharedConfig.lua',
 }
 
 server_scripts {

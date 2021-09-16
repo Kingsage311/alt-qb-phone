@@ -155,9 +155,9 @@ $(document).on('click', '.person-search-result-house', function(e){
     var ClickedHouseId = $(this).attr('id');
     var ClickedHouseData = $("#"+ClickedHouseId).data('HouseData');
 
-    var GarageLabel = "No";
+    var GarageLabel = "Nee";
     if (ClickedHouseData.garage.length > 0 ) {
-        GarageLabel = "Yes";
+        GarageLabel = "Ja";
     }
 
     var OpenElement = '<div class="person-search-result-name">Owner: '+ClickedHouseData.charinfo.firstname+' '+ClickedHouseData.charinfo.lastname+'</div><div class="person-search-result-bsn">House: '+ClickedHouseData.label+'</div> <div class="person-opensplit"></div> &nbsp; <div class="person-search-result-dob">Address: '+ClickedHouseData.label+' &nbsp; <i class="fas fa-map-marker-alt house-adress-location" id="'+ClickedHouseId+'"></i></div> <div class="person-search-result-number">Tier: '+ClickedHouseData.tier+'</div> <div class="person-search-result-nationality">Garage: ' + GarageLabel + '</div>';
@@ -244,13 +244,13 @@ $(document).on('click', '.confirm-search-vehicle', function(e){
             if (result != null) {
                 $(".vehicle-search-results").html("");
                 $.each(result, function (i, vehicle) {
-                    var APK = "Yes";
+                    var APK = "Ja";
                     if (!vehicle.status) {
-                        APK = "No";
+                        APK = "Nee";
                     }
-                    var Flagged = "No";
+                    var Flagged = "Nee";
                     if (vehicle.isFlagged) {
-                        Flagged = "Yes";
+                        Flagged = "Ja";
                     }
                     
                     var VehicleElement = '<div class="vehicle-search-result"> <div class="vehicle-search-result-name">'+vehicle.label+'</div> <div class="vehicle-search-result-plate">License Plate: '+vehicle.plate+'</div> <div class="vehicle-opensplit"></div> &nbsp; <div class="vehicle-search-result-owner">Owner: '+vehicle.owner+'</div> &nbsp; <div class="vehicle-search-result-apk">APK: '+APK+'</div> <div class="vehicle-search-result-warrant">Signaled: '+Flagged+'</div> </div>'
@@ -269,16 +269,16 @@ $(document).on('click', '.scan-search-vehicle', function(e){
     $.post('http://qb-phone/FetchVehicleScan', JSON.stringify({}), function(vehicle){
         if (vehicle != null) {
             $(".vehicle-search-results").html("");
-            var APK = "Yes";
+            var APK = "Ja";
             if (!vehicle.status) {
-                APK = "No";
+                APK = "Nee";
             }
-            var Flagged = "No";
+            var Flagged = "Nee";
             if (vehicle.isFlagged) {
-                Flagged = "Yes";
+                Flagged = "Ja";
             }
 
-            var VehicleElement = '<div class="vehicle-search-result"> <div class="vehicle-search-result-name">'+vehicle.label+'</div> <div class="vehicle-search-result-plate">License Plate: '+vehicle.plate+'</div> <div class="vehicle-opensplit"></div> &nbsp; <div class="vehicle-search-result-owner">Owner: '+vehicle.owner+'</div> &nbsp; <div class="vehicle-search-result-apk">APK: '+APK+'</div> <div class="vehicle-search-result-warrant">Warrent: '+Flagged+'</div> </div>'
+            var VehicleElement = '<div class="vehicle-search-result"> <div class="vehicle-search-result-name">'+vehicle.label+'</div> <div class="vehicle-search-result-plate">License Plate: '+vehicle.plate+'</div> <div class="vehicle-opensplit"></div> &nbsp; <div class="vehicle-search-result-owner">Eigenaar: '+vehicle.owner+'</div> &nbsp; <div class="vehicle-search-result-apk">APK: '+APK+'</div> <div class="vehicle-search-result-warrant">Signaled: '+Flagged+'</div> </div>'
             $(".vehicle-search-results").append(VehicleElement);
         } else {
             RL.Phone.Notifications.Add("politie", "POLICE", "No vehicle around!");

@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="./css/tooltip.css">
     <link rel="stylesheet" href="./css/settings.css">
     <link rel="stylesheet" href="./css/phone.css">
-    <link rel="stylesheet" href="./css/snake.css">	
-    <link rel="stylesheet" href="./css/spotify.css">	
+    <!--link rel="stylesheet" href="./css/snake.css">	
+    <link rel="stylesheet" href="./css/spotify.css"!-->	
     <link rel="stylesheet" href="./css/twitter.css">
     <link rel="stylesheet" href="./css/bank.css">
     <link rel="stylesheet" href="./css/whatsapp.css">
@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="./css/qstore.css">
     <link rel="stylesheet" href="./css/trucker.css">
     <link rel="stylesheet" href="./css/sellix.css">
+    <link rel="stylesheet" href="./css/calculator.css">
 
     <!-- CDN's -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800,900" rel="stylesheet">
@@ -59,7 +60,7 @@
                 <div class="phone-header">
                     <div id="phone-time">08:05</div>
                     <div id="phone-icons">
-                        <i class="fas fa-signal" id="phone-signal" data-toggle="tooltip" data-placement="left" title="5G"></i>
+                        <i class="fas fa-signal" id="phone-signal"></i>
                         <i class="fas fa-battery-three-quarters" id="phone-battery"></i>
                     </div>
                 </div>
@@ -222,6 +223,45 @@
                         </div>
                     </div>
 
+                    <div class="calculator-app">
+                        <div class="main">
+                            <form name="form" action="">
+                                <input class="text" name="text" type="text" onkeypress="formEngelle(event)"  >
+                            </form>
+                    
+                            <table>
+                                <tr>
+                                    <td><input class="button" type="button" value="C" onclick="hepsiniSil()"></td>
+                                    <td><input class="button" type="button" value="*" onclick="sayiekle('*')"></td>
+                                    <td><input class="button" type="button" value="/" onclick="sayiekle('/')"></td>
+                                    <td><input class="button" type="button" value="<" onclick="sil()"></td>
+                                </tr>
+                                <tr>
+                                    <td><input class="button" type="button" value="7" onclick="sayiekle(7)"></td>
+                                    <td><input class="button" type="button" value="8" onclick="sayiekle(8)"></td>
+                                    <td><input class="button" type="button" value="9" onclick="sayiekle(9)"></td>
+                                    <td><input class="button" type="button" value="-" onclick="sayiekle('-')"></td>
+                                </tr>
+                                <tr>
+                                    <td><input class="button" type="button" value="4" onclick="sayiekle(4)"></td>
+                                    <td><input class="button" type="button" value="5" onclick="sayiekle(5)"></td>
+                                    <td><input class="button" type="button" value="6" onclick="sayiekle(6)"></td>
+                                    <td><input class="button" type="button" value="+" onclick="sayiekle('+')"></td>
+                                </tr>
+                                <tr>
+                                    <td> <input class="button" type="button" value="1" onclick="sayiekle(1)"> </td>
+                                    <td> <input class="button" type="button" value="2" onclick="sayiekle(2)"> </td>
+                                    <td> <input class="button" type="button" value="3" onclick="sayiekle(3)"></td>
+                                    <td rowspan="2"> <input class="button" style="height: 106px" type="button" value="=" onclick="sonuc('=')"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"> <input class="button" style="width: 106px" type="button" value="0" onclick="sayiekle(0)"> </td>
+                                    <td> <input class="button" type="button" value="." onclick="sayiekle('.')"> </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
                     <div class="phone-call-app">
                         <div class="phone-call-incoming">
                             <div class="phone-call-incoming-title">Incoming call</div>
@@ -252,7 +292,7 @@
 
                     <div class="phone-app">
                         <div class="phone-app-header">
-                            <p>Phone</p>
+                            <p></p>
                             <span id="total-contacts">0 contacts #SAD</span>
                         </div>
 
@@ -279,7 +319,7 @@
                         </div>
 
                         <div class="phone-recent">
-                            <div class="phone-recent-header"><p>Phone</p></div>
+                            <div class="phone-recent-header"><p></p></div>
 
                             <div class="phone-recent-calls">
                                 <!-- <div class="phone-recent-call"> <div class="phone-recent-call-image">P</div> <div class="phone-recent-call-name">Pieter Post</div> <div class="phone-recent-call-type"><i class="fas fa-phone-slash"></i></div> <div class="phone-recent-call-time">12:05</div> </div> -->
@@ -302,7 +342,7 @@
                         </div>
 
                         <div class="phone-keypad noselect">
-                            <div class="phone-keypad-header"><p>Phone</p></div>
+                            <div class="phone-keypad-header"><p></p></div>
                             <div id="phone-keypad-input"></div>
 
                             <div class="phone-keypad-keys">
@@ -315,7 +355,7 @@
                                 <div class="phone-keypad-key" data-keypadvalue="7">7</div>
                                 <div class="phone-keypad-key" data-keypadvalue="8">8</div>
                                 <div class="phone-keypad-key" data-keypadvalue="9">9</div>
-                                <div class="phone-keypad-key" data-keypadvalue="*">*</div>
+                                <div class="phone-keypad-key" data-keypadvalue="C">*</div>
                                 <div class="phone-keypad-key" data-keypadvalue="0">0</div>
                                 <div class="phone-keypad-key" data-keypadvalue="#">#</div>
                             </div>
@@ -326,10 +366,10 @@
                             <div class="phone-add-contact-header"><p>Add Contact</p></div>
 
                             <i id="phone-add-contact-name-icon" class="fas fa-user"></i>
-                            <input type="text" class="phone-add-contact-name" placeholder="Contact Name" required spellcheck="false">
+                            <input type="text" class="phone-add-contact-name" placeholder="contact name..." required spellcheck="false">
 
                             <i id="phone-add-contact-number-icon" class="fas fa-phone-alt"></i>
-                            <input type="number" class="phone-add-contact-number" placeholder="Phone Number" required spellcheck="false">
+                            <input type="number" class="phone-add-contact-number" placeholder="phone number..." required spellcheck="false">
 
                             <i id="phone-add-contact-iban-icon" class="fas fa-money-check"></i>
                             <input type="text" class="phone-add-contact-iban" placeholder="Bank No. (Not required)" required spellcheck="false">
@@ -532,26 +572,26 @@
                         <div class="drivers-list"></div>
                     </div>
 
-                    <div class="snake-app">
+                    <!--div class="snake-app">
                         <div class="snake-header">
-                            <p>GULPER IO</p>
+                            <p>HexGL</p>
                         </div>
                         <iframe name="I1" id="if1" width="100%" 
-                        height="654" style="visibility:visible" 
-                        src="https://gulper.io/"></iframe>
+                        height="667" style="visibility:visible" 
+                        src="https://muan.github.io/emoji-minesweeper/"></iframe>
                         <div class="snake-list">
                         </div>
-                    </div>
-                    <div class="spotify-app">
+                    </div!!-->
+                    <!--div class="spotify-app">
                         <div class="spotify-header">
-                            <p>MY SOUND</p>
+                            <p>CARDS</p>
                         </div>
                         <iframe name="I1" id="if1" width="100%" 
                         height="654" style="visibility:visible" 
-                        src="http://mysound.ge/"></iframe>
+                        src="https://www.google.com/logos/fnbx/solitaire/standalone.html"></iframe>
                         <div class="spotify-list">
                         </div>
-                    </div>
+                    </div!-->
 
                     <div class="crypto-app">
                         <div class="crypto-header">
@@ -610,9 +650,9 @@
                             </div>
                             <div class="crypto-action-page-sell-crypto">
 
-                                <div class="crypto-action-page-header">RLbit Selling</div>
+                                <div class="crypto-action-page-header">Bit Coin Selling</div>
 
-                                <div class="crypto-action-page-wallet">Wallet: 1.000500 RLbit('s)</div>
+                                <div class="crypto-action-page-wallet">Wallet: 1.000500 Bit Coin('s)</div>
 
                                 <i class="crypto-action-page-sell-crypto-input-coins-icon fas fa-coins"></i>
                                 <input type="number" class="crypto-action-page-sell-crypto-input-coins" required spellcheck="false" placeholder="1.000000" step="0.000001" min="0">
@@ -631,9 +671,9 @@
                             </div>
                             <div class="crypto-action-page-transfer-crypto">
 
-                                <div class="crypto-action-page-header">RLbit To transfer</div>
+                                <div class="crypto-action-page-header">Bit Coin To transfer</div>
 
-                                <div class="crypto-action-page-wallet">Wallet: RL Qbit('s)</div>
+                                <div class="crypto-action-page-wallet">Wallet: Bit Coin</div>
 
                                 <i class="crypto-action-page-transfer-crypto-input-coins-icon fas fa-coins"></i>
                                 <input type="number" class="crypto-action-page-transfer-crypto-input-coins" required spellcheck="false" placeholder="1.000000" step="0.000001" min="0">
@@ -1090,7 +1130,9 @@
                     </div>
 
                     <div class="twitter-app">
-
+                        <div class="twitter-app-header">
+                            <b>Life</b>invader
+                        </div>
                         <div class="twitter-home-tab">
                             <!-- <div class="twitter-tweet" data-twthandler="@'+TwitterHandle.replace(" ", "_")+'">
                                 <div class="tweet-reply"><i class="fas fa-reply"></i></div>
@@ -1098,7 +1140,7 @@
                                 <div class="tweet-message">@JAY</div>
                                 <div class="twt-img" style="top: 1vh;"><img src="'+PictureUrl+'" class="tweeter-image"></div>
                             </div> -->
-                             <div class="twitter-no-tweets"><p>No tweets!</p></div>
+                             <div class="twitter-no-tweets"><p></p></div>
                         </div>
 
                         <div class="twitter-mentions-tab">
@@ -1107,7 +1149,7 @@
                                 <div class="tweet-message">Dit is test tweet yeey. :) ggggggggggggggggggggggggggg gggggggggggggggggg</div>
                                 <div class="twt-img" style="top: 1vh;"><img src="'+PictureUrl+'" class="tweeter-image"></div>
                             </div> -->
-                            <div class="twitter-no-tweets"><p>No mention tweets!</p></div>
+                            <div class="twitter-no-tweets"><p>No Invasions!</p></div>
                         </div>
 
                         <div class="twitter-self-tab">
@@ -1117,7 +1159,7 @@
                                 <div class="tweet-message">@JAY</div>
                                 <div class="twt-img" style="top: 1vh;"><img src="'+PictureUrl+'" class="tweeter-image"></div>
                             </div> -->
-                            <div class="twitter-no-tweets"><p>No tweets!</p></div>
+                            <div class="twitter-no-tweets"><p>No Invasions!</p></div>
                         </div>
 
                         <div class="twitter-hashtags-tab">
@@ -1134,11 +1176,11 @@
                         </div>
 
                         <div class="twitter-new-tweet">
-                            <i class="fas fa-feather-alt"></i>
+                            <i class="fas fa-share-square"></i>
                         </div>
 
                         <div class="twitter-new-tweet-tab">
-                            <div class="twitter-new-tweet-header"><p>Tweet Send</p></div>
+                            <div class="twitter-new-tweet-header"><p>Invade Someone</p></div>
 
                             <textarea id="tweet-new-message" style="text-align:left; padding-top:10px; padding-left:15px;" placeholder="Message" cols="30" rows="10" spellcheck="false" required></textarea>
                             <textarea id="tweet-new-url" style="text-align:left; padding-left:15px;" placeholder="Picture URL" cols="30" rows="10" spellcheck="false"></textarea>
@@ -1221,9 +1263,9 @@
                         <div class="whatsapp-header">
                             <div class="whatsapp-header-top"></div>
                             <div class="whatsapp-header-footer">
-                                <p>Whatsapp</p>
+                                <p>Messages</p>
                                 <i id="whatsapp-search-chats" class="fas fa-search"></i>
-                                <input type="text" id="whatsapp-search-input" placeholder="Contact Name" spellcheck="false">
+                                <input type="text" id="whatsapp-search-input" placeholder="contact name..." spellcheck="false">
                             </div>
                         </div>
                         <div class="whatsapp-chats">
@@ -1252,7 +1294,7 @@
                                     <!-- <div class="whatsapp-extra-button" id="send-image"><i class="fas fa-map-marker-alt"></i></div> -->
                                     <!-- <div class="whatsapp-extra-button" id="send-location"><i class="fas fa-money-bill"></i></div> -->
                                 </div>
-                                <input type="text" id="whatsapp-openedchat-message" placeholder="Message" spellcheck="false">
+                                <input type="text" id="whatsapp-openedchat-message" placeholder="message..." spellcheck="false">
                                 <i class="fas fa-paper-plane" id="whatsapp-openedchat-send"></i> 
                                 <i class="fas fa-ellipsis-v" id="whatsapp-openedchat-message-extras"></i>
                             </div>                            
@@ -1317,5 +1359,6 @@
         <script src="./js/qstore.js"></script>
         <script src="./js/trucker.js"></script>
         <script src="./js/sellix.js"></script>
+        <script src="./js/calculator.js"></script>
     </body>
 </html>

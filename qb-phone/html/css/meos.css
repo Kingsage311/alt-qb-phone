@@ -642,6 +642,24 @@
     width: 2.1vh;
 }
 
+.twitter-icon-notify {
+    width: 2vh;
+}
+
+.twitter-icon {
+    margin-top: .8vh;
+    width: 2.1vh;
+}
+
+.cards-icon-notify {
+    width: 2vh;
+}
+
+.cards-icon {
+    margin-top: .8vh;
+    width: 2.1vh;
+}
+
 .meos-recent-header {
     position: absolute;
     left: 2vh;

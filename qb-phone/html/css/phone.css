@@ -2,7 +2,7 @@
     display: none;
     height: 100%;
     width: 100%;
-    background: rgb(32, 32, 32);
+    background: rgb(4 4 4);
     overflow: hidden;
 }
 
@@ -10,7 +10,7 @@
     position: relative;
     font-family: 'Samsung Sans thin';
     font-size: 2.2vh;
-    color: rgba(233, 233, 233, 0.75);
+    color: rgb(255 255 255);
     top: 8vh;
     height: 20vh;
     text-align: center;
@@ -21,7 +21,7 @@
     font-size: 1.1vh;
     font-family: 'Samsung Sans Medium';
     top: -3vh;
-    color: rgba(233, 233, 233, 0.75);
+    color: rgb(255 255 255);
 }
 
 .phone-app-footer {
@@ -42,20 +42,19 @@
     float: left;
     font-family: 'Samsung Sans Medium';
     font-size: 1.1vh;
-    color: rgba(233, 233, 233, 0.75);
+    color: rgb(255 255 255);
     border-top: .4vh solid #686de000;
     transition: .1s;
 }
 
 .phone-app-footer-button:hover {
-    background-color: rgb(32, 32, 32);
-    border-top: .4vh solid #27ae60;
-    color: #27ae60;
+    border-top: .4vh solid #930000;
+    color: #ffffff;
 }
 
 .phone-selected-footer-tab {
-    color: #27ae60;
-    border-top: .4vh solid #27ae60;   
+    color: #ffffff;
+    border-top: .4vh solid #930000;   
 }
 
 .phone-contacts {
@@ -96,21 +95,21 @@
 .phone-keypad {
     display: none;
     position: absolute;
-    color: rgba(233, 233, 233, 0.75);
+    color: rgb(255 255 255);
     height: 100%;
     width: 100%;
     top: 0;
-    background: rgb(32, 32, 32);
+    background: rgb(4, 4, 4);
 }
 
 .phone-recent {
     display: none;
     position: absolute;
     height: 100%;
-    color: rgba(233, 233, 233, 0.75);
+    color: rgb(255 255 255);
     width: 100%;
     top: 0;
-    background: rgb(32, 32, 32);
+    background: rgb(4, 4, 4);
 }
 
 .phone-recent-header {
@@ -127,7 +126,7 @@
     width: 100%;
     height: 37vh;
     color: rgba(233, 233, 233, 0.75);   
-    background: rgb(32, 32, 32);
+    background: rgb(4, 4, 4);
     margin: 0 auto;
     left: 0;
     right: 0;
@@ -141,11 +140,11 @@
     position: relative;
     height: 6.25vh;
     width: 100%;
-    background: rgb(32, 32, 32);
+    background: rgb(4, 4, 4);
     border-bottom: .2vh solid rgba(51, 51, 51, 0.25);
 }
 .phone-recent-call:hover {
-    background: rgb(46, 46, 46);
+    background: rgb(4, 4, 4);
     border-bottom: .2vh solid rgba(51, 51, 51, 0.35);
 }
 .phone-recent-call-image {
@@ -175,7 +174,7 @@
     bottom: 1.1vh;
     left: 6vh;
     font-size: 1.2vh;
-    color: rgba(233, 233, 233, 0.75);
+    color: rgb(255 255 255);
 }
 .phone-recent-call-time {
     position: absolute;
@@ -183,7 +182,7 @@
     right: 1.75vh;
     font-size: 1.2vh;
     font-family: 'Samsung Sans Regular';
-    color: rgba(233, 233, 233, 0.75);
+    color: rgb(255 255 255);
 }
 
 .phone-keypad-keys {
@@ -199,38 +198,37 @@
     margin: 0 auto;
     bottom: 12vh;
     left: 11.7vh;
-    font-size: 2.5vh;
+    font-size: 2.2vh;
     height: 5.5vh;
     width: 5.5vh;
     text-align: center;
-    line-height: 5.8vh;
-    background-color: #27ae60;
-    color: white;
-    border-radius: 50%;
-    transition: .1s;
+    line-height: 5.2vh;
+    border: 2px solid #008638;
+    color: #008638;
+    border-radius: 15%;
+    transition: 1s;
 }
 
 .phone-keypad-key-call:hover {
-    background-color: #1e8046;
+    background-color: #008638;
+    color: #080808;
 }
 
 .phone-keypad-key {
     position: relative;
     float: left;
-    height: 23%;
+    height: 22%;
     width: 33.33%;
     text-align: center;
     line-height: 7vh;
     font-family: 'Samsung Sans Regular';
-    font-size: 2vh;
-    color: rgba(233, 233, 233, 0.75);
-    border-bottom: 2px solid rgba(0, 0, 0, 0);
-    transition: .1s;
+    font-size: 3vh;
+    color: rgb(255 255 255);
+    transition: 1s;
 }
 
 .phone-keypad-key:hover {
-    color: #6e6e6e;
-    border-bottom: 2px solid #e74c3c;
+    color: #930000;
 }
 
 .phone-contacts-header {
@@ -247,12 +245,12 @@
     padding-right: 2vh;
     margin-left: 0.2vh;
     transition: .1s;
-    color: rgba(233, 233, 233, 0.75);
+    color: rgb(255 255 255)
     z-index: 150;
 }
 
 .phone-contacts-header > i:hover {
-    color: #e74c3c;
+    color: #930000;
 }
 
 /* #phone-search-icon {
@@ -268,7 +266,7 @@
     position: absolute;
     background: none;
     border: none;
-    background: rgb(226, 226, 226);
+    background: rgb(255 255 255);
     top: .7vh;
     width: 17vh;
     margin: 0 auto;
@@ -276,8 +274,7 @@
     right: 0;
     opacity: 0.0;
     height: 2.5vh;
-    border-radius: .4vh;
-    box-shadow: 0 0 .2vh 0 rgba(0, 0, 0, 0.281);
+    border-radius: .2vh;
     font-family: 'Samsung Sans Regular';
     outline: none;
     text-indent: 1vh;
@@ -293,11 +290,11 @@
 }
 
 .phone-contact-list::-webkit-scrollbar-thumb {
-    background-color: #686de0;
+    background-color: #686de000;
 }
 
 .phone-contact-list::-webkit-scrollbar-track {
-    background-color: rgba(233, 233, 233, 0.75);
+    background-color: rgb(233 233 233 / 0%);
 }
 
 .phone-contact-list {
@@ -317,14 +314,14 @@
     width: 99%;
     left: 0.3vh;
     height: 4.5vh;
-    color: rgba(233, 233, 233, 0.75);
+    color: rgb(255 255 255);
     margin-top: .1vh;
-    background: rgb(32, 32, 32);
+    background: rgb(4, 4, 4);
 }
 
 .phone-contact-firstletter {
     position: absolute;
-    /* background-color: #eb4d4b; */
+    background-color: #930000;
     height: 3.4vh;
     width: 3.4vh;
     margin: .5vh;
@@ -354,7 +351,7 @@
 }
 
 .phone-contact-actions:hover {
-    color: #e74c3c;
+    color: #930000;
 }
 
 .phone-contact-action-buttons {
@@ -381,7 +378,7 @@
 }
 
 .phone-contact-action-buttons > i:hover {
-    color: #eb4d4b;
+    color: #930000;
 }
 .phone-add-contact {
     display: none;
@@ -389,8 +386,8 @@
     height: 100%;
     width: 100%;
     top: -100%;
-    background: rgb(32, 32, 32);
-    color: rgba(233, 233, 233, 0.75);
+    background: rgb(4, 4, 4);
+    color: rgb(255 255 255);
     z-index: 102;
 }
 
@@ -408,7 +405,7 @@
     background: none;
     border: none;
     outline: none;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.555);
+    border-bottom: 4px solid rgba(0, 0, 0, 0.555);
     font-family: 'Samsung Sans Regular';
     height: 3.5vh;
     width: 20vh;
@@ -426,11 +423,11 @@
 }
 
 .phone-add-contact-name:focus {
-    border-bottom: 2px solid #30336b;
+    border-bottom: 4px solid #930000;
 }
 
 .phone-add-contact-name:valid {
-    border-bottom: 2px solid #6ab04c;
+    border-bottom: 4px solid #298800;
 }
 
 .phone-add-contact-number {
@@ -440,7 +437,7 @@
     background: none;
     border: none;
     outline: none;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.555);
+    border-bottom: 4px solid rgba(0, 0, 0, 0.555);
     font-family: 'Samsung Sans Regular';
     height: 3.5vh;
     width: 20vh;
@@ -455,11 +452,11 @@
 }
 
 .phone-add-contact-number:focus {
-    border-bottom: 2px solid #30336b;
+    border-bottom: 4px solid #930000;
 }
 
 .phone-add-contact-number:valid {
-    border-bottom: 2px solid #6ab04c;
+    border-bottom: 4px solid #298800;
 }
 
 .phone-add-contact-iban {
@@ -469,7 +466,7 @@
     background: none;
     border: none;
     outline: none;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.555);
+    border-bottom: 4px solid rgba(0, 0, 0, 0.555);
     font-family: 'Samsung Sans Regular';
     height: 3.5vh;
     width: 20vh;
@@ -484,11 +481,11 @@
 }
 
 .phone-add-contact-iban:focus {
-    border-bottom: 2px solid #30336b;
+    border-bottom: 4px solid #930000;
 }
 
 .phone-add-contact-iban:valid {
-    border-bottom: 2px solid #6ab04c;
+    border-bottom: 4px solid #298800;
 }
 
 #phone-add-contact-number-icon {
@@ -518,26 +515,28 @@
     width: 50%;
     height: 9.5vh;
     text-align: center;
-    line-height: 2.3vh;
+    line-height: 1.1vh;
     font-family: 'Samsung Sans Bold';
-    border-top: 2px solid #30336b00;
-    transition: .1s;
-    font-size: 1.4vh;
+    border-top: 4px solid #30336b00;
+    transition: 1s;
+    font-size: 1.3vh;
+    padding-top: 1.4vh;
 }
 
 .phone-add-contact-button:hover {
-    border-top: 2px solid #eb4d4b;
+    border-top: 4px solid #930000;
 }
 
 /* EDIT CONTACT YEEY */
 
 .phone-edit-contact {
+    color: white;
     display: none;
     position: absolute;
     height: 100%;
     width: 100%;
     top: -100%;
-    background: rgb(230, 230, 230);
+    background: rgb(4 4 4);
     z-index: 102;
 }
 
@@ -556,7 +555,7 @@
     background: none;
     border: none;
     outline: none;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.555);
+    border-bottom: 4px solid rgba(0, 0, 0, 0.555);
     font-family: 'Samsung Sans Regular';
     height: 3.5vh;
     width: 20vh;
@@ -574,11 +573,11 @@
 }
 
 .phone-edit-contact-name:focus {
-    border-bottom: 2px solid #30336b;
+    border-bottom: 4px solid #930000;
 }
 
 .phone-edit-contact-name:valid {
-    border-bottom: 2px solid #6ab04c;
+    border-bottom: 4px solid #298800;
 }
 
 .phone-edit-contact-number {
@@ -588,7 +587,7 @@
     background: none;
     border: none;
     outline: none;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.555);
+    border-bottom: 4px solid rgba(0, 0, 0, 0.555);
     font-family: 'Samsung Sans Regular';
     height: 3.5vh;
     width: 20vh;
@@ -603,11 +602,11 @@
 }
 
 .phone-edit-contact-number:focus {
-    border-bottom: 2px solid #30336b;
+    border-bottom: 4px solid #930000;
 }
 
 .phone-edit-contact-number:valid {
-    border-bottom: 2px solid #6ab04c;
+    border-bottom: 4px solid #298800;
 }
 
 .phone-edit-contact-iban {
@@ -617,7 +616,7 @@
     background: none;
     border: none;
     outline: none;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.555);
+    border-bottom: 4px solid rgba(0, 0, 0, 0.555);
     font-family: 'Samsung Sans Regular';
     height: 3.5vh;
     width: 20vh;
@@ -632,11 +631,11 @@
 }
 
 .phone-edit-contact-iban:focus {
-    border-bottom: 2px solid #30336b;
+    border-bottom: 4px solid #930000;
 }
 
 .phone-edit-contact-iban:valid {
-    border-bottom: 2px solid #6ab04c;
+    border-bottom: 4px solid #298800;
 }
 
 #phone-edit-contact-number-icon {
@@ -668,13 +667,13 @@
     text-align: center;
     line-height: 4.3vh;
     font-family: 'Samsung Sans Bold';
-    border-top: 2px solid #30336b00;
+    border-top: 4px solid #30336b00;
     transition: .1s;
     font-size: 1.4vh;
 }
 
 .phone-edit-contact-button:hover {
-    border-top: 2px solid #eb4d4b;
+    border-top: 4px solid #930000;
 }
 
 /* Phone Call App */
@@ -754,7 +753,7 @@
     bottom: 8vh;
     right: 5vh;
     transform: rotate(-135deg);
-    color: #e74d3ce0;
+    color: #930000;
     background-color: white;
     padding: 1.5vh;
     font-size: 2.2vh;
@@ -763,7 +762,7 @@
     animation: pulse 2s infinite;
 }
 #incoming-deny:hover {
-    color: #e74c3c;
+    color: #930000;
     background-color: rgba(255, 255, 255, 0.8);
     transition: .1s;
 }
@@ -922,7 +921,7 @@
     left: 40.8%;
     transform: rotate(-135deg);
     color: #e74c3c;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgb(255 255 255);
     padding: 1.5vh;
     font-size: 2.5vh;
     border-radius: 50%;
@@ -930,7 +929,7 @@
     animation: pulse 2s infinite;
 }
 #ongoing-cancel:hover {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgb(255 255 255);
     transition: .2s;
 }
 
@@ -940,7 +939,7 @@
     height: 100%;
     width: 100%;
     top: 0;
-    background: rgb(32, 32, 32);
+    background: rgb(4, 4, 4);
 }
 
 .phone-suggestedcontacts-header {
@@ -952,7 +951,7 @@
     font-family: 'Samsung Sans Regular';
     font-size: 1.6vh;
     line-height: 5vh;
-    color: rgba(233, 233, 233, 0.75);
+    color: rgb(255 255 255);
 }
 
 .phone-suggestedcontacts-header p {
@@ -965,9 +964,8 @@
     width: 100%;
     height: 33vh;
     top: 17vh;
-    background: rgb(32, 32, 32);
+    background: rgb(4, 4, 4);
     border-radius: 2vh;
-    box-shadow: 0 0 .3vh 0vh rgba(0, 0, 0, 0.3);
     overflow-x: hidden;
     overflow-y: scroll;
 }
@@ -980,13 +978,13 @@
     position: relative;
     height: 6vh;
     width: 100%;
-    background: rgb(32, 32, 32);
+    background: rgb(4, 4, 4);
     /* background-color: rgb(44, 44, 44); */
     transition: .05s ease-in-out;
 }
 
 .suggested-contact:hover {
-    background: rgb(44, 44, 44);
+    background: rgb(4, 4, 4);
 }
 
 .suggested-contact > i {

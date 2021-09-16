@@ -152,7 +152,7 @@ body {
 }
 
 #phone-battery {
-    transform: rotate(-90deg);
+    transform: rotate(-0deg);
     left: 5.4vh;
     position: relative;
 }

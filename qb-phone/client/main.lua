@@ -121,21 +121,40 @@ local isLoggedIn = false
 CreateThread(function()
     while true do
         DisableControlAction(1, 199) 
-        if IsDisabledControlJustPressed(1--[[input group]],  199--[[control index]]) then
-        if not PhoneData.isOpen then
-                --local IsHandcuffed = exports['police']:IsHandcuffed()
-                local IsHandcuffed = false
-                if not IsHandcuffed then
-                    OpenPhone()
-				    SetPauseMenuActive(false)
-                else
-                    QBCore.Functions.Notify("Action Impossible..", "error")
+        if IsDisabledControlJustPressed(1, 199) then
+            QBCore.Functions.GetPlayerData(function(PlayerData)
+                if not PhoneData.isOpen and not PlayerData.metadata["isdead"] then
+                    local IsHandcuffed = false -- exports['police']:IsHandcuffed()
+                    if not IsHandcuffed then
+                        OpenPhone()
+                        SetPauseMenuActive(false)
+                    else
+                        QBCore.Functions.Notify("Action Impossible..", "error")
+                    end
                 end
-            end
+            end)
         end
         Wait(3)
     end
 end)
+
+-- CreateThread(function()
+--     while true do
+--         DisableControlAction(1, 199) 
+--         QBCore.Functions.GetPlayerData(function(PlayerData)
+--             if not PhoneData.isOpen and not PlayerData.metadata["isdead"] then
+--                 local IsHandcuffed = exports['police']:IsHandcuffed()
+--                 if not IsHandcuffed then
+--                     OpenPhone()
+-- 				    SetPauseMenuActive(false)
+--                 else
+--                     QBCore.Functions.Notify("Action Impossible..", "error")
+--                 end
+--             end
+--         end
+--         Wait(3)
+--     end
+-- end)
 
 function CalculateTimeToDisplay()
 	hour = GetClockHours()
@@ -361,49 +380,6 @@ RegisterNUICallback('SetupGarageVehicles', function(data, cb)
     cb(PhoneData.GarageVehicles)
 end)
 
---[[RegisterNetEvent("hidemenu")
-AddEventHandler("hidemenu", function()
-    if not PhoneData.CallData.InCall then
-        DoPhoneAnimation('cellphone_text_out')
-        SetTimeout(400, function()
-            StopAnimTask(PlayerPedId(), PhoneData.AnimationData.lib, PhoneData.AnimationData.anim, 2.5)
-            deletePhone()
-            PhoneData.AnimationData.lib = nil
-            PhoneData.AnimationData.anim = nil
-        end)
-    else
-        PhoneData.AnimationData.lib = nil
-        PhoneData.AnimationData.anim = nil
-        DoPhoneAnimation('cellphone_text_to_call')
-    end
-    SetNuiFocus(false, false)
-    SetNuiFocusKeepInput(false)
-    SetTimeout(500, function()
-        PhoneData.isOpen = false
-    end)
-end)
-
-RegisterNUICallback('Close', function()
-    if not PhoneData.CallData.InCall then
-        DoPhoneAnimation('cellphone_text_out')
-        SetTimeout(400, function()
-            StopAnimTask(PlayerPedId(), PhoneData.AnimationData.lib, PhoneData.AnimationData.anim, 2.5)
-            deletePhone()
-            PhoneData.AnimationData.lib = nil
-            PhoneData.AnimationData.anim = nil
-        end)
-    else
-        PhoneData.AnimationData.lib = nil
-        PhoneData.AnimationData.anim = nil
-        DoPhoneAnimation('cellphone_text_to_call')
-    end
-    SetNuiFocus(false, false)
-    SetNuiFocusKeepInput(false)
-    SetTimeout(500, function()
-        PhoneData.isOpen = false
-    end)
-end)]]
-
 RegisterNetEvent("hidemenu")
 AddEventHandler("hidemenu", function()
     if not PhoneData.CallData.InCall then
@@ -420,7 +396,7 @@ AddEventHandler("hidemenu", function()
         DoPhoneAnimation('cellphone_text_to_call')
     end
     SetNuiFocus(false, false)
-    --SetNuiFocusKeepInput(false)
+    SetNuiFocusKeepInput(false)
     SetTimeout(500, function()
         PhoneData.isOpen = false
     end)
@@ -1211,7 +1187,7 @@ local takePhoto = false
             CellFrontCamActivate(frontCam)
 
         else if IsControlJustPressed(1, 176) then
-        exports['screenshot-basic']:requestScreenshotUpload('https://discord.com/api/webhooks/860137211755757569/GVKZVk4Q-3AbVy8vmdbw1DsinZPonSBJ_KwclZNIdnWhpTcekEVrOj8RbNgYuiU4kSip', 'files[]', function(data2)
+        exports['screenshot-basic']:requestScreenshotUpload('https://discord.com/api/webhooks/863825966526234725/Qas62fxvRtry9SZmj6B_6U3PJocvhbapc_KeVJjYcq6z-G-4ioTkwbrU3gMLA6z00XDJ', 'files[]', function(data2)
             DestroyMobilePhone()
             CellCamActivate(false, false)
             local resp = json.decode(data2)
@@ -1769,11 +1745,11 @@ AddEventHandler('qb-phone:client:AnswerCall', function()
     end
 end)
 
-    AddEventHandler('onResourceStop', function(resource)
-     if resource == GetCurrentResourceName() then
-          SetNuiFocus(false, false)
-     end
- end)
+-- AddEventHandler('onResourceStop', function(resource)
+--     if resource == GetCurrentResourceName() then
+--         -- SetNuiFocus(false, false)
+--     end
+-- end)
 
 RegisterNUICallback('FetchSearchResults', function(data, cb)
     QBCore.Functions.TriggerCallback('qb-phone:server:FetchResult', function(result)
@@ -1834,7 +1810,7 @@ RegisterNUICallback('FetchVehicleScan', function(data, cb)
     QBCore.Functions.TriggerCallback('qb-phone:server:ScanPlate', function(result)
         QBCore.Functions.TriggerCallback('police:IsPlateFlagged', function(flagged)
             result.isFlagged = flagged
-            local vehicleInfo = QBCore.Shared.Vehicles[QBCore.Shared.VehicleModels[model]["model"]] ~= nil and QBCore.Shared.Vehicles[QBCore.Shared.VehicleModels[model]["model"]] or {["brand"] = "Unknown brand..", ["name"] = ""}
+            local vehicleInfo = QBCore.Shared.Vehicles[QBCore.Shared.VehicleModels[model]["model"]] ~= nil and QBCore.Shared.Vehicles[QBCore.Shared.VehicleModels[model]["model"]] or {["brand"] = "Onbekend merk..", ["name"] = ""}
             result.label = vehicleInfo["name"]
             cb(result)
         end, plate)
@@ -1991,10 +1967,25 @@ AddEventHandler('qb-phone:client:AddNewSuggestion', function(SuggestionData)
     TriggerServerEvent('qb-phone:server:SetPhoneAlerts', "phone", Config.PhoneApplications["phone"].Alerts)
 end)
 
+function tprint (tbl, indent)
+    if not indent then indent = 0 end
+    for k, v in pairs(tbl) do
+      formatting = string.rep("  ", indent) .. k .. ": "
+      if type(v) == "table" then
+        print(formatting)
+        tprint(v, indent+1)
+      elseif type(v) == 'boolean' then
+        print(formatting .. tostring(v))
+      else
+        print(formatting .. v)
+      end
+    end
+  end
+
 RegisterNUICallback('GetCryptoData', function(data, cb)
     TriggerEvent("debug", 'Phone: Get Crypto Data', 'success')
-
     QBCore.Functions.TriggerCallback('qb-crypto:server:GetCryptoData', function(CryptoData)
+        tprint(CryptoData)
         cb(CryptoData)
     end, data.crypto)
 end)
@@ -2432,19 +2423,4 @@ CreateThread(function()
 
         Wait(1)
     end
-end)
-
--- test
-
-RegisterNetEvent('qb-phone:RefreshPhone')
-AddEventHandler('qb-phone:RefreshPhone', function()
-    TriggerEvent("debug", 'Phone: Refresh', 'success')
-
-    LoadPhone()
-    SetTimeout(250, function()
-        SendNUIMessage({
-            action = "RefreshAlerts",
-            AppData = Config.PhoneApplications,
-        })
-    end)
 end)

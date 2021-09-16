@@ -15,7 +15,7 @@ function SetupCryptoData(Crypto) {
     CryptoData.Worth = Crypto.Worth;
     CryptoData.WalletId = Crypto.WalletId;
 
-    $(".crypto-action-page-wallet").html("Wallet: "+CryptoData.Portfolio+" RLbit('s)");
+    $(".crypto-action-page-wallet").html("Wallet: "+CryptoData.Portfolio+" Bit Coin");
     $(".crypto-walletid").html(CryptoData.WalletId);
     $(".cryptotab-course-list").html("");
     if (CryptoData.History.length > 0) {
@@ -27,9 +27,10 @@ function SetupCryptoData(Crypto) {
                 PercentageChange = (PercentageChange * -1);
                 PercentageElement = '<span style="color: red;" class="crypto-percentage-change"><i style="color: red; transform: rotate(125deg);" class="fas fa-arrow-right"></i> -('+Math.ceil(PercentageChange)+'%)</span>';
             }
+            console.log(change.NewWorth)
             var Element =   '<div class="cryptotab-course-block">' +
                                 '<i class="fas fa-exchange-alt"></i>' +
-                                '<span class="cryptotab-course-block-title">Course change</span>' +
+                                '<span class="cryptotab-course-block-title">Course Change</span>' +
                                 '<span class="cryptotab-course-block-happening"><span style="font-size: 1.3vh;">$'+change.PreviousWorth+'</span> to <span style="font-size: 1.3vh;">$'+change.NewWorth+'</span>'+PercentageElement+'</span>' +
                             '</div>';
     
@@ -48,7 +49,7 @@ function UpdateCryptoData(Crypto) {
     CryptoData.Worth = Crypto.Worth;
     CryptoData.WalletId = Crypto.WalletId;
 
-    $(".crypto-action-page-wallet").html("Wallet: "+CryptoData.Portfolio+" RLbit('s)");
+    $(".crypto-action-page-wallet").html("Wallet: "+CryptoData.Portfolio+" Bit Coin");
     $(".crypto-walletid").html(CryptoData.WalletId);
     $(".cryptotab-course-list").html("");
     if (CryptoData.History.length > 0) {
@@ -62,7 +63,7 @@ function UpdateCryptoData(Crypto) {
             }
             var Element =   '<div class="cryptotab-course-block">' +
                                 '<i class="fas fa-exchange-alt"></i>' +
-                                '<span class="cryptotab-course-block-title">Course change</span>' +
+                                '<span class="cryptotab-course-block-title">Course Change</span>' +
                                 '<span class="cryptotab-course-block-happening"><span style="font-size: 1.3vh;">$'+change.PreviousWorth+'</span> to <span style="font-size: 1.3vh;">$'+change.NewWorth+'</span>'+PercentageElement+'</span>' +
                             '</div>';
     

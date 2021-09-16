@@ -5,7 +5,7 @@ Config.CallRepeats = 10
 Config.PhoneApplications = {
     ["phone"] = {
         app = "phone",
-        color = "#04b543",
+        color = "#930000",
         icon = "fa fa-phone-alt",
         tooltipPos = "top",
         job = false,
@@ -15,8 +15,8 @@ Config.PhoneApplications = {
     },
     ["whatsapp"] = {
         app = "whatsapp",
-        color = "#25d366",
-        icon = "fab fa-whatsapp",
+        color = "#930000",
+        icon = "fas fa-comment",
         tooltipPos = "top",
         style = "font-size: 2.8vh";
         job = false,
@@ -26,7 +26,7 @@ Config.PhoneApplications = {
     },
     ["settings"] = {
         app = "settings",
-        color = "#636e72",
+        color = "#930000",
         icon = "fa fa-cog",
         tooltipPos = "top",
         style = "padding-right: .08vh; font-size: 2.3vh";
@@ -37,7 +37,7 @@ Config.PhoneApplications = {
     },
     ["twitter"] = {
         app = "twitter",
-        color = "#1da1f2",
+        color = "#930000",
         icon = "fab fa-twitter",
         job = false,
         blockedjobs = {},
@@ -46,7 +46,7 @@ Config.PhoneApplications = {
     },
     ["garage"] = {
         app = "garage",
-        color = "#b30000",
+        color = "#930000",
         icon = "fas fa-warehouse",
         job = false,
         blockedjobs = {},
@@ -55,7 +55,7 @@ Config.PhoneApplications = {
     },
     ["mail"] = {
         app = "mail",
-        color = "#ff002f",
+        color = "#930000",
         icon = "fas fa-envelope",
         tooltipPos = "top",
         job = false,
@@ -65,7 +65,7 @@ Config.PhoneApplications = {
     },
     ["advert"] = {
         app = "advert",
-        color = "#ff8f1a",
+        color = "#930000",
         icon = "fas fa-ad",
         job = false,
         blockedjobs = {},
@@ -74,17 +74,34 @@ Config.PhoneApplications = {
     },
     ["bank"] = {
         app = "bank",
-        color = "#1f212e",
+        color = "#930000",
         icon = "fas fa-university",
         job = false,
         blockedjobs = {},
         slot = 8,
         Alerts = 0,
     },
-
+    ["calculator"] = {
+        app = "calculator",
+        color = "#930000",
+        icon = "fas fa-calculator",
+        job = false,
+        blockedjobs = {},
+        slot = 14,
+        Alerts = 0,
+    },
+    ["crypto"] = {
+        app = "crypto",
+        color = "#930000",
+        icon = "fas fa-funnel-dollar",
+        job = false,
+        blockedjobs = {},
+        slot = 13,
+        Alerts = 0,
+    },
     ["racing"] = {
         app = "racing",
-        color = "#353b48",
+        color = "#930000",
         icon = "fas fa-flag-checkered",
         job = false,
         blockedjobs = {
@@ -96,7 +113,7 @@ Config.PhoneApplications = {
     },
     ["houses"] = {
         app = "houses",
-        color = "#27ae60",
+        color = "#930000",
         icon = "fas fa-home",
         job = false,
         blockedjobs = {},
@@ -105,7 +122,7 @@ Config.PhoneApplications = {
     },
     ["lawyers"] = {
         app = "lawyers",
-        color = "#030b85",
+        color = "#930000",
         icon = "fas fa-user-tie",
         job = false,
         blockedjobs = {},
@@ -114,7 +131,7 @@ Config.PhoneApplications = {
     },
     ["mechanic"] = {
         app = "mechanic",
-        color = "#353b48",
+        color = "#930000",
         icon = "fas fa-wrench",
         job = false,
         blockedjobs = {},
@@ -123,7 +140,7 @@ Config.PhoneApplications = {
     },
     ["drivers"] = {
         app = "drivers",
-        color = "#f4d219",
+        color = "#930000",
         icon = "fas fa-taxi",
         job = false,
         blockedjobs = {},
@@ -132,7 +149,7 @@ Config.PhoneApplications = {
     },  
     ["sellix"] = {
         app = "sellix",
-        color = "‎#1d00a0",
+        color = "‎#930000",
         icon = "fas fa-book-dead",
         style = "padding-right: .3vh; font-size: 2vh";
         job = false,
@@ -145,17 +162,17 @@ Config.PhoneApplications = {
     },
     ["meos"] = {
         app = "meos",
-        color = "#020144",
+        color = "#930000",
         icon = "fas fa-ad",
         job = "police",
         blockedjobs = {},
         slot = 20,
         Alerts = 0,
     },
-    ["spotify"] = {
+    --[["spotify"] = {
         app = "spotify",
-        color = "#82c91e",
-        icon = "fas fa-compact-disc",
+        color = "#930000",
+        icon = "fas fa-crown",
         job = false,
         blockedjobs = {},
         slot = 13,
@@ -163,13 +180,13 @@ Config.PhoneApplications = {
     },
     ["snake"] = {
         app = "snake",
-        color = "#609",
-        icon = "fas fa-ghost",
+        color = "#930000",
+        icon = "fas fa-bomb",
         job = false,
         blockedjobs = {},
         slot = 14,
         Alerts = 0,
-    },
+    },]]
         --  ["rentel"] = {
     --     app = "rentel",
     --     color = "‎#ee82ee",
@@ -219,20 +236,20 @@ Config.PhoneApplications = {
 Config.MaxSlots = 20
 
 Config.StoreApps = {
-    ["territory"] = {
-        app = "territory",
-        color = "#353b48",
-        icon = "fas fa-globe-europe",
-        tooltipText = "territory",
-        style = "";
-        job = false,
-        blockedjobs = {},
-        slot = 15,
-        Alerts = 0,
-        password = true,
-        creator = "Qbus",
-        title = "Territory",
-    },
+    -- ["territory"] = {
+    --     app = "territory",
+    --     color = "#353b48",
+    --     icon = "fas fa-globe-europe",
+    --     tooltipText = "territory",
+    --     style = "";
+    --     job = false,
+    --     blockedjobs = {},
+    --     slot = 15,
+    --     Alerts = 0,
+    --     password = true,
+    --     creator = "Qbus",
+    --     title = "Territory",
+    -- },
 }
 
 Config.RentelVehicles = {

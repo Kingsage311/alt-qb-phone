@@ -170,7 +170,7 @@ RL.Phone.Functions.LoadBankInvoices = function(invoices) {
         $(".bank-app-invoices-list").html("");
 
         $.each(invoices, function(i, invoice){
-            var Elem = '<div class="bank-app-invoice" id="invoiceid-'+i+'"> <div class="bank-app-invoice-title">$' + invoice.amount + ' <span style="font-size: 1vh; color: gray;">(Charged: '+ invoice.society +')</span></div> <div class="bank-app-invoice-amount">' +invoice.title+ '</div> <div class="bank-app-invoice-buttons"> <i class="fas fa-check-circle pay-invoice"></i></div> </div>';
+            var Elem = '<div class="bank-app-invoice" id="invoiceid-'+i+'"> <div class="bank-app-invoice-title">$' + invoice.amount + ' <span style="font-size: 1vh; color: gray;">(Society: '+ invoice.society +')</span></div> <div class="bank-app-invoice-amount">' +invoice.title+ '</div> <div class="bank-app-invoice-buttons"> <i class="fas fa-check-circle pay-invoice"></i></div> </div>';
 
             $(".bank-app-invoices-list").append(Elem);
             $("#invoiceid-"+i).data('invoicedata', invoice);

@@ -139,11 +139,11 @@
     max-width: 14vh;
 
     color: rgb(255, 255, 255);
-    height:4.6vh;
-    padding:1vh 1.6vh;
-    font-size:1.8vh;
+    height:46px;
+    padding:10px 16px;
+    font-size:18px;
     line-height:1.3333333;
-    border-radius:.4vh;
+    border-radius:4px;
     text-shadow:none;
     cursor: pointer;
     color:#fff;

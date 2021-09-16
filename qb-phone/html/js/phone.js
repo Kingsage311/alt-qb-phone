@@ -64,10 +64,10 @@ RL.Phone.Functions.SetupRecentCalls = function(recentcalls) {
     $.each(recentcalls, function(i, recentCall){
         var FirstLetter = (recentCall.name).charAt(0);
         var TypeIcon = 'fas fa-phone-slash';
-        var IconStyle = "color: #e74c3c;";
+        var IconStyle = "color: #930000;";
         if (recentCall.type === "outgoing") {
             TypeIcon = 'fas fa-phone-volume';
-            var IconStyle = "color: #2ecc71; font-size: 1.4vh;";
+            var IconStyle = "color: #930000; font-size: 1.4vh;";
         }
         if (recentCall.anonymous) {
             FirstLetter = "A";
@@ -138,7 +138,7 @@ $(document).on('click', '.phone-recent-call', function(e){
 $(document).on('click', ".phone-keypad-key-call", function(e){
     e.preventDefault();
 
-    var InputNum = toString($(".phone-keypad-input").text());
+    var InputNum = keyPadHTML;
 
     cData = {
         number: InputNum,
@@ -204,9 +204,9 @@ RL.Phone.Functions.LoadContacts = function(myContacts) {
 
     if (myContacts !== null) {
         $.each(myContacts, function(i, contact){
-            var ContactElement = '<div class="phone-contact" data-contactid="'+i+'"><div class="phone-contact-firstletter" style="background-color: #e74c3c;">'+((contact.name).charAt(0)).toUpperCase()+'</div><div class="phone-contact-name">'+contact.name+'</div><div class="phone-contact-actions"><i class="fas fa-sort-down"></i></div><div class="phone-contact-action-buttons"> <i class="fas fa-phone-volume" id="phone-start-call"></i> <i class="fab fa-whatsapp" id="new-chat-phone" style="font-size: 2.5vh;"></i> <i class="fas fa-user-edit" id="edit-contact"></i> </div></div>'
+            var ContactElement = '<div class="phone-contact" data-contactid="'+i+'"><div class="phone-contact-firstletter" style="background-color: #930000;">'+((contact.name).charAt(0)).toUpperCase()+'</div><div class="phone-contact-name">'+contact.name+'</div><div class="phone-contact-actions"><i class="fas fa-sort-down"></i></div><div class="phone-contact-action-buttons"> <i class="fas fa-phone-volume" id="phone-start-call"></i> <i class="fas fa-comment" id="new-chat-phone" style="font-size: 2.5vh;"></i> <i class="fas fa-user-edit" id="edit-contact"></i> </div></div>'
             if (contact.status) {
-                ContactElement = '<div class="phone-contact" data-contactid="'+i+'"><div class="phone-contact-firstletter" style="background-color: #2ecc71;">'+((contact.name).charAt(0)).toUpperCase()+'</div><div class="phone-contact-name">'+contact.name+'</div><div class="phone-contact-actions"><i class="fas fa-sort-down"></i></div><div class="phone-contact-action-buttons"> <i class="fas fa-phone-volume" id="phone-start-call"></i> <i class="fab fa-whatsapp" id="new-chat-phone" style="font-size: 2.5vh;"></i> <i class="fas fa-user-edit" id="edit-contact"></i> </div></div>'
+                ContactElement = '<div class="phone-contact" data-contactid="'+i+'"><div class="phone-contact-firstletter" style="background-color: #930000;">'+((contact.name).charAt(0)).toUpperCase()+'</div><div class="phone-contact-name">'+contact.name+'</div><div class="phone-contact-actions"><i class="fas fa-sort-down"></i></div><div class="phone-contact-action-buttons"> <i class="fas fa-phone-volume" id="phone-start-call"></i> <i class="fas fa-comment" id="new-chat-phone" style="font-size: 2.5vh;"></i> <i class="fas fa-user-edit" id="edit-contact"></i> </div></div>'
             }
             TotalContacts = TotalContacts + 1
             $(ContactsObject).append(ContactElement);
@@ -269,7 +269,7 @@ $(document).on('click', '#edit-contact', function(e){
     CurrentEditContactData.name = ContactData.name
     CurrentEditContactData.number = ContactData.number
 
-    $(".phone-edit-contact-header").text(ContactData.name+" Bewerken")
+    $(".phone-edit-contact-header").text(ContactData.name+" Edit")
     $(".phone-edit-contact-name").val(ContactData.name);
     $(".phone-edit-contact-number").val(ContactData.number);
     if (ContactData.iban != null && ContactData.iban != undefined) {

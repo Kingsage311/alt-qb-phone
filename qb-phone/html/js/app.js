@@ -69,6 +69,15 @@ RL.Phone.Functions.SetupApplications = function(data) {
             if (app.app == "meos") {
                 icon = '<img src="./img/politie.png" class="police-icon">';
             }
+            else if (app.app == "twitter") {
+                icon = '<img src="./img/life.png" class="twitter-icon">';
+            }
+            //else if (app.app == "spotify") {
+                //icon = '<img src="./img/cards.png" class="spotify-icon">';
+            //}
+            else if (app.app == "advert") {
+                icon = '<img src="./img/advert.png" class="advert-icon">';
+            }
             $(applicationSlot).html(icon+'<div class="app-unread-alerts">0</div>');
             $(applicationSlot).prop('title', app.tooltipText);
             $(applicationSlot).data('app', app.app);
@@ -117,7 +126,7 @@ $(document).on('click', '.phone-application', function(e){
                 RL.Phone.Functions.ToggleApp(PressedApplication, "block");
                 
                 if (RL.Phone.Functions.IsAppHeaderAllowed(PressedApplication)) {
-                    RL.Phone.Functions.HeaderTextColor("black", 300);
+                    RL.Phone.Functions.HeaderTextColor("white", 300);
                 }
     
                 RL.Phone.Data.currentApplication = PressedApplication;
@@ -134,6 +143,7 @@ $(document).on('click', '.phone-application', function(e){
                     if (RL.Phone.Data.IsOpen) {
                         $.post('http://qb-phone/GetTweets', JSON.stringify({}), function(Tweets){
                             RL.Phone.Notifications.LoadTweets(Tweets);
+                            RL.Phone.Functions.HeaderTextColor("black", 300);
                         });
                     }
                 } else if (PressedApplication == "bank") {
@@ -148,10 +158,12 @@ $(document).on('click', '.phone-application', function(e){
                 } else if (PressedApplication == "whatsapp") {
                     $.post('http://qb-phone/GetWhatsappChats', JSON.stringify({}), function(chats){
                         RL.Phone.Functions.LoadWhatsappChats(chats);
+                        RL.Phone.Functions.HeaderTextColor("white", 300);
                     });
                 } else if (PressedApplication == "phone") {
                     $.post('http://qb-phone/GetMissedCalls', JSON.stringify({}), function(recent){
                         RL.Phone.Functions.SetupRecentCalls(recent);
+                        RL.Phone.Functions.HeaderTextColor("white", 300);
                     });
                     $.post('http://qb-phone/GetSuggestedContacts', JSON.stringify({}), function(suggested){
                         RL.Phone.Functions.SetupSuggestedContacts(suggested);

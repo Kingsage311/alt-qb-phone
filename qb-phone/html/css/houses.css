@@ -1,30 +1,31 @@
-@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@100&display=swap');
 
 .houses-app {
     display: none;
     height: 100%;
     width: 100%;
-    background: #0c0c0c;
+    background-image: url("../img/backgrounds/houses.png");
     overflow: hidden;
 }
 
 .houses-app-header {
     position: absolute;
     width: 100%;
-    height: 5vh;
-    background-color: #111111;
+    height: 9vh;
+    background-color: #11111100;
     top: 6vh;
 }
 
 .houses-app-header-tab {
+    text-transform: uppercase;
     position: relative;
     float: left;
     width: 50%;
     height: 100%;
     text-align: center;
-    line-height: 5vh;
-    font-family: 'Source Sans Pro', sans-serif;
+    line-height: 14vh;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 800;
     border-bottom: 2px solid rgb(255, 255, 255);
     transition: .075s linear;
 }
@@ -36,69 +37,67 @@
 }
 
 .houses-app-header-tab-selected {
-    border-bottom: 2px solid #0174d3;
+    border-bottom: 2px solid #01bdff;
 }
 
 .houses-app-header-tab-selected > p {
-    color: #0174d3;
+    color: #01bdff;
 }
 
 .house-app-myhouses-container {
     position: absolute;
     width: 85%;
-    height: 73%;
+    height: 60%;
     margin: 0 auto;
     left: 0vw;
     right: 0;
-    background-color: #111111;
-    top: 12vh;
+    background-color: #11111175;
+    top: 18vh;
     overflow-x: hidden;
     overflow-y: scroll;
 }
 
 .house-app-myhouses-container::-webkit-scrollbar {
-    width: .5vh;
-    background-color: #0174d3;
+    display: none;
 }
 
 .house-app-myhouses-container::-webkit-scrollbar-thumb {
-    background-color: #111111;
+    display: none;
 }
 
 .house-app-mykeys-container {
     display: none;
     position: absolute;
     width: 85%;
-    height: 73%;
+    height: 60%;
     margin: 0 auto;
     left: 0vw;
     right: 0;
-    background-color: #111111;
-    top: 12vh;
+    background-color: #11111175;
+    top: 18vh;
     overflow-x: hidden;
     overflow-y: scroll;
 }
 
 .house-app-mykeys-container::-webkit-scrollbar {
-    width: .5vh;
-    background-color: #0174d3;
+    display: none;
 }
 
 .house-app-mykeys-container::-webkit-scrollbar-thumb {
-    background-color: #111111;
+    display: none;
 }
 
 .myhouses-house {
     position: relative;
     height: 7.5vh;
     width: 100%;
-    background-color: #0174d3;
+    background-color: #01bdff;
     transition: .05s linear;
     margin-bottom: .2vh;
 }
 
 .myhouses-house:hover {
-    background-color: #0069be;
+    background-color: #00a6e0;
 }
 
 .myhouse-house-icon {
@@ -111,16 +110,18 @@
 .myhouse-house-icon > i {
     text-align: center;
     line-height: 7.5vh;
-    color: rgb(255, 255, 255);
+    color: #0a0a0a;
     font-size: 2.2vh;
 }
 
 .myhouse-house-titel {
+    text-transform: uppercase;
     position: absolute;
     left: 5.5vh;
     top: 1.7vh;
-    color: rgb(255, 255, 255);
-    font-family: 'Source Sans Pro';
+    color: #0a0a0a;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 800;
     font-size: 1.5vh;
 }
 
@@ -128,8 +129,9 @@
     position: absolute;
     left: 5.5vh;
     bottom: 1.7vh;
-    color: rgb(255, 255, 255);
-    font-family: 'Source Sans Pro';
+    color: #0a0a0a;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 800;
     font-size: 1.3vh;
 }
 
@@ -153,20 +155,21 @@
     margin: 0 auto;
     left: 0vw;
     right: 0;
-    background: #111111;
+    background: #0c0c0c;
     top: 15vh;
 }
 
 .myhouses-options-header {
+    text-transform: uppercase;
     position: absolute;
     width: 100%;
     height: 5vh;
     color: rgb(255, 255, 255);
     text-align: center;
     line-height: 5vh;
-    font-family: 'Source Sans Pro';
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 800;
     font-size: 1.8vh;
-    border-bottom: 2px solid #0069be;
 }
 
 .myhouses-option {
@@ -175,8 +178,9 @@
     margin-bottom: .8vh;
     width: 12vh;
     height: 5vh;
-    color: rgb(255, 255, 255);
-    font-family: 'Source Sans Pro';
+    color: #0a0a0a;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 800;
     font-size: 1.5vh;
     top: 6vh;
     text-align: center;
@@ -185,43 +189,43 @@
 }
 
 #myhouse-option-transfer {
-    background-color: #0174d3;
+    background-color: #01bdff;
 }
 
 #myhouse-option-transfer:hover {
-    background-color:#0069be;
+    background-color:#00a6e0;
 }
 
 #myhouse-option-keys {
-    background-color: #0174d3;
+    background-color: #01bdff;
 }
 
 #myhouse-option-keys:hover {
-    background-color: #0069be;
+    background-color: #00a6e0;
 }
 
 #myhouse-option-close {
-    background-color: #0174d3;
+    background-color: #01bdff;
 }
 
 #myhouse-option-close:hover {
-    background-color: #0069be;
+    background-color: #00a6e0;
 }
 
 #myhouse-option-transfer-confirm {
-    background-color: #0174d3;
+    background-color: #01bdff;
 }
 
 #myhouse-option-transfer-confirm:hover {
-    background-color: #0069be;
+    background-color: #00a6e0;
 }
 
 #myhouse-option-transfer-back {
-    background-color: #0174d3;
+    background-color: #01bdff;
 }
 
 #myhouse-option-transfer-back:hover {
-    background-color: #0069be;
+    background-color: #00a6e0;
 }
 
 .myhouse-option-transfer-container {
@@ -249,13 +253,15 @@
 }
 
 .myhouse-option-transfer-container-header {
+    text-transform: uppercase;
     position: absolute;
     width: 100%;
     height: 5vh;
-    color: rgb(255, 255, 255);
+    color: rgb(255 255 255);
     text-align: center;
-    line-height: 5vh;
-    font-family: 'Source Sans Pro';
+    line-height: 8vh;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 800;
     font-size: 1.8vh;
 }
 
@@ -270,7 +276,8 @@
     border: none;
     color: rgb(255, 255, 255);
     outline: none;
-    font-family: 'Source Sans Pro';
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 800;
     font-size: 1.8vh;
     text-indent: 1vh;
     background: #0c0c0c;
@@ -279,21 +286,21 @@
 }
 
 .myhouse-option-transfer-container-citizenid:focus {
-    border: 2px solid #0069be;
+    border: 2px solid #01bdff;
 }
 
 .myhouse-option-transfer-container-citizenid:valid {
-    border: 2px solid #0174d3;
+    border: 2px solid #00a6e0;
 }
 
 
 #myhouse-option-keys-back {
     top: 22vh;
-    background-color: #0174d3;
+    background-color: #01bdff;
 }
 
 #myhouse-option-keys-back:hover {
-    background-color: #0069be;
+    background-color: #00a6e0;
 }
 
 .keys-container {
@@ -320,16 +327,17 @@
     text-overflow: ellipsis;
     position: absolute;
     padding: 1.2vh;
-    font-family: 'Source Sans Pro';
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 800;
     font-size: 1.5vh;
-    color: rgb(255, 255, 255);
+    color: #0a0a0a;
 }
 
 .house-key {
     position: relative;
     width: 100%;
     height: 4.5vh;
-    background-color: #0174d3;
+    background-color: #01bdff;
     transition: .05s ease-in-out;
 }
 
@@ -344,11 +352,11 @@
 }
 
 .house-key:hover {
-    background-color: #0069be;
+    background-color: #00a6e0;
 }
 
 .house-key-delete:hover {
-    color: #0069be;
+    color: #00a6e0;
 }
 
 @-webkit-keyframes spaceboots {
@@ -381,22 +389,24 @@
     position: relative;
     width: 100%;
     height: 7vh;
-    background-color: #0174d3;
+    background-color: #01bdff;
     margin-bottom: 0.5vh;
 
     transition: 0.1s ease;
 }
 
 .mykeys-key:hover {
-    background-color: #0069be;
+    background-color: #00a6e0;
 }
 
 .mykeys-key-label {
+    text-transform: uppercase;
     position: absolute;
     top: 0;
     left: 0;
-    color: rgb(255, 255, 255);
-    font-family: 'Source Sans Pro';
+    color: #0a0a0a;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 800;
     font-size: 1.8vh;
     margin: 1vh;
 }
@@ -405,8 +415,9 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    color: rgb(255, 255, 255);
-    font-family: 'Source Sans Pro';
+    color: #0a0a0a;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 800;
     font-size: 1.2vh;
     margin: 1vh;
 }
