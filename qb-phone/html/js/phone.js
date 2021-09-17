@@ -4,6 +4,7 @@ var CallData = {};
 var ClearNumberTimer = null;
 var SelectedSuggestion = null;
 var AmountOfSuggestions = 0;
+var keyPadHTML;
 
 $(document).on('click', '.phone-app-footer-button', function(e){
     e.preventDefault();
@@ -348,16 +349,19 @@ $(document).on('click', '.phone-keypad-key', function(e){
     var PressedButton = $(this).data('keypadvalue');
 
     if (!isNaN(PressedButton)) {
-        var keyPadHTML = $("#phone-keypad-input").text();
+        keyPadHTML = $("#phone-keypad-input").text();
         $("#phone-keypad-input").text(keyPadHTML + PressedButton)
+        keyPadHTML = $("#phone-keypad-input").text();
     } else if (PressedButton == "#") {
-        var keyPadHTML = $("#phone-keypad-input").text();
+        keyPadHTML = $("#phone-keypad-input").text();
         $("#phone-keypad-input").text(keyPadHTML + PressedButton)
+        keyPadHTML = $("#phone-keypad-input").text();
     } else if (PressedButton == "*") {
         if (ClearNumberTimer == null) {
             $("#phone-keypad-input").text("Cleared")
             ClearNumberTimer = setTimeout(function(){
                 $("#phone-keypad-input").text("");
+                keyPadHTML = $("#phone-keypad-input").text();
                 ClearNumberTimer = null;
             }, 750);
         }
