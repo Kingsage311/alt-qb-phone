@@ -1186,24 +1186,52 @@ AddEventHandler('qb-phone:server:AddTransaction', function(data)
         .citizenid, escape_sqli(data.TransactionTitle), escape_sqli(data.TransactionMessage)})
 end)
 
+QBCore.Functions.CreateCallback('qb-phone:server:GetCurrentDrivers', function(source, cb)
+    local Lawyers = {}
+    for k, v in pairs(QBCore.Functions.GetPlayers()) do
+        local Player = QBCore.Functions.GetPlayer(v)
+        if Player ~= nil then
+            if Player.PlayerData.job.name == "taxi" then
+                table.insert(Lawyers, {
+                    name = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname,
+                    phone = Player.PlayerData.charinfo.phone,
+                })
+            end
+        end
+    end
+    cb(Lawyers, QBCore.Functions.GetPlayer(source).PlayerData.job.name == "taxi")
+end)
+
 QBCore.Functions.CreateCallback('qb-phone:server:GetCurrentLawyers', function(source, cb)
     local Lawyers = {}
     for k, v in pairs(QBCore.Functions.GetPlayers()) do
         local Player = QBCore.Functions.GetPlayer(v)
         if Player ~= nil then
-            if (Player.PlayerData.job.name == "lawyer" or Player.PlayerData.job.name == "realestate" or
-                Player.PlayerData.job.name == "mechanic" or Player.PlayerData.job.name == "taxi" or
-                Player.PlayerData.job.name == "police" or Player.PlayerData.job.name == "ambulance") and
-                Player.PlayerData.job.onduty then
+            if Player.PlayerData.job.name == "lawyer" or Player.PlayerData.job.name == "judge" then
                 table.insert(Lawyers, {
                     name = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname,
                     phone = Player.PlayerData.charinfo.phone,
-                    typejob = Player.PlayerData.job.name
                 })
             end
         end
     end
     cb(Lawyers)
+end)
+
+QBCore.Functions.CreateCallback('qb-phone:server:GetCurrentMechanic', function(source, cb)
+    local Mechanic = {}
+    for k, v in pairs(QBCore.Functions.GetPlayers()) do
+        local Player = QBCore.Functions.GetPlayer(v)
+        if Player ~= nil then
+            if Player.PlayerData.job.name == "mechanic" then
+                table.insert(Mechanic, {
+                    name = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname,
+                    phone = Player.PlayerData.charinfo.phone,
+                })
+            end
+        end
+    end
+    cb(Mechanic)
 end)
 
 RegisterServerEvent('qb-phone:server:InstallApplication')
