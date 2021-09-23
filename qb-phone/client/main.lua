@@ -793,16 +793,16 @@ AddEventHandler('qb-phone:client:UpdateMessages', function(ChatMessages, SenderN
                 })
             end,  PhoneData.Chats)
         else
-	    SendNUIMessage({
-	        action = "PhoneNotification",
-	        PhoneNotify = {
-		    title = "Whatsapp",
-		    text = "New message from "..IsNumberInContacts(SenderNumber).."!",
-		    icon = "fab fa-whatsapp",
-		    color = "#25D366",
-		    timeout = 3500,
-	        },
-	    })
+            SendNUIMessage({
+                action = "Notification",
+                NotifyData = {
+                    title = "Whatsapp", 
+                    content = "You have received a new message from "..IsNumberInContacts(SenderNumber).."!", 
+                    icon = "fab fa-whatsapp", 
+                    timeout = 3500, 
+                    color = "#25D366",
+                },
+            })
             Config.PhoneApplications['whatsapp'].Alerts = Config.PhoneApplications['whatsapp'].Alerts + 1
             TriggerServerEvent('qb-phone:server:SetPhoneAlerts', "whatsapp")
         end
@@ -854,13 +854,13 @@ AddEventHandler('qb-phone:client:UpdateMessages', function(ChatMessages, SenderN
             end,  PhoneData.Chats)
         else
             SendNUIMessage({
-                action = "PhoneNotification",
-                PhoneNotify = {
-                    title = "Whatsapp",
-                    text = "New message from "..IsNumberInContacts(SenderNumber).."!",
-                    icon = "fab fa-whatsapp",
+                action = "Notification",
+                NotifyData = {
+                    title = "Whatsapp", 
+                    content = "You have received a new message from "..IsNumberInContacts(SenderNumber).."!", 
+                    icon = "fab fa-whatsapp", 
+                    timeout = 3500, 
                     color = "#25D366",
-                    timeout = 3500,
                 },
             })
 
