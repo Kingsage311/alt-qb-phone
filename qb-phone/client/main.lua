@@ -605,9 +605,7 @@ function ReorganizeChats(key)
 end
 
 RegisterNUICallback('SendMessage', function(data, cb)
-    TriggerEvent("debug", 'Phone: Send Message', 'success')
-
-    local ChatMessage = data.ChatMessage:gsub("'", "")
+    local ChatMessage = data.ChatMessage
     local ChatDate = data.ChatDate
     local ChatNumber = data.ChatNumber
     local ChatTime = data.ChatTime
@@ -730,7 +728,7 @@ RegisterNUICallback('SharedLocation', function(data)
         action = "PhoneNotification",
         PhoneNotify = {
             title = "Whatsapp",
-            text = "Location set.",
+            text = "Location has been set!",
             icon = "fab fa-whatsapp",
             color = "#25D366",
             timeout = 1500,
@@ -740,8 +738,6 @@ end)
 
 RegisterNetEvent('qb-phone:client:UpdateMessages')
 AddEventHandler('qb-phone:client:UpdateMessages', function(ChatMessages, SenderNumber, New)
-    TriggerEvent("debug", 'Phone: Update Messages', 'success')
-
     local Sender = IsNumberInContacts(SenderNumber)
 
     local NumberKey = GetKeyByNumber(SenderNumber)
@@ -797,16 +793,16 @@ AddEventHandler('qb-phone:client:UpdateMessages', function(ChatMessages, SenderN
                 })
             end,  PhoneData.Chats)
         else
-            SendNUIMessage({
-                action = "Notification",
-                NotifyData = {
-                    title = "Whatsapp", 
-                    content = "You have received a new message from "..IsNumberInContacts(SenderNumber).."!", 
-                    icon = "fab fa-whatsapp", 
-                    timeout = 3500, 
-                    color = "#25D366",
-                },
-            })
+	    SendNUIMessage({
+	        action = "PhoneNotification",
+	        PhoneNotify = {
+		    title = "Whatsapp",
+		    text = "New message from "..IsNumberInContacts(SenderNumber).."!",
+		    icon = "fab fa-whatsapp",
+		    color = "#25D366",
+		    timeout = 3500,
+	        },
+	    })
             Config.PhoneApplications['whatsapp'].Alerts = Config.PhoneApplications['whatsapp'].Alerts + 1
             TriggerServerEvent('qb-phone:server:SetPhoneAlerts', "whatsapp")
         end
@@ -858,13 +854,13 @@ AddEventHandler('qb-phone:client:UpdateMessages', function(ChatMessages, SenderN
             end,  PhoneData.Chats)
         else
             SendNUIMessage({
-                action = "Notification",
-                NotifyData = {
-                    title = "Whatsapp", 
-                    content = "You have received a new message from "..IsNumberInContacts(SenderNumber).."!", 
-                    icon = "fab fa-whatsapp", 
-                    timeout = 3500, 
+                action = "PhoneNotification",
+                PhoneNotify = {
+                    title = "Whatsapp",
+                    text = "New message from "..IsNumberInContacts(SenderNumber).."!",
+                    icon = "fab fa-whatsapp",
                     color = "#25D366",
+                    timeout = 3500,
                 },
             })
 
