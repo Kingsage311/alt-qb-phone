@@ -112,6 +112,7 @@
 }
 
 .mail-time {
+    display: none;
     position: absolute;
     font-family: 'Samsung Sans Regular';
     font-size: 1.1vh;
@@ -169,6 +170,7 @@
 }
 
 .mail-date {
+    display: none;
     position: absolute;
     top: 13vh;
     left: 2vh;
