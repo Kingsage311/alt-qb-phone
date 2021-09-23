@@ -9,3 +9,4 @@ Now follow these step my step instructions:
 If you are using my version of Alt-QB-Phone please don't ask or ping buzzee to help you with it this is a old phone he posted that I just updated to the new core
 and as my git profile says im a guy who has no idea what he's doing, so I don't want him dealing with issues i probably caused]]
 
+THIS IS STILL A WORK IN PROGRESS AND IS "BUG FREE" PLEASE JOIN DISCORD TO KEEP UP TO DATE
