@@ -45,7 +45,7 @@ function newPhoneProp()
 	deletePhone()
 	RequestModel(phoneModel)
 	while not HasModelLoaded(phoneModel) do
-		Wait(1)
+		Citizen.Wait(1)
 	end
 	phoneProp = CreateObject(phoneModel, 1.0, 1.0, 1.0, 1, 1, 0)
 
@@ -67,7 +67,7 @@ end
 function LoadAnimation(dict)
 	RequestAnimDict(dict)
 	while not HasAnimDictLoaded(dict) do
-		Wait(1)
+		Citizen.Wait(1)
 	end
 end
 
@@ -111,7 +111,7 @@ function DoPhoneAnimation(anim)
 end
 
 function CheckAnimLoop()
-    CreateThread(function()
+    Citizen.CreateThread(function()
         while PhoneData.AnimationData.lib ~= nil and PhoneData.AnimationData.anim ~= nil do
             local ped = PlayerPedId()
 
@@ -120,7 +120,7 @@ function CheckAnimLoop()
                 TaskPlayAnim(ped, PhoneData.AnimationData.lib, PhoneData.AnimationData.anim, 3.0, 3.0, -1, 50, 0, false, false, false)
             end
 
-            Wait(500)
+            Citizen.Wait(500)
         end
     end)
 end

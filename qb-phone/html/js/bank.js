@@ -6,7 +6,7 @@ $(document).on('click', '.bank-app-account', function(e){
     copyText.setSelectionRange(0, 99999);
     document.execCommand("copy");
 
-    RL.Phone.Notifications.Add("fas fa-university", "Fleeca Bank", "Bank account No. copied!", "#badc58", 1750);
+    QB.Phone.Notifications.Add("fas fa-university", "QBank", "Account number. copied!", "#badc58", 1750);
 });
 
 var CurrentTab = "accounts";
@@ -46,11 +46,11 @@ $(document).on('click', '.bank-app-header-button', function(e){
     }
 })
 
-RL.Phone.Functions.DoBankOpen = function() {
-    RL.Phone.Data.PlayerData.money.bank = (RL.Phone.Data.PlayerData.money.bank).toFixed();
-    $(".bank-app-account-number").val(RL.Phone.Data.PlayerData.charinfo.account);
-    $(".bank-app-account-balance").html("$ "+RL.Phone.Data.PlayerData.money.bank);
-    $(".bank-app-account-balance").data('balance', RL.Phone.Data.PlayerData.money.bank);
+QB.Phone.Functions.DoBankOpen = function() {
+    QB.Phone.Data.PlayerData.money.bank = (QB.Phone.Data.PlayerData.money.bank).toFixed();
+    $(".bank-app-account-number").val(QB.Phone.Data.PlayerData.charinfo.account);
+    $(".bank-app-account-balance").html("&#36; "+QB.Phone.Data.PlayerData.money.bank);
+    $(".bank-app-account-balance").data('balance', QB.Phone.Data.PlayerData.money.bank);
 
     $(".bank-app-loaded").css({"display":"none", "padding-left":"30vh"});
     $(".bank-app-accounts").css({"left":"30vh"});
@@ -84,13 +84,13 @@ RL.Phone.Functions.DoBankOpen = function() {
 }
 
 $(document).on('click', '.bank-app-account-actions', function(e){
-    RL.Phone.Animations.TopSlideDown(".bank-app-transfer", 400, 0);
+    QB.Phone.Animations.TopSlideDown(".bank-app-transfer", 400, 0);
 });
 
 $(document).on('click', '#cancel-transfer', function(e){
     e.preventDefault();
 
-    RL.Phone.Animations.TopSlideUp(".bank-app-transfer", 400, -100);
+    QB.Phone.Animations.TopSlideUp(".bank-app-transfer", 400, -100);
 });
 
 $(document).on('click', '#accept-transfer', function(e){
@@ -98,9 +98,10 @@ $(document).on('click', '#accept-transfer', function(e){
 
     var iban = $("#bank-transfer-iban").val();
     var amount = $("#bank-transfer-amount").val();
+    var amountData = $(".bank-app-account-balance").data('balance');
 
     if (iban != "" && amount != "") {
-            $.post('http://qb-phone/CanTransferMoney', JSON.stringify({
+            $.post('https://qb-phone/CanTransferMoney', JSON.stringify({
                 sendTo: iban,
                 amountOf: amount,
             }), function(data){
@@ -108,23 +109,23 @@ $(document).on('click', '#accept-transfer', function(e){
                     $("#bank-transfer-iban").val("");
                     $("#bank-transfer-amount").val("");
 
-                    $(".bank-app-account-balance").html("$ " + (data.NewBalance).toFixed(0));
+                    $(".bank-app-account-balance").html("&#36; " + (data.NewBalance).toFixed(0));
                     $(".bank-app-account-balance").data('balance', (data.NewBalance).toFixed(0));
-                    RL.Phone.Notifications.Add("fas fa-university", "Fleeca Bank", "You have $"+amount+" transferred!", "#badc58", 1500);
+                    QB.Phone.Notifications.Add("fas fa-university", "QBank", "You have transfered &#36; "+amount+"!", "#badc58", 1500);
                 } else {
-                    RL.Phone.Notifications.Add("fas fa-university", "Fleeca Bank", "You do not have enough balance!", "#badc58", 1500);
+                    QB.Phone.Notifications.Add("fas fa-university", "QBank", "You don't have enough balance!", "#badc58", 1500);
                 }
-                RL.Phone.Animations.TopSlideUp(".bank-app-transfer", 400, -100);
+                QB.Phone.Animations.TopSlideUp(".bank-app-transfer", 400, -100);
             });
     } else {
-        RL.Phone.Notifications.Add("fas fa-university", "Fleeca Bank", "Fill out all fields!", "#badc58", 1750);
+        QB.Phone.Notifications.Add("fas fa-university", "QBank", "Fill out all fields!", "#badc58", 1750);
     }
 });
 
 GetInvoiceLabel = function(type) {
     retval = null;
     if (type == "request") {
-        retval = "Betaalverzoek";
+        retval = "Payment Request";
     }
 
     return retval
@@ -138,10 +139,12 @@ $(document).on('click', '.pay-invoice', function(event){
     var BankBalance = $(".bank-app-account-balance").data('balance');
 
     if (BankBalance >= InvoiceData.amount) {
-        $.post('http://qb-phone/PayInvoice', JSON.stringify({
-            society: InvoiceData.society,
+        $.post('https://qb-phone/PayInvoice', JSON.stringify({
+            sender: InvoiceData.sender,
             amount: InvoiceData.amount,
-            invoiceId: InvoiceData.invoiceid,
+            society: InvoiceData.society,
+            invoiceId: InvoiceData.id,
+            senderCitizenId: InvoiceData.sendercitizenid
         }), function(CanPay){
             if (CanPay) {
                 $("#"+InvoiceId).animate({
@@ -151,26 +154,46 @@ $(document).on('click', '.pay-invoice', function(event){
                         $("#"+InvoiceId).remove();
                     }, 100);
                 });
-                RL.Phone.Notifications.Add("fas fa-university", "Fleeca Bank", "You have $"+InvoiceData.amount+" paid!", "#badc58", 1500);
+                QB.Phone.Notifications.Add("fas fa-university", "QBank", "You have paid &#36;"+InvoiceData.amount+"!", "#badc58", 1500);
                 var amountData = $(".bank-app-account-balance").data('balance');
                 var NewAmount = (amountData - InvoiceData.amount).toFixed();
                 $("#bank-transfer-amount").val(NewAmount);
                 $(".bank-app-account-balance").data('balance', NewAmount);
             } else {
-                RL.Phone.Notifications.Add("fas fa-university", "Fleeca Bank", "You do not have enough balance!", "#badc58", 1500);
+                QB.Phone.Notifications.Add("fas fa-university", "QBank", "You don't have enough balance!", "#badc58", 1500);
             }
         });
     } else {
-        RL.Phone.Notifications.Add("fas fa-university", "Fleeca Bank", "You do not have enough balance!", "#badc58", 1500);
+        QB.Phone.Notifications.Add("fas fa-university", "QBank", "You don't have enough balance!", "#badc58", 1500);
     }
 });
 
-RL.Phone.Functions.LoadBankInvoices = function(invoices) {
+$(document).on('click', '.decline-invoice', function(event){
+    event.preventDefault();
+    var InvoiceId = $(this).parent().parent().attr('id');
+    var InvoiceData = $("#"+InvoiceId).data('invoicedata');
+
+    $.post('https://qb-phone/DeclineInvoice', JSON.stringify({
+        sender: InvoiceData.sender,
+        amount: InvoiceData.amount,
+        society: InvoiceData.society,
+        invoiceId: InvoiceData.id,
+    }));
+    $("#"+InvoiceId).animate({
+        left: 30+"vh",
+    }, 300, function(){
+        setTimeout(function(){
+            $("#"+InvoiceId).remove();
+        }, 100);
+    });
+});
+
+QB.Phone.Functions.LoadBankInvoices = function(invoices) {
     if (invoices !== null) {
         $(".bank-app-invoices-list").html("");
 
         $.each(invoices, function(i, invoice){
-            var Elem = '<div class="bank-app-invoice" id="invoiceid-'+i+'"> <div class="bank-app-invoice-title">$' + invoice.amount + ' <span style="font-size: 1vh; color: gray;">(Society: '+ invoice.society +')</span></div> <div class="bank-app-invoice-amount">' +invoice.title+ '</div> <div class="bank-app-invoice-buttons"> <i class="fas fa-check-circle pay-invoice"></i></div> </div>';
+            var Elem = '<div class="bank-app-invoice" id="invoiceid-'+i+'"> <div class="bank-app-invoice-title">'+invoice.society+' <span style="font-size: 1vh; color: gray;">(Sender: '+invoice.sender+')</span></div> <div class="bank-app-invoice-amount">&#36; '+invoice.amount+'</div> <div class="bank-app-invoice-buttons"> <i class="fas fa-check-circle pay-invoice"></i> <i class="fas fa-times-circle decline-invoice"></i> </div> </div>';
 
             $(".bank-app-invoices-list").append(Elem);
             $("#invoiceid-"+i).data('invoicedata', invoice);
@@ -178,7 +201,7 @@ RL.Phone.Functions.LoadBankInvoices = function(invoices) {
     }
 }
 
-RL.Phone.Functions.LoadContactsWithNumber = function(myContacts) {
+QB.Phone.Functions.LoadContactsWithNumber = function(myContacts) {
     var ContactsObject = $(".bank-app-my-contacts-list");
     $(ContactsObject).html("");
     var TotalContacts = 0;
@@ -193,7 +216,7 @@ RL.Phone.Functions.LoadContactsWithNumber = function(myContacts) {
     if (myContacts !== null) {
         $.each(myContacts, function(i, contact){
             var RandomNumber = Math.floor(Math.random() * 6);
-            var ContactColor = RL.Phone.ContactColors[RandomNumber];
+            var ContactColor = QB.Phone.ContactColors[RandomNumber];
             var ContactElement = '<div class="bank-app-my-contact" data-bankcontactid="'+i+'"> <div class="bank-app-my-contact-firstletter">'+((contact.name).charAt(0)).toUpperCase()+'</div> <div class="bank-app-my-contact-name">'+contact.name+'</div> </div>'
             TotalContacts = TotalContacts + 1
             $(ContactsObject).append(ContactElement);
@@ -205,13 +228,13 @@ RL.Phone.Functions.LoadContactsWithNumber = function(myContacts) {
 $(document).on('click', '.bank-app-my-contacts-list-back', function(e){
     e.preventDefault();
 
-    RL.Phone.Animations.TopSlideUp(".bank-app-my-contacts", 400, -100);
+    QB.Phone.Animations.TopSlideUp(".bank-app-my-contacts", 400, -100);
 });
 
 $(document).on('click', '.bank-transfer-mycontacts-icon', function(e){
     e.preventDefault();
 
-    RL.Phone.Animations.TopSlideDown(".bank-app-my-contacts", 400, 0);
+    QB.Phone.Animations.TopSlideDown(".bank-app-my-contacts", 400, 0);
 });
 
 $(document).on('click', '.bank-app-my-contact', function(e){
@@ -221,7 +244,7 @@ $(document).on('click', '.bank-app-my-contact', function(e){
     if (PressedContactData.iban !== "" && PressedContactData.iban !== undefined && PressedContactData.iban !== null) {
         $("#bank-transfer-iban").val(PressedContactData.iban);
     } else {
-        RL.Phone.Notifications.Add("fas fa-university", "Fleeca Bank", "There is no IBAN tied to this contact!", "#badc58", 2500);
+        QB.Phone.Notifications.Add("fas fa-university", "QBank", "There is no bank account attached to this number!", "#badc58", 2500);
     }
-    RL.Phone.Animations.TopSlideUp(".bank-app-my-contacts", 400, -100);
+    QB.Phone.Animations.TopSlideUp(".bank-app-my-contacts", 400, -100);
 });

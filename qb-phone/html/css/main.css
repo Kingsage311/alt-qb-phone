@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
 /* CSS Reset */
 body {
     margin: 0;
@@ -6,11 +8,23 @@ body {
 }
 /* CSS Reset END */
 
+.disableSelection{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: 0;
+}
+
 /* Complete Phone */
 .container {
     display: none;
+    /* display: block; */
     position: absolute;
     bottom: -70%;
+    /* bottom: 0%; */
     right: 5vh;
 }
 /*  */
@@ -74,7 +88,7 @@ body {
     left: 4vh;
     font-size: 1.1vh;
     color: white;
-    font-family: 'Samsung Sans Regular';
+    font-family: 'Poppins', sans-serif;
 }
 
 .phone-currentcall-contact {
@@ -83,14 +97,13 @@ body {
     left: 4vh;
     font-size: 1vh;
     color: rgba(255, 255, 255, 0.7);
-    font-family: 'Samsung Sans Regular';
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Phone Container */
 .phone-frame {
     position: absolute;
-    width: 32vh;
-    height: 63vh;
+    width: 30vh;
     bottom: 0;
     right: 0;
     margin: 5vh;
@@ -102,8 +115,8 @@ body {
     height: 61.7vh;
     width: 29vh;
     bottom: 1vh;
-    border-radius: 5vh;
-    right: 1.7vh;
+    border-radius: 3vh;
+    right: 0.5vh;
     margin: 5vh;
     overflow: hidden;
     position: absolute;
@@ -123,22 +136,20 @@ body {
 .phone-header {
     width: 100%;
     height: 5vh;
-    top: -0.2vh;
     z-index: 141;
     position: absolute;
     color: white;
 }
 
 #phone-time {
-    font-family: Font-1;
-    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.3vh;
-    padding: 2.3vh 0 0 2.8vh;
+    padding: 2.3vh 0 0 1.9vh;
     float: left;
 }
 
 #phone-icons {
-    font-family: Font-1;
+    font-family: 'Poppins', sans-serif;
     font-size: 0.95vh;
     padding: 2.5vh 7.5vh 0 0vh;
     float: right;
@@ -146,14 +157,13 @@ body {
 
 #phone-signal {
     font-size: 1vh;
-    left: 4.8vh;
-    top: 0.1vh;
+    left: -0.3vh;
     position: relative;
 }
 
 #phone-battery {
-    transform: rotate(-0deg);
-    left: 5.4vh;
+    transform: rotate(-90deg);
+    top: -0.1vh;
     position: relative;
 }
 /* Phone Header END */
@@ -166,7 +176,7 @@ body {
     top: -160%;
     /* top: 0; */
     position: absolute;
-    height: 100%;
+    height: 92%;
     width: 100%;
     background-color: rgb(65, 65, 65);
     z-index: 100;
@@ -186,7 +196,7 @@ body {
     position: relative;
     height: 2.3vh;
     width: 5.2vh;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.3);
     margin: 0 auto;
     top: 2vh;
     transform: translateY(-50%);
@@ -196,22 +206,21 @@ body {
 }
 
 .phone-home-container:hover {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.45);
 }
 
 .phone-home-container:hover 
 .phone-home-button {
-    background-color: rgba(143, 143, 143, 0.95);
+    background-color: rgba(255, 255, 255, 0.95);
 }
 
 .phone-home-button {
     position: relative;
     height: 0.8vh;
-    width: 15.8vh;
-    left: -52px;
-    background-color: rgba(190, 190, 190, 0.75);
+    width: 3.8vh;
+    background-color: rgba(255, 255, 255, 0.75);
     border-radius: 0.8vh;
-    top: 45%;
+    top: 50%;
     transform: translateY(-50%);
     margin: 0 auto;
     transition: .1s;
@@ -224,21 +233,20 @@ body {
     position: relative;
     height: 100%;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .phone-application {
     position: relative;
-    top: -180px;
     height: 4.6vh;
     width: 4.6vh;
     left: 1vh;
     float: left;
     margin-left: 1.75vh;
     margin-top: 1.5vh;
-    border-radius: 12px;
+    border-radius: 2vh;
     text-align: center;
-    /* box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.13); */
+    box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.13);
     opacity: 0.9;
     transition: .05s;
 }
@@ -249,14 +257,14 @@ body {
 
 .phone-footer-applications {
     position: absolute;
-  width: 100%;
-    bottom: -120px;
+    width: 100%;
+    bottom: 7vh;
 }
 
 .phone-home-applications {
     position: absolute;
-  width: 100%;
-    bottom: 14vh;
+    width: 100%;
+    bottom: 17vh;
 }
 
 .phone-application > i {
@@ -276,14 +284,14 @@ body {
     position: absolute;
     height: 5.5vh;
     width: 22vh;
-    background-color: rgba(15, 15, 15, 0.842);
+    background-color: rgba(39, 39, 39, 0.9);
     margin: 0 auto;
     left: 0;
     right: 0;
     top: -8%;
-    border-radius: 3px;
+    border-radius: 3vh;
     overflow: hidden;
-    /* box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.11); */
+    box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.11);
     z-index: 140;
 }
 
@@ -293,7 +301,7 @@ body {
     width: 5vh;
     text-align: center;
     line-height: 5.7vh;
-    color: #ff004c;
+    color: #e74c3c;
     font-size: 2.5vh;
 }
 
@@ -302,7 +310,7 @@ body {
     top: 1vh;
     left: 4.5vh;
     font-size: 1.1vh;
-    font-family: 'Samsung Sans Regular';
+    font-family: 'Poppins', sans-serif;
     color: #ffffff;
 }
 
@@ -311,7 +319,7 @@ body {
     top: 2.7vh;
     left: 4.5vh;
     font-size: 1vh;
-    font-family: 'Samsung Sans Regular';
+    font-family: 'Poppins', sans-serif;
     color: rgb(255, 255, 255);
     width: 16vh;
     overflow: hidden;
@@ -322,12 +330,12 @@ body {
 .call-notifications {
     display: none;
     position: absolute;
-    background: #141414ea;
+    background: #e67d22ea;
     height: 9vh;
     width: 34vh;
     bottom: 16vh;
     right: -35vh;
-    border-radius: 3px;
+    border-radius: 1.7vh;
     z-index: -5;
 }
 .call-notifications-shake {
@@ -355,12 +363,12 @@ body {
 .screen-notifications-container {
     display: none;
     position: absolute;
-    background: rgba(31, 31, 31, 0.9);
+    background: rgba(29, 160, 242, 0.9);
     height: 9vh;
     width: 34vh;
     bottom: 5vh;
     right: -35vh;
-    border-radius: 5px;
+    border-radius: 1.7vh;
     z-index: -5;
 }
 
@@ -378,7 +386,7 @@ body {
     left: 7.5vh;
     font-size: 1.5vh;
     color: white;
-    font-family: 'Samsung Sans Bold';
+    font-family: 'Poppins', sans-serif;
 }
 
 .screen-notification-content {
@@ -387,7 +395,7 @@ body {
     left: 7.5vh;
     font-size: 1.2vh;
     color: white;
-    font-family: 'Samsung Sans Medium';
+    font-family: 'Poppins', sans-serif;
     height: 3.5vh;
     width: 26vh;
     overflow: hidden;
@@ -398,7 +406,7 @@ body {
     line-height: 9.3vh;
     left: 2vh;
     font-size: 3.75vh;
-    color: #ff004c;
+    color: white;
     transform: rotate(90deg);
 }
 
@@ -407,8 +415,8 @@ body {
     line-height: 5.5vh;
     left: 7.5vh;
     font-size: 1.5vh;
-    color: #ff004c;
-    font-family: 'Samsung Sans Bold';
+    color: white;
+    font-family: 'Poppins', sans-serif;
 }
 
 .call-notifications-content {
@@ -417,7 +425,7 @@ body {
     left: 7.5vh;
     font-size: 1.2vh;
     color: white;
-    font-family: 'Samsung Sans Medium';
+    font-family: 'Poppins', sans-serif;
     height: 3.5vh;
     width: 26vh;
     overflow: hidden;
@@ -432,9 +440,9 @@ body {
     color: white;
     text-align: center;
     line-height: 2vh;
-    background: rgba(31, 31, 31, 0.9);
-    border-radius: 5px;
-    font-family: 'Samsung Sans Bold';
+    background: #d63031;
+    border-radius: 50%;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.1vh;
 }
 
@@ -483,215 +491,4 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-}
-
-.device {
-  position: relative;
-  border-radius: 16px;
-  margin: 0 auto;
-  display: inline-block;
-  transform: scale(1);
-    width: 100%;
-}
-.device .device-bezel {
-  border-radius: inherit;
-  padding: 36px 10px 24px 10px;
-  overflow: hidden;
-  background: linear-gradient(240deg, #8da4c3 0%, #4f8285 30%, #070f0a 35%, #0a0606 100%);
-  position: relative;
-  box-sizing: content-box;
-}
-.device .device-viewport {
-  contain: strict;
-width:100%;
-  height: 645px;
-    position: absolute;
-  border-radius: inherit;
-  transform: scale(1);
-  z-index: 999;
-}
-
-@media only screen and (max-height: 900px) {
-.device .device-viewport {
-      max-height: 540px;
-  }
-}
-
-.containerlock {
-  background: transparent;
-  height: 100%;
-}
-
-.contentlock {
-  background: white;
-}
-.contentlock img {
-  height: 200px;
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.body-contentlock {
-  padding: 16px;
-}
-.body-contentlock h3 {
-  margin-bottom: 16px;
-}
-.body-contentlock p {
-  line-height: 1.5em;
-  margin-bottom: 8px;
-}
-/*.body-contentlock button {
-  width: 100%;
-  height: 48px;
-  border-radius: 1000px;
-  background: cyan;
-  border: none;
-  outline: none;
-  margin-top: 24px;
-  cursor: pointer;
-}
-
-.pin-info {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: white;
-  background: #EAEAEA;
-  z-index: 999;
-}
-
-.pin-display {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin-bottom: 20px;
-  background: white;
-}
-
-.keypad {
-  padding: 16px;
-  background: white;
-}
-
-.keypad--row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.keypad--button {
-  font-family: "Montserrat", sans-serif;
-  height: 105px;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 100ms ease-out;
-}
-.keypad--button:active {
-  background: #EAEAEA;
-}
-
-.confirmation-dots {
-  margin-bottom: 48px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-.confirmation-dots.error {
-  animation-name: shake;
-  animation-duration: 300ms;
-}
-.confirmation-dots svg {
-  height: 24px;
-  max-height: 24px;
-  width: 139px;
-}
-.confirmation-dots .pin-circle {
-  transition: all 100ms ease-out;
-  fill: white;
-  stroke-width: 2px;
-  stroke: black;
-  outline-offset: -2px;
-  outline-width: 2px;
-}
-.confirmation-dots .pin-circle.entered {
-  fill: black;
-}
-.confirmation-dots .pin-circle.success {
-  fill: green;
-  stroke: green;
-}
-.confirmation-dots .pin-circle.error {
-  fill: red;
-  stroke: red;
-}
-
-.circle-lock--container {
-  height: 72px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-}
-
-.circle-lock {
-  width: 80px;
-  height: 80px;
-  background: white;
-  border-radius: 1000px;
-  position: relative;
-  top: -40px;
-  box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.12);
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-.circle-lock .lock-icon {
-  color: #333;
-}
-
-.page-title {
-  font-size: 28px;
-  line-height: 32px;
-  text-align: center;
-  font-weight: 700;
-}
-
-.pin-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-} */
-
-@keyframes shake {
-  10%,
-  90% {
-    transform: translate3d(-1px, 0, 0);
-  }
-  20%,
-  80% {
-    transform: translate3d(2px, 0, 0);
-  }
-  30%,
-  50%,
-  70% {
-    transform: translate3d(-4px, 0, 0);
-  }
-  40%,
-  60% {
-    transform: translate3d(4px, 0, 0);
-  }
 }

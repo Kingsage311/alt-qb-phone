@@ -1,16 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
 .settings-app {
     display: none;
     height: 100%;
     width: 100%;
-    color: rgb(230, 230, 230);
-    background: #303030;
+    background: rgb(230, 230, 230);
     overflow: hidden;
 }
 
 .settings-app-header {
     position: relative;
     padding: 5vh 0 0 1.85vh;
-    font-family: 'Samsung Sans Medium';
+    font-family: 'Poppins', sans-serif;
     font-size: 2vh;
 }
 
@@ -45,7 +46,7 @@
     position: absolute;
     top: -2.5vh;
     height: 2.6vh;
-    font-family: 'Samsung Sans Medium';
+    font-family: 'Poppins', sans-serif;
     font-size: 1.5vh;
     border-bottom: 1px solid rgba(0, 0, 0, 0.17);
     width: 100%;
@@ -76,7 +77,7 @@
     left: 6.2vh;
     top: 1.2vh;
     font-size: 1.3vh;
-    font-family: 'Samsung Sans Medium';
+    font-family: 'Poppins', sans-serif;
 }
 
 .settings-tab-description {
@@ -84,8 +85,8 @@
     left: 6.2vh;
     top: 3.2vh;
     font-size: 1.2vh;
-    font-family: 'Samsung Sans Regular';
-    color: #e4e4e4b9;
+    font-family: 'Poppins', sans-serif;
+    color: rgba(0, 0, 0, 0.65);
 }
 
 .settings-background-tab {
@@ -96,7 +97,7 @@
     width: 100%;
     left: 0;
     right: 0;
-    background: #303030;
+    background: rgb(230, 230, 230);
 }
 
 .settings-profilepicture-tab {
@@ -107,7 +108,7 @@
     width: 100%;
     left: 0;
     right: 0;
-    background: #303030;
+    background: rgb(230, 230, 230);
 }
 
 .background-options {
@@ -121,7 +122,7 @@
     position: relative;
     width: 100%;
     height: 25%;
-    background: #303030;
+    background-color: rgb(223, 223, 223);
 }
 
 .background-option-icon {
@@ -131,7 +132,7 @@
     text-align: center;
     line-height: 7vh;
     font-size: 2.3vh;
-    color: #960bc0;
+    color: #fbc531;
 }
 
 .background-option-title {
@@ -140,9 +141,9 @@
     top: 1.5vh;
     text-align: center;
     font-size: 1vh;
-    color: #b8b8b8;
+    color: #030303;
     font-size: 1.3vh;
-    font-family: 'Samsung Sans Medium';
+    font-family: 'Poppins', sans-serif;
 }
 
 .background-option-description {
@@ -151,9 +152,9 @@
     top: 3.6vh;
     text-align: center;
     font-size: 1vh;
-    color: #e4e4e4b9;
+    color: #030303b9;
     font-size: 1.1vh;
-    font-family: 'Samsung Sans Regular';
+    font-family: 'Poppins', sans-serif;
 }
 
 .background-option-current {
@@ -162,8 +163,8 @@
     top: 2.5vh;
     text-align: center;
     font-size: 1.6vh;
-    color: #e4e4e4b9;
-    font-family: 'Samsung Sans Regular';
+    color: #030303b9;
+    font-family: 'Poppins', sans-serif;
 }
 
 .background-buttons {
@@ -179,17 +180,17 @@
     height: 100%;
     width: 50%;
     text-align: center;
-    color: rgb(223, 223, 223);
-    line-height: 3vh;
-    font-family: 'Samsung Sans Medium';
-    font-size: 1.3vh;
+    line-height: 4.7vh;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5vh;
     transition: .05s;
     border-top: 2px solid #e8421800;
 }
 
 .background-button:hover {
-    background-color: #303030;
-    border-top: 2px solid #960bc0;
+    background-color: #dadbdb;
+    border-top: 2px solid #e84118;
 }
 
 .background-custom {
@@ -197,21 +198,20 @@
     position: absolute;
     height: 40%;
     width: 80%;
-    background-color: #303030;
-    border: .4vh solid #0000001e;
-    color: rgb(230, 230, 230);
+    background-color: rgb(245, 245, 245);
+    box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.247);
     margin: 0 auto;
     left: 0;
     right: 0;
     top: -23vh;
-    border-radius: .5vh;
+    border-radius: 2vh;
     overflow: hidden;
 }
 
 .background-custom-title {
-    font-family: 'Samsung Sans Bold';
+    font-family: 'Poppins', sans-serif;
     padding: 2vh;
-    font-size: 1vh;
+    font-size: 1.5vh;
     text-align: center;
 }
 
@@ -219,15 +219,13 @@
     position: absolute;
     left: 1vh;
     background: none;
+    border: none;
     outline: none;
-    border: .4vh solid #0000001e;
-    resize: none;
-    transition: 0.1s ease-in-out;
     height: 3.5vh;
     width: 21vh;
-    font-family: 'Samsung Sans Regular';
-    background: #303030;
-    border-radius: .5vh;
+    font-family: 'Poppins', sans-serif;
+    background: rgb(235, 235, 235);
+    border-radius: 2vh;
     text-align: center;
 }
 
@@ -239,7 +237,7 @@
     position: absolute;
     bottom: 2vh;
     width: 100%;
-    height: 4vh;
+    height: 5vh;
 }
 
 .custom-background-button {
@@ -249,16 +247,16 @@
     width: 50%;
     text-align: center;
     line-height: 4.1vh;
-    color: rgb(230, 230, 230);
-    font-family: 'Samsung Sans Regular';
+    color: black;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.5vh;
     transition: .08s;
     border-bottom: 2px solid #e8421800;
 }
 
 .custom-background-button:hover {
-    background: #303030;
-    border-bottom: 2px solid #960bc0;
+    background-color: #dadbdb65;
+    border-bottom: 2px solid #e84118;
 }
 
 
@@ -273,7 +271,7 @@
     position: relative;
     width: 100%;
     height: 25%;
-    background-color: #303030;
+    background-color: rgb(223, 223, 223);
 }
 
 .profilepicture-option-icon {
@@ -283,7 +281,7 @@
     text-align: center;
     line-height: 7vh;
     font-size: 2.3vh;
-    color: #960bc0;
+    color: #fbc531;
 }
 
 .profilepicture-option-title {
@@ -292,9 +290,9 @@
     top: 1.5vh;
     text-align: center;
     font-size: 1vh;
-    color: #e4e4e4b9;
+    color: #030303;
     font-size: 1.3vh;
-    font-family: 'Samsung Sans Medium';
+    font-family: 'Poppins', sans-serif;
 }
 
 .profilepicture-option-description {
@@ -303,9 +301,9 @@
     top: 3.6vh;
     text-align: center;
     font-size: 1vh;
-    color: #e4e4e4b9;
+    color: #030303b9;
     font-size: 1.1vh;
-    font-family: 'Samsung Sans Regular';
+    font-family: 'Poppins', sans-serif;
 }
 
 .profilepicture-option-current {
@@ -314,8 +312,8 @@
     top: 2.5vh;
     text-align: center;
     font-size: 1.6vh;
-    color: #e4e4e4b9;   
-    font-family: 'Samsung Sans Regular';
+    color: #030303b9;
+    font-family: 'Poppins', sans-serif;
 }
 
 .profilepicture-buttons {
@@ -331,17 +329,17 @@
     height: 100%;
     width: 50%;
     text-align: center;
-    color: rgb(223, 223, 223);
-    line-height: 3vh;
-    font-family: 'Samsung Sans Medium';
-    font-size: 1.3vh;
+    line-height: 4.7vh;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5vh;
     transition: .05s;
     border-top: 2px solid #e8421800;
 }
 
 .profilepicture-button:hover {
-    background-color: #303030;
-    border-top: 2px solid #960bc0;
+    background-color: #dadbdb;
+    border-top: 2px solid #e84118;
 }
 
 .profilepicture-custom {
@@ -349,19 +347,18 @@
     position: absolute;
     height: 40%;
     width: 80%;
-    background-color: #303030;
-    border: .4vh solid #0000001e;
-    color: rgb(230, 230, 230);
+    background-color: rgb(245, 245, 245);
+    box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.247);
     margin: 0 auto;
     left: 0;
     right: 0;
     top: -23vh;
-    border-radius: .5vh;
+    border-radius: 2vh;
     overflow: hidden;
 }
 
 .profilepicture-custom-title {
-    font-family: 'Samsung Sans Bold';
+    font-family: 'Poppins', sans-serif;
     padding: 2vh;
     font-size: 1.5vh;
     text-align: center;
@@ -370,16 +367,14 @@
 .custom-profilepicture-input {
     position: absolute;
     left: 1vh;
-    background: none;
+    /* profilepicture: none; */
+    border: none;
     outline: none;
-    border: .4vh solid #0000001e;
-    resize: none;
-    transition: 0.1s ease-in-out;
     height: 3.5vh;
     width: 21vh;
-    font-family: 'Samsung Sans Regular';
-    background: #303030;
-    border-radius: .5vh;
+    font-family: 'Poppins', sans-serif;
+    /* profilepicture: rgb(235, 235, 235); */
+    border-radius: 2vh;
     text-align: center;
 }
 
@@ -401,16 +396,16 @@
     width: 50%;
     text-align: center;
     line-height: 4.1vh;
-    color: rgb(230, 230, 230);
-    font-family: 'Samsung Sans Regular';
+    color: black;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.5vh;
     transition: .08s;
     border-bottom: 2px solid #e8421800;
 }
 
 .custom-profilepicture-button:hover {
-    background: #303030;
-    border-bottom: 2px solid #960bc0;
+    background-color: #dadbdb65;
+    border-bottom: 2px solid #e84118;
 }
 
 /* The switch - the box around the slider */
@@ -439,7 +434,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgb(39, 39, 39);
+    background-color: #ccc;
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -451,17 +446,17 @@
     width: 16px;
     left: 4px;
     bottom: 4px;
-    background-color: rgb(65, 65, 65);
+    background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
 }
   
 input:checked + .slider {
-    background-color: #9f14bb;
+    background-color: #2196F3;
 }
   
 input:focus + .slider {
-    box-shadow: 0 0 1px #7b0a97;
+    box-shadow: 0 0 1px #2196F3;
 }
   
 input:checked + .slider:before {

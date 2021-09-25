@@ -1,4 +1,4 @@
-fx_version 'adamant'
+fx_version 'cerulean'
 game 'gta5'
 
 description 'QB-Phone'
@@ -13,18 +13,12 @@ shared_scripts {
     '@qb-garages/config.lua',
 }
 
-
 client_scripts {
     'client/main.lua',
-    'client/animation.lua',
-    'client/photo.lua',
-    'client/gui.lua',
-    'client/rentel.lua',
+    'client/animation.lua'
 }
 
-server_scripts {
-    'server/main.lua'
-}
+server_script 'server/main.lua'
 
 files {
     'html/*.html',
@@ -36,8 +30,4 @@ files {
     'html/fonts/*.woff',
     'html/img/backgrounds/*.png',
     'html/img/apps/*.png',
-}
-
-exports {
-    'InPhone'
 }

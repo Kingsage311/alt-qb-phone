@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
 .mail-app {
     display: none;
     height: 100%;
     width: 100%;
-    background-image: url("../img/backgrounds/email.png");
+    background: #ffffff;
     overflow: hidden;
 }
 
@@ -15,51 +17,45 @@
     display: block;
     height: 14vh;
     width: 100%;
-    background: #1d1d1d00;
+    background: #f2f2f2;
 }
 
 #mail-header-text {
-    text-transform: uppercase;
-    font-weight: 700;
     position: absolute;
-    top: 14.2vh;
-    left: 3vh;
-    font-family: 'Samsung Sans Regular';
-    font-size: 1.3vh;
-    color: #04728c;
+    top: 5vh;
+    left: 4.5vh;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5vh;
+    color: black;
 }
 
 #mail-header-mail {
-    border-radius: .3vh;
-    padding: .3vh;
-    background-color: #04728c;
-    text-transform: uppercase;
     position: absolute;
-    top: 54.7vh;
-    left: 6.4vh;
-    font-family: 'Samsung Sans Regular';
-    font-size: 1.4vh;
-    color: #ffc107;
+    top: 7vh;
+    left: 4.5vh;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.3vh;
+    color: gray;
 }
 
 #mail-header-lastsync {
-    text-transform: uppercase;
     position: absolute;
-    top: 14.6vh;
-    right: 3vh;
-    font-family: 'Samsung Sans Regular';
-    font-size: .9vh;
-    color: #04728c;
+    top: 10vh;
+    right: 1.5vh;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1vh;
+    color: gray;
 }
 
 .mail-list {
     position: absolute;
     width: 99%;
-    background-color: rgb(255 255 255 / 44%);
-    height: 37.7vh;
-    top: 16vh;
-    left: .2vh;
+    background-color: rgb(255, 255, 255);
+    height: 44.7vh;
+    top: 12vh;
+    left: .1vh;
     border-radius: 2.5vh 2.5vh 0 0;
+    box-shadow: 0px 0 1px .5px rgba(0, 0, 0, 0.233);
     overflow-x: hidden !important;
     overflow-y: scroll;
 }
@@ -70,7 +66,7 @@
 
 .mail {
     position: relative;
-    color: rgb(114, 114, 114);
+    background-color: rgb(243, 243, 243);
     height: 7.5vh;
     width: 100%;
     transition: .05s ease-in-out;
@@ -83,7 +79,7 @@
 
 .mail-sender {
     position: absolute;
-    font-family: 'Samsung Sans Regular';
+    font-family: 'Poppins', sans-serif;
     font-size: 1.6vh;
     color: rgb(80, 80, 80);
     left: 4.5vh;
@@ -94,7 +90,7 @@
     position: absolute;
     top: 3.3vh;
     left: 4.5vh;
-    font-family: 'Samsung Sans Regular';
+    font-family: 'Poppins', sans-serif;
     font-size: 1.15vh;
     color: rgb(83, 83, 83);
     max-width: 18vh;
@@ -112,9 +108,8 @@
 }
 
 .mail-time {
-    display: none;
     position: absolute;
-    font-family: 'Samsung Sans Regular';
+    font-family: 'Poppins', sans-serif;
     font-size: 1.1vh;
     color: rgb(80, 80, 80);
     right: 2vh;
@@ -158,7 +153,7 @@
     position: absolute;
     top: 8vh;
     left: 2vh;
-    font-family: 'Samsung Sans Regular';
+    font-family: 'Poppins', sans-serif;
     font-size: 1.8vh;
     max-width: 22vh;
 }
@@ -170,11 +165,10 @@
 }
 
 .mail-date {
-    display: none;
     position: absolute;
     top: 13vh;
     left: 2vh;
-    font-family: 'Samsung Sans Regular';
+    font-family: 'Poppins', sans-serif;
     font-size: 1.1vh;
     color: rgb(51, 51, 51);
 }
@@ -195,7 +189,7 @@
     position: absolute;
     top: 17.3vh;
     left: 2vh;
-    font-family: 'Samsung Sans Regular';
+    font-family: 'Poppins', sans-serif;
     font-size: 1.3vh;
     color: rgb(24, 24, 24);
     max-width: 23vh;
@@ -269,43 +263,44 @@
     display: none;
     height: 100%;
     width: 100%;
-    background-image: url("../img/backgrounds/advert.png");
+    background: #f2f2f2;
     overflow: hidden;
 }
 
 .advert-header {
-    display: block;
-    height: 14vh;
+    position: absolute;
     width: 100%;
-    background: #1d1d1d00;
+    height: 10vh;
+    top: 0;
 }
 
 #advert-header-text {
     position: absolute;
     top: 5vh;
     left: 2vh;
-    font-family: 'Samsung Sans Regular';
+    font-family: 'Poppins', sans-serif;
     font-size: 1.8vh;
-    color: rgb(212 212 212 / 0%);
+    color: black;
 }
 
 #advert-header-name {
     position: absolute;
-    top: 15vh;
-    left: 6.8vh;
-    font-family: 'Samsung Sans Regular';
+    top: 8vh;
+    left: 2vh;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.4vh;
-    color: rgb(255 255 255)
+    color: rgba(26, 26, 26, 0.842);
 }
 
 .advert-list {
     position: absolute;
     width: 99%;
-    background-color: #1d1d1d0000;
-    height: 33.5vh;
-    top: 18vh;
+    background-color: rgb(255, 255, 255);
+    height: 39.5vh;
+    top: 12vh;
     left: .1vh;
     border-radius: 1.5vh 1.5vh 1.5vh 1.5vh;
+    box-shadow: 0px 0 1px .5px rgba(0, 0, 0, 0.233);
     overflow-x: hidden !important;
     overflow-y: scroll;
 }
@@ -315,7 +310,7 @@
 }
 .advert {
     position: relative;
-    background-color: #ffea00;
+    background-color: #ff8f1a;
     height: auto;
     min-height: 4vh;
     width: 90%;
@@ -323,34 +318,32 @@
     margin: 0 auto;
     margin-top: 2vh;
     margin-bottom: 2vh;
-    border-radius: .2vh;
+    border-radius: 1vh;
     text-align: center;
 }
 
 .advert > p {
     margin-top: 1.5vh;
     padding-bottom: 1vh;
-    font-family: 'Samsung Sans Regular';
-    color: rgb(0 0 0);
+    font-family: 'Poppins', sans-serif;
+    color: rgb(255, 255, 255);
     max-width: 25vh;
 }
 
 .advert:hover {
-    background-color: #ffffff;
+    background-color: rgb(255, 154, 46);
     transition: .05s ease-in-out;
 }
 
 .advert-sender {
-    font-weight: 600;
     position: relative;
     top: .8vh;
-    color: rgb(0 0 0)
-    font-family: 'Samsung Sans Bold';
+    color: rgb(255, 255, 255);
+    font-family: 'Poppins', sans-serif;
     font-size: 1.3vh;
 }
 
 .test-slet {
-    color: #ffffff;
     position: absolute;
     width: 100%;
     height: 4.2vh;
@@ -359,18 +352,17 @@
     text-align: center;
     line-height: 4.2vh;
     font-size: 2.3vh;
-    background-color: rgb(234 234 234 / 0%);
+    background-color: rgb(234, 234, 234);
 }
 
 .test-slet:hover {
-    background-color: rgb(214 214 214 / 0%);
-    transition: .8s ease-in-out;
+    background-color: rgb(214, 214, 214);
+    transition: .1s ease-in-out;
 }
 
 .test-slet:hover .test-icon {
-    color: #ffea00;
     transition: .1s ease-in-out;
-    animation: Shake 2s infinite;
+    animation: Shake 1s infinite;
 }
 
 .new-advert {
@@ -379,7 +371,7 @@
     height: 100%;
     width: 100%;
     top: 0;
-    background-color: #1d1d1d;
+    background: #f2f2f2;
     overflow: hidden;
     left: -30vh;
 }
@@ -388,8 +380,8 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 9vh;
-    background-color: #1d1d1d;
+    height: 5vh;
+    background-color: rgb(234, 234, 234);
 }
 
 .new-advert-footer-item {
@@ -397,23 +389,21 @@
     float: left;
     width: 50%;
     height: 100%;
-    background-color: #1d1d1d;
+    background-color: rgb(234, 234, 234);
     text-align: center;
     line-height: 5vh;
-    font-size:2.4vh;
-    transition: 1s linear;
-    border-top: .3vh solid #ffffff00;
-    color: rgb(214, 214, 214);
+    font-size: 2.2vh;
+    transition: .1s linear;
+    color: rgb(48, 48, 48);
 }
 
 .new-advert-footer-item:hover {
-    background-color: #1d1d1d;
-    border-top: .3vh solid #ffffff;
-    transition: 1s linear;
+    background-color: rgb(214, 214, 214);
+    transition: .1s linear;
 }
 
 .new-advert-footer-item:hover .new-advert-icon {
-    color: #ffea00;
+    color: rgb(32, 32, 32);
     animation: Shake 1s infinite;
 }
 
@@ -426,39 +416,38 @@
 
 #new-advert-header-text {
     position: absolute;
-    top: 6vh;
-    left: 8.8vh;
-    font-family: 'Samsung Sans Regular';
+    top: 5vh;
+    left: 2vh;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.8vh;
-    color: rgb(228, 228, 228);
+    color: black;
 }
 
 .new-advert-textarea {
     position: absolute;
-    height: 42vh;
     margin: 0 auto;
     left: 0;
     right: 0;
-    color: rgb(228, 228, 228);
-    background-color: #1d1d1d;
+    top: 15vh;
+    height: 30vh;
+    width: 80%;
     outline: none;
-    border: .3vh solid #0000001e;
+    border: none;
     resize: none;
-    transition: 0.1s ease-in-out;
-    font-family: 'Samsung Sans Regular';
-    border-radius: 0.4vh;
-    padding: 0.87vh;
-    font-size: 1.4vh;
-    top: 9vh;
-    width: 22vh;
+    /* border-radius: 1.5vh 1.5vh 1.5vh 1.5vh; */
+    box-shadow: 0px 0 1px .5px rgba(0, 0, 0, 0.233);
+    padding: 1.5vh;
+    font-family: 'Poppins', sans-serif;
+    border-bottom: 0.5vh solid #000;
+    transition: .1s linear;
 }
 
 .new-advert-textarea:focus {
-    border: 0.3vh solid #ffea00;
+    border-bottom: 0.5vh solid #ff8f1a;
 }
 
 .new-advert-textarea:valid {
-    border: 0.3vh solid #29b417;
+    border-bottom: 0.5vh solid #29b417;
 }
 
 .advert-home {
@@ -468,8 +457,8 @@
 
 .nomails {
     text-align: center;
-    color: #04728c;
-    font-family: 'Samsung Sans Medium';
+    color: black;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.5vh;
     line-height: 20vh;
 }

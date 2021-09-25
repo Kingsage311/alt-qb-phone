@@ -1,103 +1,106 @@
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
 
 .houses-app {
     display: none;
     height: 100%;
     width: 100%;
-    background-image: url("../img/backgrounds/houses.png");
+    background: #2f3640;
     overflow: hidden;
 }
 
 .houses-app-header {
     position: absolute;
     width: 100%;
-    height: 9vh;
-    background-color: #11111100;
+    height: 5vh;
+    background-color: #353b48;
     top: 6vh;
 }
 
 .houses-app-header-tab {
-    text-transform: uppercase;
     position: relative;
     float: left;
     width: 50%;
     height: 100%;
     text-align: center;
-    line-height: 14vh;
-    font-family: 'Exo 2', sans-serif;
-    font-weight: 800;
-    border-bottom: 2px solid rgb(255, 255, 255);
+    line-height: 5vh;
+    font-family: 'Poppins', sans-serif;
+    border-bottom: .3vh solid rgb(189, 189, 189);
     transition: .075s linear;
 }
 
 .houses-app-header-tab > p {
     font-size: 1.5vh;
-    color: rgb(255, 255, 255);
+    color: rgba(255, 255, 255, 0.5);
     transition: .075s linear;
 }
 
 .houses-app-header-tab-selected {
-    border-bottom: 2px solid #01bdff;
+    border-bottom: .3vh solid #c23616;
 }
 
 .houses-app-header-tab-selected > p {
-    color: #01bdff;
+    color: #ffffff;
 }
 
 .house-app-myhouses-container {
     position: absolute;
     width: 85%;
-    height: 60%;
+    height: 77%;
     margin: 0 auto;
     left: 0vw;
     right: 0;
-    background-color: #11111175;
-    top: 18vh;
+    background-color: #464b5241;
+    border-radius: .6vh;
+    top: 12vh;
     overflow-x: hidden;
     overflow-y: scroll;
 }
 
 .house-app-myhouses-container::-webkit-scrollbar {
-    display: none;
+    width: .5vh;
+    background-color: rgba(68, 72, 82, 0.788);
 }
 
 .house-app-myhouses-container::-webkit-scrollbar-thumb {
-    display: none;
+    background-color: rgb(105, 111, 126);
 }
 
 .house-app-mykeys-container {
     display: none;
     position: absolute;
     width: 85%;
-    height: 60%;
+    height: 77%;
     margin: 0 auto;
     left: 0vw;
     right: 0;
-    background-color: #11111175;
-    top: 18vh;
+    background-color: #464b5241;
+    border-radius: .6vh;
+    top: 12vh;
     overflow-x: hidden;
     overflow-y: scroll;
 }
 
 .house-app-mykeys-container::-webkit-scrollbar {
-    display: none;
+    width: .5vh;
+    background-color: rgba(68, 72, 82, 0.788);
 }
 
 .house-app-mykeys-container::-webkit-scrollbar-thumb {
-    display: none;
+    background-color: rgb(105, 111, 126);
 }
 
 .myhouses-house {
     position: relative;
     height: 7.5vh;
     width: 100%;
-    background-color: #01bdff;
+    background-color: #4d505cc5;
     transition: .05s linear;
     margin-bottom: .2vh;
 }
 
 .myhouses-house:hover {
-    background-color: #00a6e0;
+    background-color: #666977c5;
 }
 
 .myhouse-house-icon {
@@ -110,18 +113,16 @@
 .myhouse-house-icon > i {
     text-align: center;
     line-height: 7.5vh;
-    color: #0a0a0a;
+    color: white;
     font-size: 2.2vh;
 }
 
 .myhouse-house-titel {
-    text-transform: uppercase;
     position: absolute;
     left: 5.5vh;
     top: 1.7vh;
-    color: #0a0a0a;
-    font-family: 'Exo 2', sans-serif;
-    font-weight: 800;
+    color: white;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.5vh;
 }
 
@@ -129,9 +130,8 @@
     position: absolute;
     left: 5.5vh;
     bottom: 1.7vh;
-    color: #0a0a0a;
-    font-family: 'Exo 2', sans-serif;
-    font-weight: 800;
+    color: white;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.3vh;
 }
 
@@ -155,21 +155,24 @@
     margin: 0 auto;
     left: 0vw;
     right: 0;
-    background: #0c0c0c;
+    background-color: rgb(238, 238, 238);
+    border-radius: .5vh;
+    box-shadow: 
+    inset 0 0 1vh .2vh rgba(0, 0, 0, 0.281),
+    0 0 1vh .2vh rgba(0, 0, 0, 0.253);
     top: 15vh;
 }
 
 .myhouses-options-header {
-    text-transform: uppercase;
     position: absolute;
     width: 100%;
     height: 5vh;
-    color: rgb(255, 255, 255);
+    color: rgb(27, 27, 27);
     text-align: center;
     line-height: 5vh;
-    font-family: 'Exo 2', sans-serif;
-    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.8vh;
+    border-bottom: .1vh solid rgba(0, 0, 0, 0.26);
 }
 
 .myhouses-option {
@@ -178,54 +181,55 @@
     margin-bottom: .8vh;
     width: 12vh;
     height: 5vh;
-    color: #0a0a0a;
-    font-family: 'Exo 2', sans-serif;
-    font-weight: 800;
+    color: white;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.5vh;
+    border-radius: .3vh;
     top: 6vh;
+    box-shadow: inset 0 0 1vh .2vh rgba(0, 0, 0, 0.05);
     text-align: center;
     line-height: 5vh;
     transition: .05s linear;
 }
 
 #myhouse-option-transfer {
-    background-color: #01bdff;
+    background-color: #0097e6;
 }
 
 #myhouse-option-transfer:hover {
-    background-color:#00a6e0;
+    background-color: #00a8ff;
 }
 
 #myhouse-option-keys {
-    background-color: #01bdff;
+    background-color: #e1b12c;
 }
 
 #myhouse-option-keys:hover {
-    background-color: #00a6e0;
+    background-color: #fbc531;
 }
 
 #myhouse-option-close {
-    background-color: #01bdff;
+    background-color: #c23616;
 }
 
 #myhouse-option-close:hover {
-    background-color: #00a6e0;
+    background-color: #e84118;
 }
 
 #myhouse-option-transfer-confirm {
-    background-color: #01bdff;
+    background-color: #27ae60;
 }
 
 #myhouse-option-transfer-confirm:hover {
-    background-color: #00a6e0;
+    background-color: #2ecc71;
 }
 
 #myhouse-option-transfer-back {
-    background-color: #01bdff;
+    background-color: #c23616;
 }
 
 #myhouse-option-transfer-back:hover {
-    background-color: #00a6e0;
+    background-color: #e74c3c;
 }
 
 .myhouse-option-transfer-container {
@@ -236,7 +240,11 @@
     left: 35vw;
     /* left: 0; */
     right: 0;
-    background: #0c0c0c;
+    background-color: rgb(238, 238, 238);
+    border-radius: .5vh;
+    box-shadow: 
+    inset 0 0 1vh .2vh rgba(0, 0, 0, 0.281),
+    0 0 1vh .2vh rgba(0, 0, 0, 0.253);
     top: 15vh;
 }
 
@@ -248,21 +256,24 @@
     left: 35vw;
     /* left: 0; */
     right: 0;
-    background: #0c0c0c;
+    background-color: rgb(238, 238, 238);
+    border-radius: .5vh;
+    box-shadow: 
+    inset 0 0 1vh .2vh rgba(0, 0, 0, 0.281),
+    0 0 1vh .2vh rgba(0, 0, 0, 0.253);
     top: 15vh;
 }
 
 .myhouse-option-transfer-container-header {
-    text-transform: uppercase;
     position: absolute;
     width: 100%;
     height: 5vh;
-    color: rgb(255 255 255);
+    color: rgb(27, 27, 27);
     text-align: center;
-    line-height: 8vh;
-    font-family: 'Exo 2', sans-serif;
-    font-weight: 800;
+    line-height: 5vh;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.8vh;
+    border-bottom: .1vh solid rgba(0, 0, 0, 0.26);
 }
 
 .myhouse-option-transfer-container-citizenid {
@@ -274,33 +285,31 @@
     height: 5vh;
     top: 7.5vh;
     border: none;
-    color: rgb(255, 255, 255);
     outline: none;
-    font-family: 'Exo 2', sans-serif;
-    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.8vh;
     text-indent: 1vh;
-    background: #0c0c0c;
-    border: 2px solid #111111;
+    background: rgba(223, 223, 223, 0.5);
+    border-bottom: .3vh solid #c0392b;
     transition: .05s linear;
 }
 
 .myhouse-option-transfer-container-citizenid:focus {
-    border: 2px solid #01bdff;
+    border-bottom: .3vh solid #e67e22;
 }
 
 .myhouse-option-transfer-container-citizenid:valid {
-    border: 2px solid #00a6e0;
+    border-bottom: .3vh solid #27ae60;
 }
 
 
 #myhouse-option-keys-back {
     top: 22vh;
-    background-color: #01bdff;
+    background-color: #c23616;
 }
 
 #myhouse-option-keys-back:hover {
-    background-color: #00a6e0;
+    background-color: #e74c3c;
 }
 
 .keys-container {
@@ -312,7 +321,7 @@
     right: 0;
     top: 2vh;
     overflow-y: scroll;
-    background: #111111;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .keys-container::-webkit-scrollbar {
@@ -327,17 +336,16 @@
     text-overflow: ellipsis;
     position: absolute;
     padding: 1.2vh;
-    font-family: 'Exo 2', sans-serif;
-    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.5vh;
-    color: #0a0a0a;
+    color: white;
 }
 
 .house-key {
     position: relative;
     width: 100%;
     height: 4.5vh;
-    background-color: #01bdff;
+    background-color: rgba(0, 0, 0, 0.7);
     transition: .05s ease-in-out;
 }
 
@@ -347,16 +355,16 @@
     padding: 1.2vh;
     padding-right: 1.5vh;
     font-size: 1.5vh;
-    color: rgb(255, 255, 255);
+    color: white;
     transition: .05s ease-in-out;
 }
 
 .house-key:hover {
-    background-color: #00a6e0;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .house-key-delete:hover {
-    color: #00a6e0;
+    color: rgb(201, 53, 53);
 }
 
 @-webkit-keyframes spaceboots {
@@ -389,24 +397,23 @@
     position: relative;
     width: 100%;
     height: 7vh;
-    background-color: #01bdff;
+    background-color: #3a4047;
+    border-radius: 0.7vh;
     margin-bottom: 0.5vh;
 
     transition: 0.1s ease;
 }
 
 .mykeys-key:hover {
-    background-color: #00a6e0;
+    background-color: #4e565f;
 }
 
 .mykeys-key-label {
-    text-transform: uppercase;
     position: absolute;
     top: 0;
     left: 0;
-    color: #0a0a0a;
-    font-family: 'Exo 2', sans-serif;
-    font-weight: 800;
+    color: white;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.8vh;
     margin: 1vh;
 }
@@ -415,9 +422,8 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    color: #0a0a0a;
-    font-family: 'Exo 2', sans-serif;
-    font-weight: 800;
+    color: rgb(153, 153, 153);
+    font-family: 'Poppins', sans-serif;
     font-size: 1.2vh;
     margin: 1vh;
 }

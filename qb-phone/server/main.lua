@@ -244,7 +244,7 @@ RegisterServerEvent('qb-phone:server:sendNewMailToOffline')
 AddEventHandler('qb-phone:server:sendNewMailToOffline', function(citizenid, mailData)
     local Player = QBCore.Functions.GetPlayerByCitizenId(citizenid)
 
-    if Player ~= nil then
+    if Player then
         local src = Player.PlayerData.source
 
         if mailData.button == nil then
@@ -277,12 +277,11 @@ AddEventHandler('qb-phone:server:sendNewMailToOffline', function(citizenid, mail
         if mailData.button == nil then
             exports.oxmysql:insert(
                 'INSERT INTO player_mails (`citizenid`, `sender`, `subject`, `message`, `mailid`, `read`) VALUES (?, ?, ?, ?, ?, ?)',
-                {Player.PlayerData.citizenid, mailData.sender, mailData.subject, mailData.message, GenerateMailId(), 0})
+                {citizenid, mailData.sender, mailData.subject, mailData.message, GenerateMailId(), 0})
         else
             exports.oxmysql:insert(
                 'INSERT INTO player_mails (`citizenid`, `sender`, `subject`, `message`, `mailid`, `read`, `button`) VALUES (?, ?, ?, ?, ?, ?, ?)',
-                {Player.PlayerData.citizenid, mailData.sender, mailData.subject, mailData.message, GenerateMailId(), 0,
-                 json.encode(mailData.button)})
+                {citizenid, mailData.sender, mailData.subject, mailData.message, GenerateMailId(), 0, json.encode(mailData.button)})
         end
     end
 end)
@@ -391,37 +390,37 @@ AddEventHandler('qb-phone:server:BillingEmail', function(data, paid)
     end
 end)
 
-QBCore.Functions.CreateCallback('qb-phone:server:PayInvoice',
-    function(source, cb, society, amount, invoiceId, sendercitizenid)
-        local Invoices = {}
-        local Ply = QBCore.Functions.GetPlayer(source)
-        local SenderPly = QBCore.Functions.GetPlayerByCitizenId(sendercitizenid)
-        local billAmount = amount
-        local commission, billAmount
-
-        if Config.BillingCommissions[society] then
-            commission = round(amount * Config.BillingCommissions[society])
-            billAmount = round(amount - (amount * Config.BillingCommissions[society]))
-            SenderPly.Functions.AddMoney('bank', commission)
-            local mailData = {
-                sender = 'Billing Department',
-                subject = 'Commission Received',
-                message = string.format('You received a commission check of $%s when %s %s paid a bill of $%s.',
-                    commission, Ply.PlayerData.charinfo.firstname, Ply.PlayerData.charinfo.lastname, amount)
-            }
-            TriggerEvent('qb-phone:server:sendNewMailToOffline', sendercitizenid, mailData)
-        end
-
-        Ply.Functions.RemoveMoney('bank', amount, "paid-invoice")
-        TriggerEvent("qb-bossmenu:server:addAccountMoney", society, billAmount)
-        exports.oxmysql:execute('DELETE FROM phone_invoices WHERE id = ?', {invoiceId})
-        local invoices = exports.oxmysql:fetchSync('SELECT * FROM phone_invoices WHERE citizenid = ?',
-            {Ply.PlayerData.citizenid})
-        if invoices[1] ~= nil then
-            Invoices = invoices
-        end
-        cb(true, Invoices)
-    end)
+QBCore.Functions.CreateCallback('qb-phone:server:PayInvoice', function(source, cb, society, amount, invoiceId, sendercitizenid)
+    local Invoices = {}
+    local Ply = QBCore.Functions.GetPlayer(source)
+    local SenderPly = QBCore.Functions.GetPlayerByCitizenId(sendercitizenid)
+    local invoiceMailData = {}
+    if SenderPly and Config.BillingCommissions[society] then
+        local commission = round(amount * Config.BillingCommissions[society])
+        SenderPly.Functions.AddMoney('bank', commission)
+        invoiceMailData = {
+            sender = 'Billing Department',
+            subject = 'Commission Received',
+            message = string.format('You received a commission check of $%s when %s %s paid a bill of $%s.', commission, Ply.PlayerData.charinfo.firstname, Ply.PlayerData.charinfo.lastname, amount)
+        }
+    elseif not SenderPly and Config.BillingCommissions[society] then
+        invoiceMailData = {
+            sender = 'Billing Department',
+            subject = 'Bill Paid',
+            message = string.format('%s %s paid a bill of $%s', Ply.PlayerData.charinfo.firstname, Ply.PlayerData.charinfo.lastname, amount)
+        }
+    end
+    Ply.Functions.RemoveMoney('bank', amount, "paid-invoice")
+    TriggerEvent('qb-phone:server:sendNewMailToOffline', sendercitizenid, invoiceMailData)
+    TriggerEvent("qb-bossmenu:server:addAccountMoney", society, amount)
+    exports.oxmysql:execute('DELETE FROM phone_invoices WHERE id = ?', {invoiceId})
+    local invoices = exports.oxmysql:fetchSync('SELECT * FROM phone_invoices WHERE citizenid = ?',
+        {Ply.PlayerData.citizenid})
+    if invoices[1] ~= nil then
+        Invoices = invoices
+    end
+    cb(true, Invoices)
+end)
 
 QBCore.Functions.CreateCallback('qb-phone:server:DeclineInvoice', function(source, cb, sender, amount, invoiceId)
     local Invoices = {}
@@ -770,7 +769,7 @@ function escape_sqli(source)
         ['"'] = '\\"',
         ["'"] = "\\'"
     }
-    return source:gsub("['\"]", replacements) -- or string.gsub( source, "['\"]", replacements )
+    return source:gsub("['\"]", replacements)
 end
 
 QBCore.Functions.CreateCallback('qb-phone:server:FetchResult', function(source, cb, search)
@@ -1182,24 +1181,11 @@ RegisterServerEvent('qb-phone:server:AddTransaction')
 AddEventHandler('qb-phone:server:AddTransaction', function(data)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
-    exports.oxmysql:insert('INSERT INTO crypto_transactions (citizenid, title, message) VALUES (?, ?, ?)', {Player.PlayerData
-        .citizenid, escape_sqli(data.TransactionTitle), escape_sqli(data.TransactionMessage)})
-end)
-
-QBCore.Functions.CreateCallback('qb-phone:server:GetCurrentDrivers', function(source, cb)
-    local Lawyers = {}
-    for k, v in pairs(QBCore.Functions.GetPlayers()) do
-        local Player = QBCore.Functions.GetPlayer(v)
-        if Player ~= nil then
-            if Player.PlayerData.job.name == "taxi" then
-                table.insert(Lawyers, {
-                    name = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname,
-                    phone = Player.PlayerData.charinfo.phone,
-                })
-            end
-        end
-    end
-    cb(Lawyers, QBCore.Functions.GetPlayer(source).PlayerData.job.name == "taxi")
+    exports.oxmysql:insert('INSERT INTO crypto_transactions (citizenid, title, message) VALUES (?, ?, ?)', {
+        Player.PlayerData.citizenid,
+        data.TransactionTitle,
+        data.TransactionMessage
+    })
 end)
 
 QBCore.Functions.CreateCallback('qb-phone:server:GetCurrentLawyers', function(source, cb)
@@ -1207,31 +1193,19 @@ QBCore.Functions.CreateCallback('qb-phone:server:GetCurrentLawyers', function(so
     for k, v in pairs(QBCore.Functions.GetPlayers()) do
         local Player = QBCore.Functions.GetPlayer(v)
         if Player ~= nil then
-            if Player.PlayerData.job.name == "lawyer" or Player.PlayerData.job.name == "judge" then
+            if (Player.PlayerData.job.name == "lawyer" or Player.PlayerData.job.name == "realestate" or
+                Player.PlayerData.job.name == "mechanic" or Player.PlayerData.job.name == "taxi" or
+                Player.PlayerData.job.name == "police" or Player.PlayerData.job.name == "ambulance") and
+                Player.PlayerData.job.onduty then
                 table.insert(Lawyers, {
                     name = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname,
                     phone = Player.PlayerData.charinfo.phone,
+                    typejob = Player.PlayerData.job.name
                 })
             end
         end
     end
     cb(Lawyers)
-end)
-
-QBCore.Functions.CreateCallback('qb-phone:server:GetCurrentMechanic', function(source, cb)
-    local Mechanic = {}
-    for k, v in pairs(QBCore.Functions.GetPlayers()) do
-        local Player = QBCore.Functions.GetPlayer(v)
-        if Player ~= nil then
-            if Player.PlayerData.job.name == "mechanic" then
-                table.insert(Mechanic, {
-                    name = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname,
-                    phone = Player.PlayerData.charinfo.phone,
-                })
-            end
-        end
-    end
-    cb(Mechanic)
 end)
 
 RegisterServerEvent('qb-phone:server:InstallApplication')
@@ -1275,50 +1249,3 @@ function round(num, numDecimalPlaces)
     end
     return math.floor(num + 0.5)
 end
-
-local TaxiCalls = {}
-local CurrentCallID = 1
-RegisterServerEvent('qb-phone:server:CallDriver')
-AddEventHandler('qb-phone:server:CallDriver', function(coords)
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
-    CurrentCallID = CurrentCallID + 1
-
-    print(CurrentCallID)
-    TaxiCalls[CurrentCallID] = { name = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname, coords = coords }
-    TriggerClientEvent("qb-phone:client:AddTaxiCall", -1, CurrentCallID, TaxiCalls[CurrentCallID])
-end)
-
-RegisterServerEvent('qb-phone:server:AcceptDriverCall')
-AddEventHandler('qb-phone:server:AcceptDriverCall', function(ID)
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
-
-    if TaxiCalls[ID] then
-        TriggerClientEvent("qb-phone:client:RemoveTaxiCall", -1, ID)
-        TriggerClientEvent("qb-phone:client:AcceptDriverCall", -1, TaxiCalls[ID])
-        TriggerClientEvent('QBCore:Notify', src, "The player location is marked for you on the GPS.")
-        TaxiCalls[ID] = nil
-    end
-end)
-
-local VehiclePlate = 0
-RegisterServerEvent('qb-phone:server:spawnVehicle')
-AddEventHandler('qb-phone:server:spawnVehicle', function(data)
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
-    VehiclePlate = VehiclePlate + 1
-
-    if Config.RentelVehicles[data.model] and data.price <= Player['PlayerData']['money']['cash'] then
-        data['plate'] = 'RENT-' .. VehiclePlate
-        TriggerClientEvent('qb-phone:client:spawnVehicle', src, data)
-        TriggerEvent('qb-phone:server:clearVehicleTrunk', data['plate'])
-    else
-        TriggerClientEvent('QBCore:Notify', src, "You don't have enough money.", 'error')
-    end
-end)
-
-RegisterServerEvent('qb-phone:server:clearVehicleTrunk')
-AddEventHandler('qb-phone:server:clearVehicleTrunk', function(plate)
-    QBCore.Functions.ExecuteSql(false, "DELETE FROM `trunkitems` WHERE `plate` = '"..plate.."'")
-end)

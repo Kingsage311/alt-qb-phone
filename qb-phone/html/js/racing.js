@@ -10,7 +10,7 @@ $(document).on('click', '.racing-race', function(e){
     var OpenSize = "15vh";
     var DefaultSize = "9vh";
     var RaceData = $(this).data('RaceData');
-    var IsRacer = IsInRace(RL.Phone.Data.PlayerData.citizenid, RaceData.RaceData.Racers)
+    var IsRacer = IsInRace(QB.Phone.Data.PlayerData.citizenid, RaceData.RaceData.Racers)
 
     if (!RaceData.RaceData.Started || IsRacer) {
         if (OpenedRaceElement === null) {
@@ -33,7 +33,7 @@ $(document).on('click', '.racing-race', function(e){
             OpenedRaceElement = this;
         }
     } else {
-        RL.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "The race is already ongoing.", "#1DA1F2");
+        QB.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "The race already started..", "#1DA1F2");
     }
 });
 
@@ -68,9 +68,9 @@ function SetupRaces(Races) {
     if (Races.length > 0) {
         Races = (Races).reverse();
         $.each(Races, function(i, race){
-            var Locked = '<i class="fas fa-unlock"></i> Not started yet.';
+            var Locked = '<i class="fas fa-unlock"></i> Not started yet';
             if (race.RaceData.Started) {
-                Locked = '<i class="fas fa-lock"></i> Started.';
+                Locked = '<i class="fas fa-lock"></i> Started';
             }
             var LapLabel = "";
             if (race.Laps == 0) {
@@ -82,8 +82,8 @@ function SetupRaces(Races) {
                     LapLabel = race.Laps + " Laps";
                 }
             }
-            var InRace = IsInRace(RL.Phone.Data.PlayerData.citizenid, race.RaceData.Racers);
-            var Creator = IsCreator(RL.Phone.Data.PlayerData.citizenid, race);
+            var InRace = IsInRace(QB.Phone.Data.PlayerData.citizenid, race.RaceData.Racers);
+            var Creator = IsCreator(QB.Phone.Data.PlayerData.citizenid, race);
             var Buttons = '<div class="race-buttons"> <div class="race-button" id="join-race" data-toggle="racetooltip" data-placement="left" title="Join"><i class="fas fa-sign-in-alt"></i></div>';
             if (InRace) {
                 if (!Creator) {
@@ -120,31 +120,31 @@ $(document).on('click', '#join-race', function(e){
     var RaceId = $(this).parent().parent().attr('id');
     var Data = $("#"+RaceId).data('RaceData');
 
-    $.post('http://qb-phone/IsInRace', JSON.stringify({}), function(IsInRace){
+    $.post('https://qb-phone/IsInRace', JSON.stringify({}), function(IsInRace){
         if (!IsInRace) {
-            $.post('http://qb-phone/RaceDistanceCheck', JSON.stringify({
+            $.post('https://qb-phone/RaceDistanceCheck', JSON.stringify({
                 RaceId: Data.RaceId,
                 Joined: true,
             }), function(InDistance){
                 if (InDistance) {
-                    $.post('http://qb-phone/IsBusyCheck', JSON.stringify({
+                    $.post('https://qb-phone/IsBusyCheck', JSON.stringify({
                         check: "editor"
                     }), function(IsBusy){
                         if (!IsBusy) {
-                            $.post('http://qb-phone/JoinRace', JSON.stringify({
+                            $.post('https://qb-phone/JoinRace', JSON.stringify({
                                 RaceData: Data,
                             }));
-                            $.post('http://qb-phone/GetAvailableRaces', JSON.stringify({}), function(Races){
+                            $.post('https://qb-phone/GetAvailableRaces', JSON.stringify({}), function(Races){
                                 SetupRaces(Races);
                             });
                         } else {
-                            RL.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "You are in an editor.", "#1DA1F2");
+                            QB.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "You're in a editor..", "#1DA1F2");
                         }
                     });
                 }
             })
         } else {
-            RL.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "You are already in a race.", "#1DA1F2");
+            QB.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "You're already in a race..", "#1DA1F2");
         }
     });
 });
@@ -155,11 +155,11 @@ $(document).on('click', '#quit-race', function(e){
     var RaceId = $(this).parent().parent().attr('id');
     var Data = $("#"+RaceId).data('RaceData');
 
-    $.post('http://qb-phone/LeaveRace', JSON.stringify({
+    $.post('https://qb-phone/LeaveRace', JSON.stringify({
         RaceData: Data,
     }));
 
-    $.post('http://qb-phone/GetAvailableRaces', JSON.stringify({}), function(Races){
+    $.post('https://qb-phone/GetAvailableRaces', JSON.stringify({}), function(Races){
         SetupRaces(Races);
     });
 });
@@ -171,11 +171,11 @@ $(document).on('click', '#start-race', function(e){
     var RaceId = $(this).parent().parent().attr('id');
     var Data = $("#"+RaceId).data('RaceData');
 
-    $.post('http://qb-phone/StartRace', JSON.stringify({
+    $.post('https://qb-phone/StartRace', JSON.stringify({
         RaceData: Data,
     }));
 
-    $.post('http://qb-phone/GetAvailableRaces', JSON.stringify({}), function(Races){
+    $.post('https://qb-phone/GetAvailableRaces', JSON.stringify({}), function(Races){
         SetupRaces(Races);
     });
 });
@@ -200,7 +200,7 @@ $('.dropdown').focusout(function () {
     $(this).find('.dropdown-menu').slideUp(300);
 });
 $(document).on('click', '.dropdown .dropdown-menu li', function(e) {
-    $.post('http://qb-phone/GetTrackData', JSON.stringify({
+    $.post('https://qb-phone/GetTrackData', JSON.stringify({
         RaceId: $(this).attr('id')
     }), function(TrackData){
         if ((TrackData.CreatorData.charinfo.lastname).length > 8) {
@@ -209,7 +209,7 @@ $(document).on('click', '.dropdown .dropdown-menu li', function(e) {
         var CreatorTag = TrackData.CreatorData.charinfo.firstname.charAt(0).toUpperCase() + ". " + TrackData.CreatorData.charinfo.lastname;
 
         $(".racing-setup-information-distance").html('Distance: '+TrackData.Distance+' m');
-        $(".racing-setup-information-creator").html('Maker: ' + CreatorTag);
+        $(".racing-setup-information-creator").html('Creator: ' + CreatorTag);
         if (TrackData.Records.Holder !== undefined) {
             if (TrackData.Records.Holder[1].length > 8) {
                 TrackData.Records.Holder[1] = TrackData.Records.Holder[1].substring(0, 8) + "..";
@@ -236,7 +236,7 @@ $(document).on('click', '#setup-race', function(e){
         left: 0
     }, 300);
 
-    $.post('http://qb-phone/GetRaces', JSON.stringify({}), function(Races){
+    $.post('https://qb-phone/GetRaces', JSON.stringify({}), function(Races){
         if (Races !== undefined && Races !== null) {
             $(".dropdown-menu").html("");
             $.each(Races, function(i, race){
@@ -251,23 +251,23 @@ $(document).on('click', '#setup-race', function(e){
 
 $(document).on('click', '#create-race', function(e){
     e.preventDefault();
-    $.post('http://qb-phone/IsAuthorizedToCreateRaces', JSON.stringify({}), function(data){
+    $.post('https://qb-phone/IsAuthorizedToCreateRaces', JSON.stringify({}), function(data){
         if (data.IsAuthorized) {
             if (!data.IsBusy) {
-                $.post('http://qb-phone/IsBusyCheck', JSON.stringify({
+                $.post('https://qb-phone/IsBusyCheck', JSON.stringify({
                     check: "race"
                 }), function(InRace){
                     if (!InRace) {
                         $(".racing-create").fadeIn(200);
                     } else {
-                        RL.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "You are in a race.", "#1DA1F2");
+                        QB.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "You're in a race..", "#1DA1F2");
                     }
                 });
             } else {
-                RL.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "You are already creating a Track.", "#1DA1F2");
+                QB.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "You're already setting up a track..", "#1DA1F2");
             }
         } else {
-            RL.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "You have no rights to create Race Tracks.", "#1DA1F2");
+            QB.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "You don't have rights to make Race Tracks..", "#1DA1F2");
         }
     });
 });
@@ -277,26 +277,31 @@ $(document).on('click', '#racing-create-accept', function(e){
     var TrackName = $(".racing-create-trackname").val();
 
     if (TrackName !== "" && TrackName !== undefined && TrackName !== null) {
-        $.post('http://qb-phone/IsAuthorizedToCreateRaces', JSON.stringify({
+        TrackName = DOMPurify.sanitize(TrackName , {
+            ALLOWED_TAGS: [], 
+            ALLOWED_ATTR: []
+        });
+        if (TrackName == '') TrackName = 'What are you trying?'
+        $.post('https://qb-phone/IsAuthorizedToCreateRaces', JSON.stringify({
             TrackName: TrackName
         }), function(data){
             if (data.IsAuthorized) {
                 if (data.IsNameAvailable) {
-                    $.post('http://qb-phone/StartTrackEditor', JSON.stringify({
+                    $.post('https://qb-phone/StartTrackEditor', JSON.stringify({
                         TrackName: TrackName
                     }));
                     $(".racing-create").fadeOut(200, function(){
                         $(".racing-create-trackname").val("");
                     });
                 } else {
-                    RL.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "This name is not available.", "#1DA1F2");
+                    QB.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "This name is not available..", "#1DA1F2");
                 }
             } else {
-                RL.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "You have no rights to create Race Tracks.", "#1DA1F2");
+                QB.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "You don't have any rights to create Race Tracks..", "#1DA1F2");
             }
         });
     } else {
-        RL.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "You must enter a Track name.", "#1DA1F2");
+        QB.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "You have to enter a track name..", "#1DA1F2");
     }
 });
 
@@ -313,18 +318,18 @@ $(document).on('click', '#setup-race-accept', function(e){
     var track = $('.dropdown').find('input').attr('value');
     var laps = $(".racing-setup-laps").val();
 
-    $.post('http://qb-phone/HasCreatedRace', JSON.stringify({}), function(HasCreatedRace){
+    $.post('https://qb-phone/HasCreatedRace', JSON.stringify({}), function(HasCreatedRace){
         if (!HasCreatedRace) {
-            $.post('http://qb-phone/RaceDistanceCheck', JSON.stringify({
+            $.post('https://qb-phone/RaceDistanceCheck', JSON.stringify({
                 RaceId: track,
                 Joined: false,
             }), function(InDistance){
                 if (InDistance) {
                     if (track !== undefined || track !== null) {
                         if (laps !== "") {
-                            $.post('http://qb-phone/CanRaceSetup', JSON.stringify({}), function(CanSetup){
+                            $.post('https://qb-phone/CanRaceSetup', JSON.stringify({}), function(CanSetup){
                                 if (CanSetup) {
-                                    $.post('http://qb-phone/SetupRace', JSON.stringify({
+                                    $.post('https://qb-phone/SetupRace', JSON.stringify({
                                         RaceId: track,
                                         AmountOfLaps: laps,
                                     }))
@@ -342,19 +347,19 @@ $(document).on('click', '#setup-race-accept', function(e){
                                         $('.dropdown').find('span').text("Select a Track");
                                     });
                                 } else {
-                                    RL.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "No races can be made at this time.", "#1DA1F2");
+                                    QB.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "There can't be any ..", "#1DA1F2");
                                 }
                             });
                         } else {
-                            RL.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "Enter an amount of rounds.", "#1DA1F2");
+                            QB.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "Fill in an amount of laps..", "#1DA1F2");
                         }
                     } else {
-                        RL.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "You have not chosen a Track.", "#1DA1F2");
+                        QB.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "You haven't selected a track..", "#1DA1F2");
                     }
                 }
             })
         } else {
-            RL.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "You already have a race active.", "#1DA1F2");
+            QB.Phone.Notifications.Add("fas fa-flag-checkered", "Racing", "You already have a race active..", "#1DA1F2");
         }
     });
 });
@@ -422,7 +427,7 @@ $(document).on('click', '.racing-leaderboards-button', function(e){
 $(document).on('click', '#leaderboards-race', function(e){
     e.preventDefault();
 
-    $.post('http://qb-phone/GetRacingLeaderboards', JSON.stringify({}), function(Races){
+    $.post('https://qb-phone/GetRacingLeaderboards', JSON.stringify({}), function(Races){
         if (Races !== null) {
             $(".racing-leaderboards").html("");
             $.each(Races, function(i, race){
