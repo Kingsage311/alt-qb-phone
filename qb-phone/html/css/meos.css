@@ -1,10 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
-
 .meos-app {
     display: none;
     height: 100%;
     width: 100%;
-    background: #fdf9f9;
+    background: #0a0a0a;
     overflow: hidden;
 }
 
@@ -23,10 +21,11 @@
 }
 
 .meos-app-header {
+    background-image: url("../img/apps/police-app.png");
     position: absolute;
     width: 100%;
     height: 9vh;
-    background-color: #004682;
+    background-color: #020144;
     top: 0vh;
 }
 
@@ -35,7 +34,7 @@
     color: white;
     top: 5.2vh;
     left: 2vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Calibri';
     font-weight: bold;
     font-size: 1.6vh;
     letter-spacing: .1vh;
@@ -46,7 +45,7 @@
     color: white;
     top: 5.6vh;
     right: 2vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Calibri';
     font-size: 1.2vh;
     letter-spacing: .1vh;
     float: right;
@@ -64,7 +63,7 @@
 
 .meos-block {
     position: relative;
-    background-color: #004682;
+    background-color: #020144;
     width: 45%;
     height: 30%;
     margin: .5vh;
@@ -77,7 +76,7 @@
 }
 
 .meos-block:hover {
-    background-color: #005299;
+    background-color: #02005e;
 }
 
 .meos-block > i {
@@ -90,23 +89,23 @@
     line-height: 2vh;
     color: white;
     font-size: 1.5vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Calibri';
     pointer-events: none;
 }
 
 .meos-tabs-footer {
     position: absolute;
-    bottom: -5vh;
+    bottom: -3vh;
     width: 100%;
-    height: 5vh;
-    background-color: #004682;
+    height: 11vh;
+    background-color: #020144;
     color: #ffffff;
     text-align: center;
     transition: .1s linear;
 }
 
 .meos-tabs-footer:hover {
-    background-color: #005299;
+    background-color: #02005e;
 }
 
 .meos-tabs-footer:hover #back-meos {
@@ -171,7 +170,7 @@
     background-color: rgb(235, 235, 235);
     border-radius: .5vh .5vh 0 0;
     transition: .1s linear;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Calibri';
 }
 
 .person-search-input:focus {
@@ -197,7 +196,7 @@
     background-color: rgb(235, 235, 235);
     border-radius: .5vh .5vh 0 0;
     transition: .1s linear;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Calibri';
 }
 
 .person-search-input-house:focus {
@@ -214,7 +213,7 @@
     position: absolute;
     width: 5vh;
     height: 4.2vh;
-    background-color: #004682;
+    background-color: #020144;
     top: 11vh;
     right: 2vh;
     border-radius: .4vh;
@@ -230,7 +229,7 @@
 }
 
 .confirm-search-person-test:hover {
-    background-color: #005299;
+    background-color: #02005e;
 }
 
 .confirm-search-person-house {
@@ -238,7 +237,7 @@
     position: absolute;
     width: 5vh;
     height: 4.2vh;
-    background-color: #004682;
+    background-color: #020144;
     top: 11vh;
     right: 2vh;
     border-radius: .4vh;
@@ -253,13 +252,13 @@
 }
 
 .confirm-search-person-house:hover {
-    background-color: #005299;
+    background-color: #02005e;
 }
 
 .person-search-results {
     position: absolute;
     width: 87%;
-    height: 57.5%;
+    height: 53.5%;
     margin: 0 auto;
     left: 0;
     right: 0;
@@ -275,16 +274,16 @@
 }
 
 .person-search-results::-webkit-scrollbar-thumb {
-    background-color: #004682;
+    background-color: #020144;
 }
 
 .person-search-result {
     position: relative;
     width: 100%;
     height: auto;
-    background-color: #004682;
+    background-color: #020144;
     margin-bottom: 1vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Calibri';
     color: white;
     transition: .05s linear;
 }
@@ -293,9 +292,9 @@
     position: relative;
     width: 100%;
     height: auto;
-    background-color: #004682;
+    background-color: #020144;
     margin-bottom: 1vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Calibri';
     color: white;
     transition: .05s linear;
 }
@@ -313,7 +312,7 @@
 }
 
 .person-search-result:hover {
-    background-color: #005299;
+    background-color: #02005e;
 }
 
 .person-search-result-name {
@@ -411,7 +410,7 @@
     background-color: rgb(235, 235, 235);
     border-radius: .5vh .5vh 0 0;
     transition: .1s linear;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Calibri';
 }
 
 .vehicle-search-input:focus {
@@ -428,7 +427,7 @@
     position: absolute;
     width: 4vh;
     height: 4.2vh;
-    background-color: #004682;
+    background-color: #020144;
     top: 11vh;
     right: 7vh;
     border-radius: .4vh;
@@ -443,14 +442,14 @@
 }
 
 .scan-search-vehicle:hover {
-    background-color: #005299;
+    background-color: #02005e;
 }
 
 .confirm-search-vehicle {
     position: absolute;
     width: 4vh;
     height: 4.2vh;
-    background-color: #004682;
+    background-color: #020144;
     top: 11vh;
     right: 2vh;
     border-radius: .4vh;
@@ -465,13 +464,13 @@
 }
 
 .confirm-search-vehicle:hover {
-    background-color: #005299;
+    background-color: #02005e;
 }
 
 .vehicle-search-results {
     position: absolute;
     width: 87%;
-    height: 57.5%;
+    height: 53.5%;
     margin: 0 auto;
     left: 0;
     right: 0;
@@ -487,22 +486,22 @@
 }
 
 .vehicle-search-results::-webkit-scrollbar-thumb {
-    background-color: #004682;
+    background-color: #020144;
 }
 
 .vehicle-search-result {
     position: relative;
     width: 100%;
     height: auto;
-    background-color: #004682;
+    background-color: #020144;
     margin-bottom: 1vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Calibri';
     color: white;
     transition: .05s linear;
 }
 
 .vehicle-search-result:hover {
-    background-color: #005299;
+    background-color: #02005e;
 }
 
 .vehicle-search-result-name {
@@ -551,17 +550,17 @@
     width: 6.5vh;
     top: 11vh;
     left: 2vh;
-    background-color: #004682;
+    background-color: #020144;
     border-radius: .4vh;
     text-align: center;
     line-height: 3.5vh;
     color: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Calibri';
     transition: .05s linear;
 }
 
 .meos-clear-alerts:hover {
-    background-color: #005299;
+    background-color: #02005e;
 }
 
 .meos-alerts {
@@ -586,7 +585,7 @@
     position: relative;
     width: 100%;
     height: auto;
-    background-color: #004682;
+    background-color: #020144;
     padding: 1.5vh;
     margin-bottom: .5vh;
 }
@@ -594,7 +593,7 @@
 .meos-alert-new {
     background-color: rgb(99, 99, 99);
     color: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Calibri';
     padding: .5vh;
     border-radius: 1vh;
     font-size: 1.2vh;
@@ -603,7 +602,7 @@
 .meos-alert-type {
     margin-left: .2vh;
     margin-top: 1vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Calibri';
     color: white;
     font-size: 1.4vh;
 }
@@ -611,7 +610,7 @@
 .meos-alert-description {
     margin-left: .2vh;
     margin-top: -.8vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Calibri';
     color: white;
     font-size: 1.1vh;
 }
@@ -621,7 +620,7 @@
     height: auto;
     background-color: rgb(66, 66, 66);
     margin-left: 16vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Calibri';
     color: white;
     padding: .5vh;
     text-align: center;
@@ -643,11 +642,29 @@
     width: 2.1vh;
 }
 
+.twitter-icon-notify {
+    width: 2vh;
+}
+
+.twitter-icon {
+    margin-top: .8vh;
+    width: 2.1vh;
+}
+
+.cards-icon-notify {
+    width: 2vh;
+}
+
+.cards-icon {
+    margin-top: .8vh;
+    width: 2.1vh;
+}
+
 .meos-recent-header {
     position: absolute;
     left: 2vh;
     bottom: 18.5vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Calibri';
     color: black;
     font-size: 1.4vh;
 }
@@ -674,19 +691,19 @@
     width: 100%;
     height: auto;
     padding: 1vh;
-    background-color: #004682;
+    background-color: #020144;
     border-radius: .3vh;
     transition: .05s linear;
 }
 
 .meos-recent-alert:hover {
-    background-color: #005cad;
+    background-color: #02005e;
 }
 
 .meos-recent-alert-title {
     margin-left: .2vh;
     margin-top: 1vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Calibri';
     color: white;
     font-size: 1.3vh;
 }
@@ -694,7 +711,7 @@
 .meos-recent-alert-description {
     margin-left: .2vh;
     margin-top: .5vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Calibri';
     color: white;
     font-size: 1.1vh;
 }

@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
 
 .bank-app {
     display: none;
     height: 100%;
     width: 100%;
-    background: #2f3640;
+    background: #1f212e;
     overflow: hidden;
 }
 
@@ -22,17 +22,18 @@
     height: 100%;
     text-align: center;
     line-height: 6vh;
-    background: #353b48;
-    border-bottom: .3vh solid rgba(0, 0, 0, 0);
-    font-family: 'Poppins', sans-serif;
+    background: #1f212e;
+    border-bottom: .3vh solid #008a2e;
+    font-family: 'Cairo';
     color: white;
     transition: .08s;
 }
 .bank-app-header-button:hover {
-    background: #4b5466;
+    background: #008a2e;
 }
 .bank-app-header-button-selected {
-    border-bottom: .3vh solid #fbc531;
+    background: #006321;
+    border-bottom: .3vh solid #008a2e;
 }
 .bank-app-header-button > i {
     position: absolute;
@@ -56,8 +57,17 @@
     position: absolute;
     width: 100%;
     height: 70%;
-    background-color: #353b48;
+    background-color: #1f212e;
     top: 13vh;
+    left: 30vh;
+}
+.bank-app-society {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 70%;
+    background-color: #1f212e;
+    top: 23vh;
     left: 30vh;
 }
 .bank-app-invoices {
@@ -65,7 +75,7 @@
     position: absolute;
     width: 100%;
     height: 37vh;
-    background-color: #353b48;
+    background-color: #1f212e;
     top: 13vh;
     left: 30vh;
 }
@@ -74,7 +84,7 @@
     top: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.226);
+    background-color: #1f212e;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -87,22 +97,22 @@
     height: 6vh;
     width: 100%;
     letter-spacing: .05vh;
-    border-bottom: .2vh solid #363d4b;
+    border-bottom: .2vh solid #008a2e;
 }
 .bank-app-invoice-title {
     position: absolute;
     top: 1vh;
     left: 2vh;
     color: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Cairo';
     font-size: 1.3vh;
 }
 .bank-app-invoice-amount {
     position: absolute;
     bottom: 1vh;
     left: 2vh;
-    color: rgba(255, 255, 255, 0.781);
-    font-family: 'Poppins', sans-serif;
+    color: #008a2e;
+    font-family: 'Cairo';
     font-size: 1.22vh;
 }
 .bank-app-invoice-buttons {
@@ -138,13 +148,13 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: #2b303a;
+    background-color: #1f212e;
     top: -100%;
     z-index: 500;
 }
 .bank-app-account {
     position: absolute;
-    background-color: #444c5c;
+    background-color: #006321;
     height: 9.5vh;
     width: 80%;
     margin: 0 auto;
@@ -152,18 +162,18 @@
     right: 0;
     top: 1.5vh;
     border-radius: .3vh .3vh 0 0;
-    border-bottom: .2vh solid #2a2f38;
+    border-bottom: .2vh solid #008a2e;
     transition: .1s;
 }
 .bank-app-account:hover{
-    background-color: #596275;
-    border-bottom: .2vh solid #424957;
+    background-color: #008a2e;
+    border-bottom: .2vh solid #008a2e;
 }
 .bank-app-account-title {
     position: absolute;
     top: 1vh;
     left: 1vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Cairo';
     letter-spacing: .1vh;
     color: white;
     font-size: 1.1vh;
@@ -172,7 +182,7 @@
     position: absolute;
     top: 3vh;
     left: 1vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Cairo';
     letter-spacing: .1vh;
     width: 100%;
     color: white;
@@ -191,11 +201,12 @@
     position: absolute;
     top: 6.5vh;
     left: 1vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Cairo';
     letter-spacing: .1vh;
     color: white;
     font-size: 1.5vh;
 }
+
 .bank-app-account-actions {
     text-align: center;
     color: white;
@@ -209,14 +220,14 @@
     font-size: 2.5vh;
     border-radius: .3vh;
     position: absolute;
-    background-color: #444c5c;
+    background-color: #1f212e;
     border-radius: .3vh .3vh 0 0;
-    border-bottom: .2vh solid #2a2f38;
+    border: .2vh solid #006321;
     transition: .1s;
 }
 .bank-app-account-actions:hover {
-    background-color: #596275;
-    border-bottom: .2vh solid #424957;
+    background-color: #008a2e;
+    border: .2vh solid #008a2e;
 }
 .bank-app-loaded {
     display: none;
@@ -246,7 +257,7 @@
     left: 9vh;
     font-size: 4.5vh;
     color: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Cairo';
     z-index: 100;
     opacity: 0;
 }
@@ -255,8 +266,8 @@
     position: absolute;
     top: 5.5vh;
     left: 3vh;
-    color: white;
-    font-family: 'Poppins', sans-serif;
+    color: #008a2e;
+    font-family: 'Cairo';
     font-size: 2vh;
 }
 
@@ -267,8 +278,8 @@
     background: none;
     border: none;
     outline: none;
-    border-bottom: 2px solid #f5f6fa;
-    font-family: 'Poppins', sans-serif;
+    border-bottom: 2px solid #8a8a8a;
+    font-family: 'Cairo';
     /* background: rgb(33,36,43); */
     /* background: linear-gradient(0deg, rgba(33,36,43,0.5) 0%, rgba(178,132,254,0) 100%); */
     height: 3.5vh;
@@ -276,16 +287,16 @@
     text-indent: .4vh;
     transition: .1s;
     font-size: 1.3vh;
-    color: white;
+    color: #8a8a8a;
 }
 #bank-transfer-iban::-webkit-inner-spin-button {
     display: none;
 }
 #bank-transfer-iban:focus {
-    border-bottom: 2px solid #fbc531;
+    border-bottom: 2px solid #006321;
 }
 #bank-transfer-iban:valid {
-    border-bottom: 2px solid #6ab04c;
+    border-bottom: 2px solid #008a2e;
 }
 #bank-transfer-amount {
     position: absolute;
@@ -294,8 +305,8 @@
     background: none;
     border: none;
     outline: none;
-    border-bottom: 2px solid #f5f6fa;
-    font-family: 'Poppins', sans-serif;
+    border-bottom: 2px solid #8a8a8a;
+    font-family: 'Cairo';
     /* background: rgb(33,36,43); */
     /* background: linear-gradient(0deg, rgba(33,36,43,0.5) 0%, rgba(178,132,254,0) 100%); */
     height: 3.5vh;
@@ -303,47 +314,47 @@
     text-indent: .4vh;
     transition: .1s;
     font-size: 1.3vh;
-    color: white;
+    color: #8a8a8a;
 }
 #bank-transfer-amount::-webkit-inner-spin-button {
     display: none;
 }
 
 #bank-transfer-amount:focus {
-    border-bottom: 2px solid #fbc531;
+    border-bottom: 2px solid #006321;
 }
 
 #bank-transfer-amount:valid {
-    border-bottom: 2px solid #6ab04c;
+    border-bottom: 2px solid #008a2e;
 }
 .bank-transfer-iban-icon  {
     position: absolute;
     top: 13.5vh;
     left: 3.4vh;
     font-size: 2.1vh;
-    color: white
+    color: #006321;
 }
 .bank-transfer-amount-icon  {
     position: absolute;
     top: 19.2vh;
     left: 3.5vh;
     font-size: 2.4vh;
-    color: white
+    color: #006321;
 }
 .bank-transfer-mycontacts-icon  {
     position: absolute;
     top: 25.5vh;
     left: 3.5vh;
     font-size: 2.2vh;
-    color: white
+    color: #006321;
 }
 .bank-transfer-mycontacts-icon:hover {
-    color: #fbc531;
+    color: #008a2e;
 }
 .bank-app-transfer-buttons {
     position: absolute;
     bottom: 0;
-    height: 5vh;
+    height: 9vh;
     width: 100%;
 }
 .bank-app-transfer-button {
@@ -353,14 +364,14 @@
     height: 100%;
     text-align: center;
     line-height: 4.5vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Cairo';
     color: white;
     font-size: 1.4vh;
-    border-top: .2vh solid #fbc53100;
+    border-top: .2vh solid #006321;
     transition: .1s;
 }
 .bank-app-transfer-button:hover {
-    border-top: .2vh solid #fbc531;
+    border-top: .2vh solid #008a2e;
 }
 .bank-app-my-contacts {
     display: none;
@@ -368,7 +379,7 @@
     height: 100%;
     width: 100%;
     top: -100%;
-    background: #2f3640;
+    background: #1f212e;
     z-index: 500;
 }
 
@@ -383,9 +394,9 @@
 .bank-app-my-contacts-header {
     position: relative;
     padding: 5vh 0 0 1.85vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Cairo';
     font-size: 2vh;
-    color: white;
+    color: #008a2e;
 }
 .bank-app-my-contacts-list {
     position: absolute;
@@ -402,17 +413,17 @@
     width: 100%;
     height: 4.5vh;
     margin-top: .1vh;
-    background-color: #626c80;
-    border: .1vh solid #454d5a;
+    background-color: #1f212e;
+    border: .1vh solid #1f212e;
     border-radius: 2vh;
     transition: .1s;
 }
 .bank-app-my-contact:hover {
-    background-color: #727e94;
+    background-color: #1f212e;
 }
 .bank-app-my-contact-firstletter {
     position: absolute;
-    background-color: #eb4d4b;
+    background-color: #008a2e;
     height: 3.5vh;
     width: 3.5vh;
     margin: .4vh;
@@ -420,14 +431,14 @@
     text-align: center;
     line-height: 3.6vh;
     border-radius: 50%;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Cairo';
     color: white;
 }
 .bank-app-my-contact-name {
     position: absolute;
     left: 5vh;
     line-height: 4.5vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Cairo';
     font-size: 1.4vh;
     color: white;
 }
@@ -449,31 +460,31 @@
     right: 0;
     opacity: 1.0;
     height: 2.5vh;
-    border-radius: 1vh;
-    box-shadow: 0 0 .2vh 0 rgba(0, 0, 0, 0.281);
-    font-family: 'Poppins', sans-serif;
+    border-radius: 2px;
+    font-family: 'Cairo';
     outline: none;
     text-indent: 1vh;
     z-index: 100;
 }
 #bank-app-my-contact-search::placeholder{
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Cairo';
     color: rgba(39, 39, 39, 0.9);
 }
 .bank-app-my-contacts-list-back {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 5vh;
+    height: 9vh;
     text-align: center;
     line-height: 5vh;
     text-transform: uppercase;
     color: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Cairo';
     font-size: 1.4vh;
-    background: #22272e;
+    background: #006321;
     transition: .1s;
 }
 .bank-app-my-contacts-list-back:hover {
-    background-color: #15181d;
+    background-color: #008a2e;
 }
+
