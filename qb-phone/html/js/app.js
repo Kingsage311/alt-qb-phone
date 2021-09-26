@@ -1,10 +1,10 @@
-QB = {}
-QB.Phone = {}
-QB.Screen = {}
-QB.Phone.Functions = {}
-QB.Phone.Animations = {}
-QB.Phone.Notifications = {}
-QB.Phone.ContactColors = {
+RL = {}
+RL.Phone = {}
+RL.Screen = {}
+RL.Phone.Functions = {}
+RL.Phone.Animations = {}
+RL.Phone.Notifications = {}
+RL.Phone.ContactColors = {
     0: "#9b59b6",
     1: "#3498db",
     2: "#e67e22",
@@ -13,7 +13,7 @@ QB.Phone.ContactColors = {
     5: "#9c88ff",
 }
 
-QB.Phone.Data = {
+RL.Phone.Data = {
     currentApplication: null,
     PlayerData: {},
     Applications: {},
@@ -24,7 +24,7 @@ QB.Phone.Data = {
     AnonymousCall: false,
 }
 
-QB.Phone.Data.MaxSlots = 16;
+RL.Phone.Data.MaxSlots = 16;
 
 OpenedChatData = {
     number: null,
@@ -36,7 +36,7 @@ function IsAppJobBlocked(joblist, myjob) {
     var retval = false;
     if (joblist.length > 0) {
         $.each(joblist, function(i, job){
-            if (job == myjob && QB.Phone.Data.PlayerData.job.onduty) {
+            if (job == myjob && RL.Phone.Data.PlayerData.job.onduty) {
                 retval = true;
             }
         });
@@ -44,11 +44,11 @@ function IsAppJobBlocked(joblist, myjob) {
     return retval;
 }
 
-QB.Phone.Functions.SetupApplications = function(data) {
-    QB.Phone.Data.Applications = data.applications;
+RL.Phone.Functions.SetupApplications = function(data) {
+    RL.Phone.Data.Applications = data.applications;
 
     var i;
-    for (i = 1; i <= QB.Phone.Data.MaxSlots; i++) {
+    for (i = 1; i <= RL.Phone.Data.MaxSlots; i++) {
         var applicationSlot = $(".phone-applications").find('[data-appslot="'+i+'"]');
         $(applicationSlot).html("");
         $(applicationSlot).css({
@@ -61,13 +61,22 @@ QB.Phone.Functions.SetupApplications = function(data) {
 
     $.each(data.applications, function(i, app){
         var applicationSlot = $(".phone-applications").find('[data-appslot="'+app.slot+'"]');
-        var blockedapp = IsAppJobBlocked(app.blockedjobs, QB.Phone.Data.PlayerJob.name)
+        var blockedapp = IsAppJobBlocked(app.blockedjobs, RL.Phone.Data.PlayerJob.name)
 
-        if ((!app.job || app.job === QB.Phone.Data.PlayerJob.name) && !blockedapp) {
+        if ((!app.job || app.job === RL.Phone.Data.PlayerJob.name) && !blockedapp) {
             $(applicationSlot).css({"background-color":app.color});
             var icon = '<i class="ApplicationIcon '+app.icon+'" style="'+app.style+'"></i>';
             if (app.app == "meos") {
                 icon = '<img src="./img/politie.png" class="police-icon">';
+            }
+            else if (app.app == "twitter") {
+                icon = '<img src="./img/life.png" class="twitter-icon">';
+            }
+            //else if (app.app == "spotify") {
+                //icon = '<img src="./img/cards.png" class="spotify-icon">';
+            //}
+            else if (app.app == "advert") {
+                icon = '<img src="./img/advert.png" class="advert-icon">';
             }
             $(applicationSlot).html(icon+'<div class="app-unread-alerts">0</div>');
             $(applicationSlot).prop('title', app.tooltipText);
@@ -82,7 +91,7 @@ QB.Phone.Functions.SetupApplications = function(data) {
     $('[data-toggle="tooltip"]').tooltip();
 }
 
-QB.Phone.Functions.SetupAppWarnings = function(AppData) {
+RL.Phone.Functions.SetupAppWarnings = function(AppData) {
     $.each(AppData, function(i, app){
         var AppObject = $(".phone-applications").find("[data-appslot='"+app.slot+"']").find('.app-unread-alerts');
 
@@ -95,7 +104,7 @@ QB.Phone.Functions.SetupAppWarnings = function(AppData) {
     });
 }
 
-QB.Phone.Functions.IsAppHeaderAllowed = function(app) {
+RL.Phone.Functions.IsAppHeaderAllowed = function(app) {
     var retval = true;
     $.each(Config.HeaderDisabledApps, function(i, blocked){
         if (app == blocked) {
@@ -112,87 +121,94 @@ $(document).on('click', '.phone-application', function(e){
 
     if (AppObject.length !== 0) {
         if (CanOpenApp) {
-            if (QB.Phone.Data.currentApplication == null) {
-                QB.Phone.Animations.TopSlideDown('.phone-application-container', 300, 0);
-                QB.Phone.Functions.ToggleApp(PressedApplication, "block");
+            if (RL.Phone.Data.currentApplication == null) {
+                RL.Phone.Animations.TopSlideDown('.phone-application-container', 300, 0);
+                RL.Phone.Functions.ToggleApp(PressedApplication, "block");
                 
-                if (QB.Phone.Functions.IsAppHeaderAllowed(PressedApplication)) {
-                    QB.Phone.Functions.HeaderTextColor("black", 300);
+                if (RL.Phone.Functions.IsAppHeaderAllowed(PressedApplication)) {
+                    RL.Phone.Functions.HeaderTextColor("white", 300);
                 }
     
-                QB.Phone.Data.currentApplication = PressedApplication;
+                RL.Phone.Data.currentApplication = PressedApplication;
     
                 if (PressedApplication == "settings") {
-                    $("#myPhoneNumber").text(QB.Phone.Data.PlayerData.charinfo.phone);
-                    $("#mySerialNumber").text("QB-" + QB.Phone.Data.PlayerData.metadata["phonedata"].SerialNumber);
+                    $("#myPhoneNumber").text(RL.Phone.Data.PlayerData.charinfo.phone);
                 } else if (PressedApplication == "twitter") {
-                    $.post('https://qb-phone/GetMentionedTweets', JSON.stringify({}), function(MentionedTweets){
-                        QB.Phone.Notifications.LoadMentionedTweets(MentionedTweets)
+                    $.post('http://qb-phone/GetMentionedTweets', JSON.stringify({}), function(MentionedTweets){
+                        RL.Phone.Notifications.LoadMentionedTweets(MentionedTweets)
                     })
-                    $.post('https://qb-phone/GetHashtags', JSON.stringify({}), function(Hashtags){
-                        QB.Phone.Notifications.LoadHashtags(Hashtags)
+                    $.post('http://qb-phone/GetHashtags', JSON.stringify({}), function(Hashtags){
+                        RL.Phone.Notifications.LoadHashtags(Hashtags)
                     })
-                    if (QB.Phone.Data.IsOpen) {
-                        $.post('https://qb-phone/GetTweets', JSON.stringify({}), function(Tweets){
-                            QB.Phone.Notifications.LoadTweets(Tweets);
+                    if (RL.Phone.Data.IsOpen) {
+                        $.post('http://qb-phone/GetTweets', JSON.stringify({}), function(Tweets){
+                            RL.Phone.Notifications.LoadTweets(Tweets);
+                            RL.Phone.Functions.HeaderTextColor("black", 300);
                         });
                     }
                 } else if (PressedApplication == "bank") {
-                    QB.Phone.Functions.DoBankOpen();
-                    $.post('https://qb-phone/GetBankContacts', JSON.stringify({}), function(contacts){
-                        QB.Phone.Functions.LoadContactsWithNumber(contacts);
+                    $.post('http://qb-phone/GetBankContacts', JSON.stringify({}), function(contacts){
+                        RL.Phone.Functions.LoadContactsWithNumber(contacts);
                     });
-                    $.post('https://qb-phone/GetInvoices', JSON.stringify({}), function(invoices){
-                        QB.Phone.Functions.LoadBankInvoices(invoices);
+                    $.post('http://qb-phone/GetInvoices', JSON.stringify({}), function(invoices){
+                        RL.Phone.Functions.LoadBankInvoices(invoices);
                     });
+
+                    RL.Phone.Functions.DoBankOpen();
                 } else if (PressedApplication == "whatsapp") {
-                    $.post('https://qb-phone/GetWhatsappChats', JSON.stringify({}), function(chats){
-                        QB.Phone.Functions.LoadWhatsappChats(chats);
+                    $.post('http://qb-phone/GetWhatsappChats', JSON.stringify({}), function(chats){
+                        RL.Phone.Functions.LoadWhatsappChats(chats);
+                        RL.Phone.Functions.HeaderTextColor("white", 300);
                     });
                 } else if (PressedApplication == "phone") {
-                    $.post('https://qb-phone/GetMissedCalls', JSON.stringify({}), function(recent){
-                        QB.Phone.Functions.SetupRecentCalls(recent);
+                    $.post('http://qb-phone/GetMissedCalls', JSON.stringify({}), function(recent){
+                        RL.Phone.Functions.SetupRecentCalls(recent);
+                        RL.Phone.Functions.HeaderTextColor("white", 300);
                     });
-                    $.post('https://qb-phone/GetSuggestedContacts', JSON.stringify({}), function(suggested){
-                        QB.Phone.Functions.SetupSuggestedContacts(suggested);
+                    $.post('http://qb-phone/GetSuggestedContacts', JSON.stringify({}), function(suggested){
+                        RL.Phone.Functions.SetupSuggestedContacts(suggested);
                     });
-                    $.post('https://qb-phone/ClearGeneralAlerts', JSON.stringify({
+                    $.post('http://qb-phone/ClearGeneralAlerts', JSON.stringify({
                         app: "phone"
                     }));
                 } else if (PressedApplication == "mail") {
-                    $.post('https://qb-phone/GetMails', JSON.stringify({}), function(mails){
-                        QB.Phone.Functions.SetupMails(mails);
+                    $.post('http://qb-phone/GetMails', JSON.stringify({}), function(mails){
+                        RL.Phone.Functions.SetupMails(mails);
                     });
-                    $.post('https://qb-phone/ClearGeneralAlerts', JSON.stringify({
+                    $.post('http://qb-phone/ClearGeneralAlerts', JSON.stringify({
                         app: "mail"
                     }));
                 } else if (PressedApplication == "advert") {
-                    $.post('https://qb-phone/LoadAdverts', JSON.stringify({}), function(Adverts){
-                        QB.Phone.Functions.RefreshAdverts(Adverts);
+                    $.post('http://qb-phone/LoadAdverts', JSON.stringify({}), function(Adverts){
+                        RL.Phone.Functions.RefreshAdverts(Adverts);
                     })
                 } else if (PressedApplication == "garage") {
-                    $.post('https://qb-phone/SetupGarageVehicles', JSON.stringify({}), function(Vehicles){
+                    $.post('http://qb-phone/SetupGarageVehicles', JSON.stringify({}), function(Vehicles){
                         SetupGarageVehicles(Vehicles);
                     })
                 } else if (PressedApplication == "crypto") {
-                    $.post('https://qb-phone/GetCryptoData', JSON.stringify({
+                    $.post('http://qb-phone/GetCryptoData', JSON.stringify({
                         crypto: "qbit",
                     }), function(CryptoData){
                         SetupCryptoData(CryptoData);
                     })
 
-                    $.post('https://qb-phone/GetCryptoTransactions', JSON.stringify({}), function(data){
+                    $.post('http://qb-phone/GetCryptoTransactions', JSON.stringify({}), function(data){
                         RefreshCryptoTransactions(data);
                     })
                 } else if (PressedApplication == "racing") {
-                    $.post('https://qb-phone/GetAvailableRaces', JSON.stringify({}), function(Races){
+                    $.post('http://qb-phone/GetAvailableRaces', JSON.stringify({}), function(Races){
+                        SetupRaces(Races);
+                    });
+                } else if (PressedApplication == "lsrental") {
+                    $.post('http://qb-phone/GetAvailableRaces', JSON.stringify({}), function(Races){
                         SetupRaces(Races);
                     });
                 } else if (PressedApplication == "houses") {
-                    $.post('https://qb-phone/GetPlayerHouses', JSON.stringify({}), function(Houses){
+                    $.post('http://qb-phone/GetPlayerHouses', JSON.stringify({}), function(Houses){
                         SetupPlayerHouses(Houses);
                     });
-                    $.post('https://qb-phone/GetPlayerKeys', JSON.stringify({}), function(Keys){
+                    $.post('http://qb-phone/GetPlayerKeys', JSON.stringify({}), function(Keys){
                         $(".house-app-mykeys-container").html("");
                         if (Keys.length > 0) {
                             $.each(Keys, function(i, key){
@@ -206,22 +222,38 @@ $(document).on('click', '.phone-application', function(e){
                 } else if (PressedApplication == "meos") {
                     SetupMeosHome();
                 } else if (PressedApplication == "lawyers") {
-                    $.post('https://qb-phone/GetCurrentLawyers', JSON.stringify({}), function(data){
+                    $.post('http://qb-phone/GetCurrentLawyers', JSON.stringify({}), function(data){
                         SetupLawyers(data);
                     });
+                } else if (PressedApplication == "mechanic") {
+                    $.post('http://qb-phone/GetCurrentMechanic', JSON.stringify({}), function(data){
+                        SetupMechanic(data);
+                    });
+                } else if (PressedApplication == "rentel") {
+                    $.post('http://qb-phone/SetupRentel', JSON.stringify({}), function(data){
+                        SetupRentel(data); 
+                    });
+                } else if (PressedApplication == "sellix") {
+                    $.post('http://qb-phone/SetupSellix', JSON.stringify({}), function(data){
+                        SetupSellixData(data); 
+                    });
+                } else if (PressedApplication == "drivers") {
+                    $.post('http://qb-phone/GetCurrentDrivers', JSON.stringify({}), function(data){
+                        SetupDrivers(data.drivers, data.isTaxi);
+                    });
                 } else if (PressedApplication == "store") {
-                    $.post('https://qb-phone/SetupStoreApps', JSON.stringify({}), function(data){
+                    $.post('http://qb-phone/SetupStoreApps', JSON.stringify({}), function(data){
                         SetupAppstore(data); 
                     });
                 } else if (PressedApplication == "trucker") {
-                    $.post('https://qb-phone/GetTruckerData', JSON.stringify({}), function(data){
+                    $.post('http://qb-phone/GetTruckerData', JSON.stringify({}), function(data){
                         SetupTruckerInfo(data);
                     });
                 }
             }
         }
     } else {
-        QB.Phone.Notifications.Add("fas fa-exclamation-circle", "System", QB.Phone.Data.Applications[PressedApplication].tooltipText+" is not available!")
+        RL.Phone.Notifications.Add("fas fa-exclamation-circle", "System", RL.Phone.Data.Applications[PressedApplication].tooltipText+ " is not available!")
     }
 });
 
@@ -230,7 +262,7 @@ $(document).on('click', '.mykeys-key', function(e){
 
     var KeyData = $(this).data('KeyData');
 
-    $.post('https://qb-phone/SetHouseLocation', JSON.stringify({
+    $.post('http://qb-phone/SetHouseLocation', JSON.stringify({
         HouseData: KeyData
     }))
 });
@@ -238,19 +270,19 @@ $(document).on('click', '.mykeys-key', function(e){
 $(document).on('click', '.phone-home-container', function(event){
     event.preventDefault();
 
-    if (QB.Phone.Data.currentApplication === null) {
-        QB.Phone.Functions.Close();
+    if (RL.Phone.Data.currentApplication === null) {
+        RL.Phone.Functions.Close();
     } else {
-        QB.Phone.Animations.TopSlideUp('.phone-application-container', 400, -160);
-        QB.Phone.Animations.TopSlideUp('.'+QB.Phone.Data.currentApplication+"-app", 400, -160);
+        RL.Phone.Animations.TopSlideUp('.phone-application-container', 400, -160);
+        RL.Phone.Animations.TopSlideUp('.'+RL.Phone.Data.currentApplication+"-app", 400, -160);
         CanOpenApp = false;
         setTimeout(function(){
-            QB.Phone.Functions.ToggleApp(QB.Phone.Data.currentApplication, "none");
+            RL.Phone.Functions.ToggleApp(RL.Phone.Data.currentApplication, "none");
             CanOpenApp = true;
         }, 400)
-        QB.Phone.Functions.HeaderTextColor("white", 300);
+        RL.Phone.Functions.HeaderTextColor("white", 300);
 
-        if (QB.Phone.Data.currentApplication == "whatsapp") {
+        if (RL.Phone.Data.currentApplication == "whatsapp") {
             if (OpenedChatData.number !== null) {
                 setTimeout(function(){
                     $(".whatsapp-chats").css({"display":"block"});
@@ -266,7 +298,7 @@ $(document).on('click', '.phone-home-container', function(event){
                     OpenedChatData.number = null;
                 }, 450);
             }
-        } else if (QB.Phone.Data.currentApplication == "bank") {
+        } else if (RL.Phone.Data.currentApplication == "bank") {
             if (CurrentTab == "invoices") {
                 setTimeout(function(){
                     $(".bank-app-invoices").animate({"left": "30vh"});
@@ -283,7 +315,7 @@ $(document).on('click', '.phone-home-container', function(event){
                     CurrentTab = "accounts";
                 }, 400)
             }
-        } else if (QB.Phone.Data.currentApplication == "meos") {
+        } else if (RL.Phone.Data.currentApplication == "meos") {
             $(".meos-alert-new").remove();
             setTimeout(function(){
                 $(".meos-recent-alert").removeClass("noodknop");
@@ -291,28 +323,28 @@ $(document).on('click', '.phone-home-container', function(event){
             }, 400)
         }
 
-        QB.Phone.Data.currentApplication = null;
+        RL.Phone.Data.currentApplication = null;
     }
 });
 
-QB.Phone.Functions.Open = function(data) {
-    QB.Phone.Animations.BottomSlideUp('.container', 300, 0);
-    QB.Phone.Notifications.LoadTweets(data.Tweets);
-    QB.Phone.Data.IsOpen = true;
+RL.Phone.Functions.Open = function(data) {
+    RL.Phone.Animations.BottomSlideUp('.container', 300, 0);
+    RL.Phone.Notifications.LoadTweets(data.Tweets);
+    RL.Phone.Data.IsOpen = true;
 }
 
-QB.Phone.Functions.ToggleApp = function(app, show) {
+RL.Phone.Functions.ToggleApp = function(app, show) {
     $("."+app+"-app").css({"display":show});
 }
 
-QB.Phone.Functions.Close = function() {
+RL.Phone.Functions.Close = function() {
 
-    if (QB.Phone.Data.currentApplication == "whatsapp") {
+    if (RL.Phone.Data.currentApplication == "whatsapp") {
         setTimeout(function(){
-            QB.Phone.Animations.TopSlideUp('.phone-application-container', 400, -160);
-            QB.Phone.Animations.TopSlideUp('.'+QB.Phone.Data.currentApplication+"-app", 400, -160);
+            RL.Phone.Animations.TopSlideUp('.phone-application-container', 400, -160);
+            RL.Phone.Animations.TopSlideUp('.'+RL.Phone.Data.currentApplication+"-app", 400, -160);
             $(".whatsapp-app").css({"display":"none"});
-            QB.Phone.Functions.HeaderTextColor("white", 300);
+            RL.Phone.Functions.HeaderTextColor("white", 300);
     
             if (OpenedChatData.number !== null) {
                 setTimeout(function(){
@@ -329,30 +361,30 @@ QB.Phone.Functions.Close = function() {
                 }, 450);
             }
             OpenedChatPicture = null;
-            QB.Phone.Data.currentApplication = null;
+            RL.Phone.Data.currentApplication = null;
         }, 500)
-    } else if (QB.Phone.Data.currentApplication == "meos") {
+    } else if (RL.Phone.Data.currentApplication == "meos") {
         $(".meos-alert-new").remove();
         $(".meos-recent-alert").removeClass("noodknop");
         $(".meos-recent-alert").css({"background-color":"#004682"}); 
     }
 
-    QB.Phone.Animations.BottomSlideDown('.container', 300, -70);
-    $.post('https://qb-phone/Close');
-    QB.Phone.Data.IsOpen = false;
+    RL.Phone.Animations.BottomSlideDown('.container', 300, -70);
+    $.post('http://qb-phone/Close');
+    RL.Phone.Data.IsOpen = false;
 }
 
-QB.Phone.Functions.HeaderTextColor = function(newColor, Timeout) {
+RL.Phone.Functions.HeaderTextColor = function(newColor, Timeout) {
     $(".phone-header").animate({color: newColor}, Timeout);
 }
 
-QB.Phone.Animations.BottomSlideUp = function(Object, Timeout, Percentage) {
+RL.Phone.Animations.BottomSlideUp = function(Object, Timeout, Percentage) {
     $(Object).css({'display':'block'}).animate({
         bottom: Percentage+"%",
     }, Timeout);
 }
 
-QB.Phone.Animations.BottomSlideDown = function(Object, Timeout, Percentage) {
+RL.Phone.Animations.BottomSlideDown = function(Object, Timeout, Percentage) {
     $(Object).css({'display':'block'}).animate({
         bottom: Percentage+"%",
     }, Timeout, function(){
@@ -360,13 +392,13 @@ QB.Phone.Animations.BottomSlideDown = function(Object, Timeout, Percentage) {
     });
 }
 
-QB.Phone.Animations.TopSlideDown = function(Object, Timeout, Percentage) {
+RL.Phone.Animations.TopSlideDown = function(Object, Timeout, Percentage) {
     $(Object).css({'display':'block'}).animate({
         top: Percentage+"%",
     }, Timeout);
 }
 
-QB.Phone.Animations.TopSlideUp = function(Object, Timeout, Percentage, cb) {
+RL.Phone.Animations.TopSlideUp = function(Object, Timeout, Percentage, cb) {
     $(Object).css({'display':'block'}).animate({
         top: Percentage+"%",
     }, Timeout, function(){
@@ -374,13 +406,13 @@ QB.Phone.Animations.TopSlideUp = function(Object, Timeout, Percentage, cb) {
     });
 }
 
-QB.Phone.Notifications.Add = function(icon, title, text, color, timeout) {
-    $.post('https://qb-phone/HasPhone', JSON.stringify({}), function(HasPhone){
+RL.Phone.Notifications.Add = function(icon, title, text, color, timeout) {
+    $.post('http://qb-phone/HasPhone', JSON.stringify({}), function(HasPhone){
         if (HasPhone) {
             if (timeout == null && timeout == undefined) {
                 timeout = 1500;
             }
-            if (QB.Phone.Notifications.Timeout == undefined || QB.Phone.Notifications.Timeout == null) {
+            if (RL.Phone.Notifications.Timeout == undefined || RL.Phone.Notifications.Timeout == null) {
                 if (color != null || color != undefined) {
                     $(".notification-icon").css({"color":color});
                     $(".notification-title").css({"color":color});
@@ -388,10 +420,7 @@ QB.Phone.Notifications.Add = function(icon, title, text, color, timeout) {
                     $(".notification-icon").css({"color":"#e74c3c"});
                     $(".notification-title").css({"color":"#e74c3c"});
                 }
-                if (!QB.Phone.Data.IsOpen) {
-                    QB.Phone.Animations.BottomSlideUp('.container', 300, -52);
-                }
-                QB.Phone.Animations.TopSlideDown(".phone-notification-container", 200, 8);
+                RL.Phone.Animations.TopSlideDown(".phone-notification-container", 200, 8);
                 if (icon !== "politie") {
                     $(".notification-icon").html('<i class="'+icon+'"></i>');
                 } else {
@@ -399,15 +428,12 @@ QB.Phone.Notifications.Add = function(icon, title, text, color, timeout) {
                 }
                 $(".notification-title").html(title);
                 $(".notification-text").html(text);
-                if (QB.Phone.Notifications.Timeout !== undefined || QB.Phone.Notifications.Timeout !== null) {
-                    clearTimeout(QB.Phone.Notifications.Timeout);
+                if (RL.Phone.Notifications.Timeout !== undefined || RL.Phone.Notifications.Timeout !== null) {
+                    clearTimeout(RL.Phone.Notifications.Timeout);
                 }
-                QB.Phone.Notifications.Timeout = setTimeout(function(){
-                    QB.Phone.Animations.TopSlideUp(".phone-notification-container", 200, -8);
-                    if (!QB.Phone.Data.IsOpen) {
-                        QB.Phone.Animations.BottomSlideUp('.container', 300, -100);
-                    }
-                    QB.Phone.Notifications.Timeout = null;
+                RL.Phone.Notifications.Timeout = setTimeout(function(){
+                    RL.Phone.Animations.TopSlideUp(".phone-notification-container", 200, -8);
+                    RL.Phone.Notifications.Timeout = null;
                 }, timeout);
             } else {
                 if (color != null || color != undefined) {
@@ -417,58 +443,39 @@ QB.Phone.Notifications.Add = function(icon, title, text, color, timeout) {
                     $(".notification-icon").css({"color":"#e74c3c"});
                     $(".notification-title").css({"color":"#e74c3c"});
                 }
-                if (!QB.Phone.Data.IsOpen) {
-                    QB.Phone.Animations.BottomSlideUp('.container', 300, -52);
-                }
                 $(".notification-icon").html('<i class="'+icon+'"></i>');
                 $(".notification-title").html(title);
                 $(".notification-text").html(text);
-                if (QB.Phone.Notifications.Timeout !== undefined || QB.Phone.Notifications.Timeout !== null) {
-                    clearTimeout(QB.Phone.Notifications.Timeout);
+                if (RL.Phone.Notifications.Timeout !== undefined || RL.Phone.Notifications.Timeout !== null) {
+                    clearTimeout(RL.Phone.Notifications.Timeout);
                 }
-                QB.Phone.Notifications.Timeout = setTimeout(function(){
-                    QB.Phone.Animations.TopSlideUp(".phone-notification-container", 200, -8);
-                    if (!QB.Phone.Data.IsOpen) {
-                        QB.Phone.Animations.BottomSlideUp('.container', 300, -100);
-                    }
-                    QB.Phone.Notifications.Timeout = null;
+                RL.Phone.Notifications.Timeout = setTimeout(function(){
+                    RL.Phone.Animations.TopSlideUp(".phone-notification-container", 200, -8);
+                    RL.Phone.Notifications.Timeout = null;
                 }, timeout);
             }
         }
     });
 }
 
-QB.Phone.Functions.LoadPhoneData = function(data) {
-    QB.Phone.Data.PlayerData = data.PlayerData;
-    QB.Phone.Data.PlayerJob = data.PlayerJob;
-    QB.Phone.Data.MetaData = data.PhoneData.MetaData;
-    QB.Phone.Functions.LoadMetaData(data.PhoneData.MetaData);
-    QB.Phone.Functions.LoadContacts(data.PhoneData.Contacts);
-    QB.Phone.Functions.SetupApplications(data);
-    // console.log("Phone succesfully loaded!");
+RL.Phone.Functions.LoadPhoneData = function(data) {
+    RL.Phone.Data.PlayerData = data.PlayerData;
+    RL.Phone.Data.PlayerJob = data.PlayerJob;
+    RL.Phone.Data.MetaData = data.PhoneData.MetaData;
+    RL.Phone.Functions.LoadMetaData(data.PhoneData.MetaData);
+    RL.Phone.Functions.LoadContacts(data.PhoneData.Contacts);
+    RL.Phone.Functions.SetupApplications(data);
+    console.log("Phone succesfully loaded!");
 }
 
-QB.Phone.Functions.UpdateTime = function(data) {    
-    var NewDate = new Date();
-    var NewHour = NewDate.getHours();
-    var NewMinute = NewDate.getMinutes();
-    var Minutessss = NewMinute;
-    var Hourssssss = NewHour;
-    if (NewHour < 10) {
-        Hourssssss = "0" + Hourssssss;
-    }
-    if (NewMinute < 10) {
-        Minutessss = "0" + NewMinute;
-    }
-    var MessageTime = Hourssssss + ":" + Minutessss
-
-    $("#phone-time").html(MessageTime + " <span style='font-size: 1.1vh;'>" + data.InGameTime.hour + ":" + data.InGameTime.minute + "</span>");
+RL.Phone.Functions.UpdateTime = function(data) {    
+    $("#phone-time").html(data.InGameTime.hour + ":" + data.InGameTime.minute);
 }
 
 var NotificationTimeout = null;
 
-QB.Screen.Notification = function(title, content, icon, timeout, color) {
-    $.post('https://qb-phone/HasPhone', JSON.stringify({}), function(HasPhone){
+RL.Screen.Notification = function(title, content, icon, timeout, color) {
+    $.post('http://qb-phone/HasPhone', JSON.stringify({}), function(HasPhone){
         if (HasPhone) {
             if (color != null && color != undefined) {
                 $(".screen-notifications-container").css({"background-color":color});
@@ -485,6 +492,7 @@ QB.Screen.Notification = function(title, content, icon, timeout, color) {
             }
         
             NotificationTimeout = setTimeout(function(){
+
                 $(".screen-notifications-container").animate({
                     right: -35+"vh",
                 }, 200, function(){
@@ -496,79 +504,81 @@ QB.Screen.Notification = function(title, content, icon, timeout, color) {
     });
 }
 
-// QB.Screen.Notification("Nieuwe Tweet", "Dit is een test tweet like #YOLO", "fab fa-twitter", 4000);
+// RL.Screen.Notification("Nieuwe Tweet", "Dit is een test tweet like #YOLO", "fab fa-twitter", 4000);
 
 $(document).ready(function(){
     window.addEventListener('message', function(event) {
         switch(event.data.action) {
             case "open":
-                QB.Phone.Functions.Open(event.data);
-                QB.Phone.Functions.SetupAppWarnings(event.data.AppData);
-                QB.Phone.Functions.SetupCurrentCall(event.data.CallData);
-                QB.Phone.Data.IsOpen = true;
-                QB.Phone.Data.PlayerData = event.data.PlayerData;
+                RL.Phone.Functions.Open(event.data);
+                RL.Phone.Functions.SetupAppWarnings(event.data.AppData);
+                RL.Phone.Functions.SetupCurrentCall(event.data.CallData);
+                RL.Phone.Data.IsOpen = true;
+                RL.Phone.Data.PlayerData = event.data.PlayerData;
                 break;
             // case "LoadPhoneApplications":
-            //     QB.Phone.Functions.SetupApplications(event.data);
+            //     RL.Phone.Functions.SetupApplications(event.data);
             //     break;
             case "LoadPhoneData":
-                QB.Phone.Functions.LoadPhoneData(event.data);
+                RL.Phone.Functions.LoadPhoneData(event.data);
                 break;
             case "UpdateTime":
-                QB.Phone.Functions.UpdateTime(event.data);
+                RL.Phone.Functions.UpdateTime(event.data);
                 break;
             case "Notification":
-                QB.Screen.Notification(event.data.NotifyData.title, event.data.NotifyData.content, event.data.NotifyData.icon, event.data.NotifyData.timeout, event.data.NotifyData.color);
+                RL.Screen.Notification(event.data.NotifyData.title, event.data.NotifyData.content, event.data.NotifyData.icon, event.data.NotifyData.timeout, event.data.NotifyData.color);
                 break;
             case "PhoneNotification":
-                QB.Phone.Notifications.Add(event.data.PhoneNotify.icon, event.data.PhoneNotify.title, event.data.PhoneNotify.text, event.data.PhoneNotify.color, event.data.PhoneNotify.timeout);
+                RL.Phone.Notifications.Add(event.data.PhoneNotify.icon, event.data.PhoneNotify.title, event.data.PhoneNotify.text, event.data.PhoneNotify.color, event.data.PhoneNotify.timeout);
                 break;
             case "RefreshAppAlerts":
-                QB.Phone.Functions.SetupAppWarnings(event.data.AppData);                
+                RL.Phone.Functions.SetupAppWarnings(event.data.AppData);                
                 break;
             case "UpdateMentionedTweets":
-                QB.Phone.Notifications.LoadMentionedTweets(event.data.Tweets);                
+                RL.Phone.Notifications.LoadMentionedTweets(event.data.Tweets);                
                 break;
             case "UpdateBank":
-                $(".bank-app-account-balance").html("&#36; "+event.data.NewBalance);
+                $(".bank-app-account-balance").html("&dollar; "+event.data.NewBalance);
                 $(".bank-app-account-balance").data('balance', event.data.NewBalance);
                 break;
             case "UpdateChat":
-                if (QB.Phone.Data.currentApplication == "whatsapp") {
+                if (RL.Phone.Data.currentApplication == "whatsapp") {
                     if (OpenedChatData.number !== null && OpenedChatData.number == event.data.chatNumber) {
                         console.log('Chat reloaded')
-                        QB.Phone.Functions.SetupChatMessages(event.data.chatData);
+                        RL.Phone.Functions.SetupChatMessages(event.data.chatData);
                     } else {
                         console.log('Chats reloaded')
-                        QB.Phone.Functions.LoadWhatsappChats(event.data.Chats);
+                        RL.Phone.Functions.LoadWhatsappChats(event.data.Chats);
                     }
                 }
                 break;
             case "UpdateHashtags":
-                QB.Phone.Notifications.LoadHashtags(event.data.Hashtags);
+                RL.Phone.Notifications.LoadHashtags(event.data.Hashtags);
                 break;
             case "RefreshWhatsappAlerts":
-                QB.Phone.Functions.ReloadWhatsappAlerts(event.data.Chats);
+                RL.Phone.Functions.ReloadWhatsappAlerts(event.data.Chats);
                 break;
             case "CancelOutgoingCall":
-                $.post('https://qb-phone/HasPhone', JSON.stringify({}), function(HasPhone){
+                $.post('http://qb-phone/HasPhone', JSON.stringify({}), function(HasPhone){
                     if (HasPhone) {
                         CancelOutgoingCall();
                     }
                 });
                 break;
             case "IncomingCallAlert":
-                $.post('https://qb-phone/HasPhone', JSON.stringify({}), function(HasPhone){
+                $.post('http://qb-phone/HasPhone', JSON.stringify({}), function(HasPhone){
                     if (HasPhone) {
                         IncomingCallAlert(event.data.CallData, event.data.Canceled, event.data.AnonymousCall);
                     }
                 });
                 break;
             case "SetupHomeCall":
-                QB.Phone.Functions.SetupCurrentCall(event.data.CallData);
+                RL.Phone.Functions.SetupCurrentCall(event.data.CallData);
                 break;
+            case "RemoveOngoingMessage":
+                $(".phone-currentcall-container").css({"display":"none"});
             case "AnswerCall":
-                QB.Phone.Functions.AnswerCall(event.data.CallData);
+                RL.Phone.Functions.AnswerCall(event.data.CallData);
                 break;
             case "UpdateCallTime":
                 var CallTime = event.data.Time;
@@ -576,7 +586,7 @@ $(document).ready(function(){
                 date.setSeconds(CallTime);
                 var timeString = date.toISOString().substr(11, 8);
 
-                if (!QB.Phone.Data.IsOpen) {
+                if (!RL.Phone.Data.IsOpen) {
                     if ($(".call-notifications").css("right") !== "52.1px") {
                         $(".call-notifications").css({"display":"block"});
                         $(".call-notifications").animate({right: 5+"vh"});
@@ -593,50 +603,56 @@ $(document).ready(function(){
                 }
 
                 $(".phone-call-ongoing-time").html(timeString);
-                $(".phone-currentcall-title").html("In conversation ("+timeString+")");
+                $(".phone-currentcall-title").html("In gesprek ("+timeString+")");
                 break;
             case "CancelOngoingCall":
                 $(".call-notifications").animate({right: -35+"vh"}, function(){
                     $(".call-notifications").css({"display":"none"});
                 });
-                QB.Phone.Animations.TopSlideUp('.phone-application-container', 400, -160);
+                RL.Phone.Animations.TopSlideUp('.phone-application-container', 400, -160);
                 setTimeout(function(){
-                    QB.Phone.Functions.ToggleApp("phone-call", "none");
+                    RL.Phone.Functions.ToggleApp("phone-call", "none");
                     $(".phone-application-container").css({"display":"none"});
                 }, 400)
-                QB.Phone.Functions.HeaderTextColor("white", 300);
+                RL.Phone.Functions.HeaderTextColor("white", 300);
     
-                QB.Phone.Data.CallActive = false;
-                QB.Phone.Data.currentApplication = null;
+                RL.Phone.Data.CallActive = false;
+                RL.Phone.Data.currentApplication = null;
                 break;
             case "RefreshContacts":
-                QB.Phone.Functions.LoadContacts(event.data.Contacts);
+                RL.Phone.Functions.LoadContacts(event.data.Contacts);
                 break;
             case "UpdateMails":
-                QB.Phone.Functions.SetupMails(event.data.Mails);
+                RL.Phone.Functions.SetupMails(event.data.Mails);
                 break;
             case "RefreshAdverts":
-                if (QB.Phone.Data.currentApplication == "advert") {
-                    QB.Phone.Functions.RefreshAdverts(event.data.Adverts);
+                if (RL.Phone.Data.currentApplication == "advert") {
+                    RL.Phone.Functions.RefreshAdverts(event.data.Adverts);
                 }
                 break;
             case "AddPoliceAlert":
                 AddPoliceAlert(event.data)
                 break;
             case "UpdateApplications":
-                QB.Phone.Data.PlayerJob = event.data.JobData;
-                QB.Phone.Functions.SetupApplications(event.data);
+                RL.Phone.Data.PlayerJob = event.data.JobData;
+                RL.Phone.Functions.SetupApplications(event.data);
                 break;
             case "UpdateTransactions":
                 RefreshCryptoTransactions(event.data);
                 break;
             case "UpdateRacingApp":
-                $.post('https://qb-phone/GetAvailableRaces', JSON.stringify({}), function(Races){
+                $.post('http://qb-phone/GetAvailableRaces', JSON.stringify({}), function(Races){
                     SetupRaces(Races);
                 });
                 break;
             case "RefreshAlerts":
-                QB.Phone.Functions.SetupAppWarnings(event.data.AppData);
+                RL.Phone.Functions.SetupAppWarnings(event.data.AppData);
+                break;
+            case "RemoveTaxiCall":
+                RemoveTaxiCall(event.data.id);
+                break;
+            case "AddTaxiCall":
+                AddTaxiCall(event.data.id, event.data.data);
                 break;
         }
     })
@@ -645,9 +661,9 @@ $(document).ready(function(){
 $(document).on('keydown', function() {
     switch(event.keyCode) {
         case 27: // ESCAPE
-            QB.Phone.Functions.Close();
+            RL.Phone.Functions.Close();
             break;
     }
 });
 
-// QB.Phone.Functions.Open();
+// RL.Phone.Functions.Open();

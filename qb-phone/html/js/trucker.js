@@ -10,7 +10,7 @@ SetupTruckerInfo = function(data) {
         ProgressPercentage = NewRep * DivideAmount;
     }
 
-    $("#trucker-name").html(QB.Phone.Data.PlayerData.charinfo.firstname + " " + QB.Phone.Data.PlayerData.charinfo.lastname);
+    $("#trucker-name").html(RL.Phone.Data.PlayerData.charinfo.firstname + " " + RL.Phone.Data.PlayerData.charinfo.lastname);
 
     if (data.CurrentTierData.min == data.CurrentTierData.max) {
         $("#trucker-header-progress-current").html("Current: " + data.CurrentRep + " REP");

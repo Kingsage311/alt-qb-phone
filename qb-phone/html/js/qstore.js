@@ -11,7 +11,7 @@ SetupAppstore = function(data) {
             app.app = i;
             $("#app-"+i).data('AppData', app);
         } else {
-            var elem = '<div class="storeapp" id="app-'+i+'" data-app="'+i+'"><div class="storeapp-icon"><i class="'+app.icon+'"></i></div><div class="storeapp-title">'+app.title+'<span style="font-size: 1vh;"> - Geïnstalleerd</span></div> <div class="storeapp-creator">'+app.creator+'</div><div class="storeapp-remove"><i class="fas fa-trash"></i></div></div>'
+            var elem = '<div class="storeapp" id="app-'+i+'" data-app="'+i+'"><div class="storeapp-icon"><i class="'+app.icon+'"></i></div><div class="storeapp-title">'+app.title+'<span style="font-size: 1vh;"> - Installed</span></div> <div class="storeapp-creator">'+app.creator+'</div><div class="storeapp-remove"><i class="fas fa-trash"></i></div></div>'
             $(".store-apps").append(elem);
             app.app = i;
             $("#app-"+i).data('AppData', app);
@@ -51,13 +51,13 @@ $(document).on('click', '.storeapp-remove', function(e){
 
     $(applicationSlot).tooltip("destroy");
 
-    QB.Phone.Data.Applications[AppData.app] = null;
+    RL.Phone.Data.Applications[AppData.app] = null;
 
-    $.post('https://qb-phone/RemoveApplication', JSON.stringify({
+    $.post('http://qb-phone/RemoveApplication', JSON.stringify({
         app: AppData.app
     }));
     setTimeout(function(){
-        $.post('https://qb-phone/SetupStoreApps', JSON.stringify({}), function(data){
+        $.post('http://qb-phone/SetupStoreApps', JSON.stringify({}), function(data){
             SetupAppstore(data); 
         });
     }, 100);
@@ -82,13 +82,13 @@ $(document).on('click', '.download-password-accept', function(e){
                 $(".download-progressbar-fill").css("width", "0%");
             });
 
-            $.post('https://qb-phone/InstallApplication', JSON.stringify({
+            $.post('http://qb-phone/InstallApplication', JSON.stringify({
                 app: CurrentApp,
             }), function(Installed){
                 if (Installed) {
                     var applicationSlot = $(".phone-applications").find('[data-appslot="'+Installed.data.slot+'"]');
-                    var blockedapp = IsAppJobBlocked(Installed.data.blockedjobs, QB.Phone.Data.PlayerJob.name)
-                    if ((!Installed.data.job || Installed.data.job === QB.Phone.Data.PlayerJob.name) && !blockedapp) {
+                    var blockedapp = IsAppJobBlocked(Installed.data.blockedjobs, RL.Phone.Data.PlayerJob.name)
+                    if ((!Installed.data.job || Installed.data.job === RL.Phone.Data.PlayerJob.name) && !blockedapp) {
                         $(applicationSlot).css({"background-color":Installed.data.color});
                         var icon = '<i class="ApplicationIcon '+Installed.data.icon+'" style="'+Installed.data.style+'"></i>';
                         if (Installed.data.app == "meos") {
@@ -112,10 +112,10 @@ $(document).on('click', '.download-password-accept', function(e){
                     } else {
                         $(AppObject).css({"display":"none"});
                     }
-                    QB.Phone.Data.Applications[Installed.data.app] = Installed.data;
+                    RL.Phone.Data.Applications[Installed.data.app] = Installed.data;
 
                     setTimeout(function(){
-                        $.post('https://qb-phone/SetupStoreApps', JSON.stringify({}), function(data){
+                        $.post('http://qb-phone/SetupStoreApps', JSON.stringify({}), function(data){
                             SetupAppstore(data);
                             $(".download-password-input").attr('readonly', false);
                             $(".download-progressbar-fill").css("width", "0%");
