@@ -1576,6 +1576,37 @@ RegisterNUICallback('FetchVehicleResults', function(data, cb)
     end, data.input)
 end)
 
+RegisterNUICallback('SetupSellix', function(data, cb)
+    QBCore.Functions.TriggerCallback('mg-pawnshop:server:getSellixList', function(boolz, dataz)
+        if boolz == false then
+            cb('banned')
+        else
+            cb(dataz)
+        end
+    end)
+end)
+
+RegisterNUICallback('ActivateBuyer', function(data, cb)
+    if exports['mg-pawnshop']:hasActiveDelivery() == true then
+        cb(1)
+        return
+    end
+
+    QBCore.Functions.TriggerCallback('mg-pawnshop:server:takeOffer', function(boolz, dataz)
+        if boolz == true then
+            TriggerServerEvent('qb-phone:server:sendNewMail', {
+                sender = "Sellix Store",
+                subject = "Your delivery",
+                message = "Thank you for choosing to use us.<br>Your buyer - " .. dataz['buyerData'][2] .. " is waiting for you at the checkpoint indicated on the radar.<br>You have " .. (dataz['delivery'] / 60000) .. " minutes to make the delivery, if you do not make it in that time we will ban you from our app for a limited time.<br><br><strong>Come with the follwing stuff on you:</strong><br>" .. dataz.quantity .. 'x ' .. dataz.name,
+                button = {}
+            })
+            cb(0)
+        else
+            cb(2)
+        end
+    end, data.id)
+end)
+
 RegisterNUICallback('FetchVehicleScan', function(data, cb)
     local vehicle = QBCore.Functions.GetClosestVehicle()
     local plate = GetVehicleNumberPlateText(vehicle)
