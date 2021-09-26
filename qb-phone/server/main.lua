@@ -1188,24 +1188,52 @@ AddEventHandler('qb-phone:server:AddTransaction', function(data)
     })
 end)
 
+QBCore.Functions.CreateCallback('qb-phone:server:GetCurrentDrivers', function(source, cb)
+    local Lawyers = {}
+    for k, v in pairs(QBCore.Functions.GetPlayers()) do
+        local Player = QBCore.Functions.GetPlayer(v)
+        if Player ~= nil then
+            if Player.PlayerData.job.name == "taxi" then
+                table.insert(Lawyers, {
+                    name = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname,
+                    phone = Player.PlayerData.charinfo.phone,
+                })
+            end
+        end
+    end
+    cb(Lawyers, QBCore.Functions.GetPlayer(source).PlayerData.job.name == "taxi")
+end)
+
 QBCore.Functions.CreateCallback('qb-phone:server:GetCurrentLawyers', function(source, cb)
     local Lawyers = {}
     for k, v in pairs(QBCore.Functions.GetPlayers()) do
         local Player = QBCore.Functions.GetPlayer(v)
         if Player ~= nil then
-            if (Player.PlayerData.job.name == "lawyer" or Player.PlayerData.job.name == "realestate" or
-                Player.PlayerData.job.name == "mechanic" or Player.PlayerData.job.name == "taxi" or
-                Player.PlayerData.job.name == "police" or Player.PlayerData.job.name == "ambulance") and
-                Player.PlayerData.job.onduty then
+            if Player.PlayerData.job.name == "lawyer" or Player.PlayerData.job.name == "judge" then
                 table.insert(Lawyers, {
                     name = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname,
                     phone = Player.PlayerData.charinfo.phone,
-                    typejob = Player.PlayerData.job.name
                 })
             end
         end
     end
     cb(Lawyers)
+end)
+
+QBCore.Functions.CreateCallback('qb-phone:server:GetCurrentMechanic', function(source, cb)
+    local Mechanic = {}
+    for k, v in pairs(QBCore.Functions.GetPlayers()) do
+        local Player = QBCore.Functions.GetPlayer(v)
+        if Player ~= nil then
+            if Player.PlayerData.job.name == "mechanic" then
+                table.insert(Mechanic, {
+                    name = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname,
+                    phone = Player.PlayerData.charinfo.phone,
+                })
+            end
+        end
+    end
+    cb(Mechanic)
 end)
 
 RegisterServerEvent('qb-phone:server:InstallApplication')
@@ -1249,3 +1277,50 @@ function round(num, numDecimalPlaces)
     end
     return math.floor(num + 0.5)
 end
+
+local TaxiCalls = {}
+local CurrentCallID = 1
+RegisterServerEvent('qb-phone:server:CallDriver')
+AddEventHandler('qb-phone:server:CallDriver', function(coords)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    CurrentCallID = CurrentCallID + 1
+
+    print(CurrentCallID)
+    TaxiCalls[CurrentCallID] = { name = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname, coords = coords }
+    TriggerClientEvent("qb-phone:client:AddTaxiCall", -1, CurrentCallID, TaxiCalls[CurrentCallID])
+end)
+
+RegisterServerEvent('qb-phone:server:AcceptDriverCall')
+AddEventHandler('qb-phone:server:AcceptDriverCall', function(ID)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+
+    if TaxiCalls[ID] then
+        TriggerClientEvent("qb-phone:client:RemoveTaxiCall", -1, ID)
+        TriggerClientEvent("qb-phone:client:AcceptDriverCall", -1, TaxiCalls[ID])
+        TriggerClientEvent('QBCore:Notify', src, "The player location is marked for you on the GPS.")
+        TaxiCalls[ID] = nil
+    end
+end)
+
+local VehiclePlate = 0
+RegisterServerEvent('qb-phone:server:spawnVehicle')
+AddEventHandler('qb-phone:server:spawnVehicle', function(data)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    VehiclePlate = VehiclePlate + 1
+
+    if Config.RentelVehicles[data.model] and data.price <= Player['PlayerData']['money']['cash'] then
+        data['plate'] = 'RENT-' .. VehiclePlate
+        TriggerClientEvent('qb-phone:client:spawnVehicle', src, data)
+        TriggerEvent('qb-phone:server:clearVehicleTrunk', data['plate'])
+    else
+        TriggerClientEvent('QBCore:Notify', src, "You don't have enough money.", 'error')
+    end
+end)
+
+RegisterServerEvent('qb-phone:server:clearVehicleTrunk')
+AddEventHandler('qb-phone:server:clearVehicleTrunk', function(plate)
+    QBCore.Functions.ExecuteSql(false, "DELETE FROM `trunkitems` WHERE `plate` = '"..plate.."'")
+end)

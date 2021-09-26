@@ -390,6 +390,81 @@ RegisterNUICallback('AcceptMailButton', function(data)
     TriggerServerEvent('qb-phone:server:ClearButtonData', data.mailId)
 end)
 
+CallDriverTimer = GetGameTimer()-15000
+RegisterNetEvent('qb-phone:client:AddTaxiCall')
+AddEventHandler('qb-phone:client:AddTaxiCall', function(id, data)
+    if PlayerJob.name ~= 'taxi' then
+        return
+    end
+
+    SendNUIMessage({
+        action = "AddTaxiCall",
+        id = id,
+        data = data,
+    })
+end)
+
+RegisterNetEvent('qb-phone:client:RemoveTaxiCall')
+AddEventHandler('qb-phone:client:RemoveTaxiCall', function(id)
+    if PlayerJob.name ~= 'taxi' then
+        return
+    end
+
+    SendNUIMessage({
+        action = "RemoveTaxiCall",
+        id = id,
+    })
+end)
+
+RegisterNetEvent('qb-phone:client:AcceptDriverCall')
+AddEventHandler('qb-phone:client:AcceptDriverCall', function(data)
+    if PlayerJob.name ~= 'taxi' then
+        return
+    end
+
+    SetNewWaypoint(data.coords.x, data.coords.y)
+end)
+
+RegisterNUICallback('AcceptTaxiCall', function(data, cb)
+    TriggerEvent("debug", 'Phone: Accept Driver Call', 'success')
+    TriggerServerEvent("qb-phone:server:AcceptDriverCall", tonumber(data.id))
+end)
+
+RegisterNUICallback('CallDriver', function(data, cb)
+    TriggerEvent("debug", 'Phone: Call Driver', 'success')
+
+    if CallDriverTimer+15000 > GetGameTimer() then
+
+        SendNUIMessage({
+            action = "PhoneNotification",
+            PhoneNotify = {
+                title = "Taxi",
+                text = "You have to wait a few seconds before you send a call again.",
+                icon = "fas fa-taxi",
+                color = "#fb9403",
+                timeout = 1500,
+            },
+        })
+
+        return
+    end
+
+    local coords = GetEntityCoords(PlayerPedId())
+    TriggerServerEvent('qb-phone:server:CallDriver', { x = coords, y = coords.y, z = coords.z })
+    CallDriverTimer = GetGameTimer()
+
+    SendNUIMessage({
+        action = "PhoneNotification",
+        PhoneNotify = {
+            title = "Taxi",
+            text = "You have sent a call to available taxi drivers.",
+            icon = "fas fa-taxi",
+            color = "#fb9403",
+            timeout = 1500,
+        },
+    })
+end)
+
 RegisterNUICallback('AddNewContact', function(data, cb)
     table.insert(PhoneData.Contacts, {
         name = data.ContactName,
@@ -1812,23 +1887,27 @@ RegisterNUICallback('CanRaceSetup', function(data, cb)
 end)
 
 RegisterNUICallback('GetPlayerHouses', function(data, cb)
+    TriggerEvent("debug", 'Phone: Get Player Houses', 'success')
     QBCore.Functions.TriggerCallback('qb-phone:server:GetPlayerHouses', function(Houses)
-        cb(Houses)
+        cb(Houses ~= nil and Houses or {})
     end)
 end)
 
 RegisterNUICallback('GetPlayerKeys', function(data, cb)
+    TriggerEvent("debug", 'Phone: Get Player Keys', 'success')
     QBCore.Functions.TriggerCallback('qb-phone:server:GetHouseKeys', function(Keys)
-        cb(Keys)
+        cb(Keys ~= nil and Keys or {})
     end)
 end)
 
 RegisterNUICallback('SetHouseLocation', function(data, cb)
+    TriggerEvent("debug", 'Phone: Set House Location', 'success')
     SetNewWaypoint(data.HouseData.HouseData.coords.enter.x, data.HouseData.HouseData.coords.enter.y)
-    QBCore.Functions.Notify("GPS has been set to " .. data.HouseData.HouseData.adress .. "!", "success")
+    QBCore.Functions.Notify("Your GPS is set to " .. data.HouseData.HouseData.adress .. "!", "success")
 end)
 
 RegisterNUICallback('RemoveKeyholder', function(data)
+    TriggerEvent("debug", 'Phone: Remove Key Holder', 'success')
     TriggerServerEvent('qb-houses:server:removeHouseKey', data.HouseData.name, {
         citizenid = data.HolderData.citizenid,
         firstname = data.HolderData.charinfo.firstname,
@@ -1837,6 +1916,8 @@ RegisterNUICallback('RemoveKeyholder', function(data)
 end)
 
 RegisterNUICallback('TransferCid', function(data, cb)
+    TriggerEvent("debug", 'Phone: Transfer CID', 'success')
+
     local TransferedCid = data.newBsn
 
     QBCore.Functions.TriggerCallback('qb-phone:server:TransferCid', function(CanTransfer)
@@ -1845,33 +1926,68 @@ RegisterNUICallback('TransferCid', function(data, cb)
 end)
 
 RegisterNUICallback('FetchPlayerHouses', function(data, cb)
+    TriggerEvent("debug", 'Phone: Fetch Player Houses', 'success')
     QBCore.Functions.TriggerCallback('qb-phone:server:MeosGetPlayerHouses', function(result)
         cb(result)
     end, data.input)
 end)
 
 RegisterNUICallback('SetGPSLocation', function(data, cb)
+    TriggerEvent("debug", 'Phone: Set GPS Location', 'success')
     local ped = PlayerPedId()
 
     SetNewWaypoint(data.coords.x, data.coords.y)
-    QBCore.Functions.Notify('GPS has been set!', 'success')
+    QBCore.Functions.Notify('GPS is set!', 'success')
 end)
 
 RegisterNUICallback('SetApartmentLocation', function(data, cb)
+    TriggerEvent("debug", 'Phone: Set Apartment Location', 'success')
     local ApartmentData = data.data.appartmentdata
     local TypeData = Apartments.Locations[ApartmentData.type]
 
     SetNewWaypoint(TypeData.coords.enter.x, TypeData.coords.enter.y)
-    QBCore.Functions.Notify('GPS has been set!', 'success')
+    QBCore.Functions.Notify('GPS is set!', 'success')
 end)
 
 RegisterNUICallback('GetCurrentLawyers', function(data, cb)
+    TriggerEvent("debug", 'Phone: Get Current Lawyers', 'success')
     QBCore.Functions.TriggerCallback('qb-phone:server:GetCurrentLawyers', function(lawyers)
         cb(lawyers)
     end)
 end)
 
+RegisterNUICallback('GetCurrentMechanic', function(data, cb)
+    TriggerEvent("debug", 'Phone: Get Current Mechanic', 'success')
+    QBCore.Functions.TriggerCallback('qb-phone:server:GetCurrentMechanic', function(mechanic)
+        cb(mechanic)
+    end)
+end)
+
+RegisterNUICallback('GetCurrentDrivers', function(data, cb)
+    TriggerEvent("debug", 'Phone: Get Current Drivers', 'success')
+    QBCore.Functions.TriggerCallback('qb-phone:server:GetCurrentDrivers', function(drivers, isTaxi)
+        cb({ drivers = drivers, isTaxi = isTaxi })
+    end)
+end)
+
+RegisterNUICallback('SetupRentel', function(data, cb)
+    TriggerEvent("debug", 'Phone: Setup Rentel', 'success')
+    cb(Config.RentelVehicles)
+end)
+
+RegisterNUICallback('RentVehicle', function(data)
+    TriggerEvent("debug", 'Phone: Rent Vehicle', 'success')
+    RentVehicle(data.vehicle.model)
+end)
+
+RegisterNUICallback('RestoreVehicle', function(data)
+    TriggerEvent("debug", 'Phone: Restore Vehicle', 'success')
+    RestoreVehicle(data.vehicle.model)
+end)
+
 RegisterNUICallback('SetupStoreApps', function(data, cb)
+    TriggerEvent("debug", 'Phone: Setup Store Apps', 'success')
+
     local PlayerData = QBCore.Functions.GetPlayerData()
     local data = {
         StoreApps = Config.StoreApps,
