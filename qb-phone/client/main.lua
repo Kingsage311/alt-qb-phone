@@ -743,11 +743,13 @@ AddEventHandler('qb-phone:client:UpdateMessages', function(ChatMessages, SenderN
     local NumberKey = GetKeyByNumber(SenderNumber)
 
     if New then
-        PhoneData.Chats[NumberKey] = {
+        table.insert(PhoneData.Chats, {
             name = IsNumberInContacts(SenderNumber),
             number = SenderNumber,
-            messages = ChatMessages
-        }
+            messages = {},
+        })
+
+        NumberKey = GetKeyByNumber(SenderNumber)
 
         if PhoneData.Chats[NumberKey].Unread ~= nil then
             PhoneData.Chats[NumberKey].Unread = PhoneData.Chats[NumberKey].Unread + 1
@@ -2015,7 +2017,7 @@ RegisterNetEvent('qb-phone:client:RemoveBankMoney')
 AddEventHandler('qb-phone:client:RemoveBankMoney', function(amount)
     TriggerEvent("debug", 'Phone: Remove Bank Money ($' .. amount .. ')', 'success')
 
-    if PhoneData.isOpen then
+    if amount > 0 then
         SendNUIMessage({
             action = "PhoneNotification",
             PhoneNotify = {
