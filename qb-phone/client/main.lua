@@ -1185,10 +1185,10 @@ local takePhoto = false
             CellFrontCamActivate(frontCam)
 
         else if IsControlJustPressed(1, 176) then
-        exports['screenshot-basic']:requestScreenshotUpload('https://discord.com/api/webhooks/863825966526234725/Qas62fxvRtry9SZmj6B_6U3PJocvhbapc_KeVJjYcq6z-G-4ioTkwbrU3gMLA6z00XDJ', 'files[]', function(data2)
+        exports['screenshot-basic']:requestScreenshotUpload('https://discord.com/api/webhooks/863825966526234725/Qas62fxvRtry9SZmj6B_6U3PJocvhbapc_KeVJjYcq6z-G-4ioTkwbrU3gMLA6z00XDJ', 'files[]', function(data)
             DestroyMobilePhone()
             CellCamActivate(false, false)
-            local resp = json.decode(data2)
+            local resp = json.decode(data)
             test = resp.attachments[1].proxy_url
             cb(resp.attachments[1].proxy_url)
         end)
