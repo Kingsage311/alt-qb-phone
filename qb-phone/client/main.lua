@@ -30,6 +30,18 @@ PhoneData = {
     CryptoTransactions = {},
 }
 
+RegisterCommand('phone', function()
+    PlayerData = QBCore.Functions.GetPlayerData()
+    if not PhoneData.isOpen and isLoggedIn then
+        local IsHandcuffed = exports['qb-policejob']:IsHandcuffed()
+        if not IsHandcuffed and not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['isdead'] and not IsPauseMenuActive() then
+            OpenPhone()
+        else
+            QBCore.Functions.Notify("Action not available at the moment..", "error")
+        end
+    end
+end)
+
 RegisterNetEvent('qb-phone:client:RaceNotify')
 AddEventHandler('qb-phone:client:RaceNotify', function(message)
     if PhoneData.isOpen then
